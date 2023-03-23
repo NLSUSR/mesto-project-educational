@@ -1,6 +1,11 @@
 .profile__title {
   margin: 22px 0 8px;
   padding: 0;
+  max-width: 294px;
+  max-height: fit-content;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   font-family: "Inter", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -14,6 +19,7 @@
     font-size: 1.6875rem;
     line-height: 2.0625rem;
     text-align: center;
+    max-width: 189px;
   }
 }
 
@@ -21,5 +27,7 @@
   .profile__title {
     margin: 0 0 6px 46px;
     text-align: end;
+    max-width: 189px;
+    max-height: fit-content;
   }
 }

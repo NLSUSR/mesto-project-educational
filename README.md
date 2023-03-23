@@ -21,7 +21,7 @@
 
 ##### Функции:
 
-* Для появления модального окна ввода имени и рода занятий нужно зафлексить popup , по умолчанию popup - display: none;
+на js
 
 # Ссылка на проект в github pages: 
 https://nlsusr.github.io/mesto-project/ 

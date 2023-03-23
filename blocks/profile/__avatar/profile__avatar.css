@@ -4,11 +4,12 @@
   justify-content: start;
   max-width: 120px;
   max-height: 120px;
-  object-position: top; /*center*/
+  object-position: center;
   object-fit: cover;
   aspect-ratio: 1;
   border-radius: 50%;
   grid-area: img;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 767px) {
