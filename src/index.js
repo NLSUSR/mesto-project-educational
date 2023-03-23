@@ -1,207 +1,305 @@
 // зависимости
 import * as styles from "./index.css";
 
-import {
-  pageLoader
-} from "./components/modules/utils.js";
-
-import {
-  enableValidation,
-  changeButtonState
-} from "./components/modules/validate.js";
-
-import {
-  closePopup,
-  openPopup,
-  showSendStatus
-} from "./components/modules/modal.js";
-
-import {
-  removeCard,
-  renderCard,
-  changeLikeState,
-  cardToBeRemoving,
-  checkLike,
-  likeMethod,
-} from "./components/modules/card.js";
-
-import {
-  responseError,
-  likeState,
-  deleteCard,
-  getDataAndCards,
-  patchAvatar,
-  postCard,
-  patchData,
-} from "./components/modules/api.js";
-
-import {
-  profileAvatarWrapper,
-  changeAvatarContainer,
-  profileEditButton,
-  profileEditContainer,
-  changeAvatarContainerForm,
-  cardAddButton,
-  cardAddContainer,
-  cardAddContainerForm,
-  profileEditContainerForm,
-  changeAvatarInput,
-  profileEditNameInput,
-  profileEditActivityInput,
-  cardAddTitleInput,
-  cardAddImageLinkInput,
-  pageLoaded,
-  profileAvatarImage,
-  profileName,
-  profileActivity,
-  cardRemoveContainerButton,
-  cardRemoveContainer,
-  placeImage,
-  placeName,
-  imageOpeningContainer
-} from "./components/modules/constants.js";
+import images from "./components/utils/images.js";
+import constants from "./components/utils/constants.js";
+import pageLoader from "./components/utils/utils.js";
+import Api from "./components/modules/Api.js";
+import Section from "./components/modules/Section.js";
+import UserInfo from "./components/modules/UserInfo.js";
+import FormValidator from "./components/modules/FormValidator.js";
+import PopupWithForms from "./components/modules/PopupWithForms.js";
+import PopupWithImages from "./components/modules/PopupWithImages.js";
+import PopupWithDeletions from "./components/modules/PopupWithDeletions.js";
+import Card from "./components/modules/Card.js";
 
 // импорт каскадной таблицы стилей
 styles;
 
+// импорт картинок
+images; // зачем они ? хз!
+
 // вызов прелоадера
-document.addEventListener(pageLoaded, pageLoader(true));
+document.addEventListener(constants.pageLoaded, pageLoader(true));
 
-// вызов функции валидации
-enableValidation();
+// создание экземпляра класса для Application Programming Interface
+const api = new Api(constants.cfg);
 
-// просмотр карточки
-const viewCard = card => {
-  imageOpeningContainer.classList.add("image-viewer")
+// валидация
+const validation = (function wrapper() {
 
-  placeName.textContent = card.name;
-  placeImage.src = card.link;
-  placeImage.alt = card.name;
+  // обьект с селекторами форм для класса валидации
+  const formElement = {
+    changeAvatar: constants.selectors.changeAvatarContainerForm,
+    profileEdit: constants.selectors.profileEditContainerForm,
+    cardAdd: constants.selectors.cardAddContainerForm
+  };
 
-  openPopup(imageOpeningContainer);
-};
+  // создание экземпляра класса для валидации формы смены аватара
+  const avatarFormValidation = new FormValidator(
+    constants.objectValidation,
+    formElement.changeAvatar
+  );
 
-// обработка лайка
-const likeCard = card => {
-  checkLike(card);
-  const cardId = card.dataset.cardId;
-  const method = likeMethod;
-  const data = { cardId, method };
-  likeState(data).then(data => {
-    changeLikeState(card, data.likes.length)
-  }).catch(error => responseError(error))
-};
+  avatarFormValidation.enableValidation();
+
+  // создание экземпляра класса для валидации формы редактирования профиля
+  const profileFormValidation = new FormValidator(
+    constants.objectValidation,
+    formElement.profileEdit
+  );
+
+  profileFormValidation.enableValidation();
+
+  // создание экземпляра класса для валидации формы добавления карточки
+  const cardFormValidation = new FormValidator(
+    constants.objectValidation,
+    formElement.cardAdd
+  );
+
+  cardFormValidation.enableValidation();
+
+  return { avatarFormValidation, profileFormValidation, cardFormValidation };
+
+}());
+
+// данные пользователя
+const userInfo = (function wrapper() {
+
+  // создание экземпляра класса с пользовательскими данными
+  const info = {
+    avatar: constants.selectors.profileAvatarImage,
+    name: constants.selectors.profileName,
+    about: constants.selectors.profileActivity,
+  };
+
+  const userInfo = new UserInfo(info);
+
+  return userInfo;
+
+}());
+
+// создание экземпляра класса добавления карточки
+const cardsSection = (function wrapper() {
+
+  const add = {
+    container: constants.selectors.elementsContainer,
+    render: item => { cardsSection.appendItem(createCardElement(item)) }
+  };
+  const cardsSection = new Section(add);
+
+  return cardsSection;
+
+}());
 
 // обработка аватара
-const submitPatchAvatar = event => {
-  event.preventDefault();
+const submitPatchAvatar = ([link]) => {
 
-  showSendStatus(true);
+  api.patchAvatar(link).then(url => {
 
-  const url = `${changeAvatarInput.value}`;
+    userInfo.setUserInfo(url)
+    popups.popupFormAvatar.close();
 
-  patchAvatar(url).then(data => {
-    profileAvatarImage.src = data.avatar;
-    closePopup(changeAvatarContainer);
-  }).catch(error => responseError(error)).finally(() => {
-    showSendStatus(false)
+  }).catch(error => api.responseError(error)).finally(() => {
+
+    popups.popupFormAvatar.showSendStatus(false);
+
   });
 };
 
 // обработка данных профиля
-const submitPatchData = event => {
-  event.preventDefault();
+const submitPatchData = ([name, about]) => {
 
-  showSendStatus(true);
+  const user = { name, about };
 
-  const data = { name: `${profileEditNameInput.value}`, about: `${profileEditActivityInput.value}` };
+  api.patchData(user).then(user => {
 
-  patchData(data).then(data => {
-    profileName.textContent = data.name;
-    profileActivity.textContent = data.about;
-    closePopup(profileEditContainer);
-  }).catch(error => responseError(error)).finally(() => {
-    showSendStatus(false)
+    userInfo.setUserInfo(user);
+    popups.popupFormProfile.close();
+
+  }).catch(error => api.responseError(error)).finally(() => {
+
+    popups.popupFormProfile.showSendStatus(false);
+
   });
 };
 
 // обработка добавления карточки
-const submitPostCard = event => {
-  event.preventDefault();
+const submitPostCard = ([name, link]) => {
 
-  showSendStatus(true);
+  const card = { name, link };
 
-  const card = { name: `${cardAddTitleInput.value}`, link: `${cardAddImageLinkInput.value}` }
+  api.postCard(card).then(card => {
 
-  postCard(card).then(card => {
-    renderCard(card, userId, likeCard, viewCard)
-    closePopup(cardAddContainer);
-    cardAddContainerForm.reset();
-  }).catch(error => responseError(error)).finally(() => {
-    showSendStatus(false)
+    cardsSection.prependItem(createCardElement(card));
+    popups.popupFormPlace.reset();
+    popups.popupFormPlace.close();
+
+  }).catch(error => api.responseError(error)).finally(() => {
+
+    popups.popupFormPlace.showSendStatus(false);
+
   });
 };
 
 // обработка удаления карточки
-cardRemoveContainerButton.addEventListener("click", () => {
-  const card = cardToBeRemoving;
+const deleteElement = (card, id) => {
 
-  deleteCard(card.dataset.cardId).then(() => {
-    removeCard(card);
-    closePopup(cardRemoveContainer);
-  }).catch(error => responseError(error)).finally(() => {
-    showSendStatus(false)
+  api.deleteCard(id).then(() => {
+
+    card.removeCard();
+    popups.popupDelete.close();
+
+  }).catch(error => api.responseError(error)).finally(() => {
+
+    popups.popupDelete.showSendStatus(false);
+
   });
-});
+};
+
+// обработка лайка
+const likeCard = (card, id, method) => {
+
+  const data = { id, method };
+
+  api.likeState(data).then(data => {
+
+    card.changeLikeState(data.likes);
+
+  }).catch(error => api.responseError(error))
+};
+
+// попапы
+const popups = (function wrapper() {
+
+  // создание экземпляра класса для формы смены аватара
+  const avatar = {
+
+    container: constants.selectors.changeAvatarContainer,
+    handler: submitPatchAvatar
+
+  };
+
+  const popupFormAvatar = new PopupWithForms(avatar);
+  popupFormAvatar.setEventListeners();
+
+  // создание экземпляра класса для формы редактирования профиля
+  const profile = {
+
+    container: constants.selectors.profileEditContainer,
+    handler: submitPatchData
+
+  };
+
+  const popupFormProfile = new PopupWithForms(profile);
+  popupFormProfile.setEventListeners();
+
+  // создание экземпляра класса для формы добавления места
+  const place = {
+
+    container: constants.selectors.cardAddContainer,
+    handler: submitPostCard
+
+  };
+
+  const popupFormPlace = new PopupWithForms(place);
+  popupFormPlace.setEventListeners();
+
+  // создание экземпляра класса для удаления карточки
+  const deleting = {
+
+    container: constants.selectors.cardRemoveContainer,
+    button: constants.selectors.cardRemoveContainerButton,
+    handler: deleteElement
+
+  };
+
+  const popupDelete = new PopupWithDeletions(deleting);
+  // popupDelete.setEventListeners();
+
+  // создание экземпляра класса для просмотра карточки
+  const image = {
+
+    container: constants.selectors.imageOpeningContainer,
+    name: constants.selectors.placeName,
+    image: constants.selectors.placeImage
+
+  };
+
+  const popupImage = new PopupWithImages(image);
+  // popupImage.setEventListeners();
+
+  return { popupFormAvatar, popupFormProfile, popupFormPlace, popupDelete, popupImage };
+
+}());
+
+// создание экземлпяра карточки
+const createCardElement = (function wrapper() {
+
+  const data = {
+    template: constants.selectors.cardTemplate,
+    container: constants.selectors.elementsContainer,
+  };
+
+  const callbacks = {
+    deleteCallback: (card, id) => { popups.popupDelete.open(card, id) },
+    cardCallback: (name, link) => { popups.popupImage.open(name, link) },
+    likeCallback: (card, id, method) => { likeCard(card, id, method) }
+  };
+
+  const createCardElement = item => {
+
+    const cardElement = new Card(item, callbacks, data, userInfo.getUserId());
+
+    return cardElement.getCard();
+
+  };
+
+  return createCardElement;
+
+}());
 
 // получение информации профиля с сервера
-let userId = null;
-getDataAndCards().then(([data, cards]) => {
-  profileAvatarImage.src = data.avatar;
-  changeAvatarInput.value = data.avatar;
+api.getDataAndCards().then(([data, cards]) => {
 
-  profileName.textContent = data.name;
-  profileEditNameInput.value = data.name;
-
-  profileActivity.textContent = data.about;
-  profileEditActivityInput.value = data.about;
-
-  userId = data._id;
-
-  // переварачиваем массив задом на перед
-  cards.reverse();
+  //передаем данные методу класса информации профиля
+  userInfo.setUserInfo(data);
 
   // функция перебора массива загружаемых с сервера карточек
-  cards.forEach(card => { renderCard(card, userId, likeCard, viewCard) });// рендер карточек с сервера
+  cardsSection.renderItems(cards);
 
-}).catch(error => responseError(error)).finally(setTimeout(() => { pageLoader(false) }, 500));
+}).catch(error => api.responseError(error)).finally(window.onload = () => { setTimeout(() => { pageLoader(false) }, 500) });
 
 // слушатель открытия модалки редактирования аватара
-profileAvatarWrapper.addEventListener("click", () => {
-  showSendStatus(true);
-  openPopup(changeAvatarContainer);
-  changeButtonState(changeAvatarContainer);
+constants.selectors.profileAvatarWrapper.addEventListener("click", () => {
+
+  const user = userInfo.getUserInfo();
+  constants.selectors.changeAvatarInput.value = user.avatar;
+
+  popups.popupFormAvatar.showSendStatus(true);
+  popups.popupFormAvatar.open();
+  validation.avatarFormValidation.changeButtonState();
+
 });
 
 // слушатель открытия модалки редактирования профиля
-profileEditButton.addEventListener("click", () => {
-  showSendStatus(true);
-  openPopup(profileEditContainer);
-  changeButtonState(profileEditContainer);
+constants.selectors.profileEditButton.addEventListener("click", () => {
+
+  const user = userInfo.getUserInfo();
+  constants.selectors.profileEditNameInput.value = user.name;
+  constants.selectors.profileEditActivityInput.value = user.about;
+
+  popups.popupFormProfile.showSendStatus(true);
+  popups.popupFormProfile.open();
+  validation.profileFormValidation.changeButtonState();
+
 });
 
 // слушатель кнопки открытия модалки добавления карточки
-cardAddButton.addEventListener("click", () => {
-  showSendStatus(true);
-  openPopup(cardAddContainer);
-  changeButtonState(cardAddContainer);
+constants.selectors.cardAddButton.addEventListener("click", () => {
+
+  popups.popupFormPlace.showSendStatus(true);
+  popups.popupFormPlace.open();
+  validation.cardFormValidation.changeButtonState();
+
 });
-
-// слушатель сабмита формы редактирования аватара
-changeAvatarContainerForm.addEventListener("submit", submitPatchAvatar);
-
-// слушатель сабмита формы редактирования профиля
-profileEditContainerForm.addEventListener("submit", submitPatchData);
-
-// слушатель сабмита формы добавления карточки
-cardAddContainerForm.addEventListener("submit", submitPostCard);

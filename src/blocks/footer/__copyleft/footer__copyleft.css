@@ -15,11 +15,6 @@
 	transform: rotate(180deg);
 }
 
-.profile-id::before {
-	content: attr(data-id);
-	transform: none;
-}
-
 @media screen and (max-width: 1024px) {
 	.footer__copyleft {
 		margin: 0;

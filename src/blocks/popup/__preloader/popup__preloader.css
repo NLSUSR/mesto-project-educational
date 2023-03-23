@@ -8,9 +8,22 @@
   z-index: 9999;
   width: 100vw;
   height: 100vh;
-  background-image: url("../../../images/splash/splashBlack.svg");
+  background-image: url(../../../images/splash/splash.svg);
   background-size: 50%;
   background-repeat: no-repeat;
   background-position: center;
   transition: visibility 0.5s, opacity 0.5s linear;
 }
+
+/* .container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: fit-content;
+} */
+
+/* .load{
+ width: 100%;
+ height: fit-content;
+} */

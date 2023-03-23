@@ -4,7 +4,10 @@
   width: 150px;
   height: 50px;
   background-color: #000;
-  background-image: url(../../../images/main-pics/profile-plus.svg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../../../images/main-pics/add.svg);
   background-size: 22px 22px;
   background-repeat: no-repeat;
   background-position: center;
