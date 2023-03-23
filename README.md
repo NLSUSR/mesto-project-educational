@@ -10,18 +10,22 @@
 
 ### Используемые технологии: 
 
-* 1. Flex
-* 2. Grid
+* HTML;
+* CSS: Flex, Grid, Адаптивная верстка;
+* JS: NodeJS, NPM;
+* BabelJS: edge: "17", ie: "11", firefox: "50", chrome: "64", safari: "11.1";
+* Webpack: html-webpack-plugin, clean-webpack-plugin, mini-css-extract-plugin;
+* PostCSS: autoprefixer, cssnano;
 
 #### Адаптив под
 
-* 1. Desktop 1280px+
-* 2. Tablet от 1279px до 768px 
-* 3. Mobile 320px
+* I Desktop 1280px+
+* II Tablet от 1279px до 768px 
+* III Mobile 320px
 
 ##### Функции:
 
-валидация форм , вебпак , асинхронщина , подключение к серверу
+Валидация форм , Асинхронный JS , Подключение к серверу
 
 # Ссылка на проект в github pages: 
-https://nlsusr.github.io/mesto-project/ 
+https://nlsusr.github.io/mesto-project

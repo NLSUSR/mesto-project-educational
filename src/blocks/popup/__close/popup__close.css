@@ -4,6 +4,7 @@
   position: absolute;
   top: -38px;
   right: -38px;
+  z-index: 998;
   background-image: url(../../../images/main-pics/close.svg);
   background-size: 32px 32px;
   background-color: rgba(0, 0, 0, 0%);

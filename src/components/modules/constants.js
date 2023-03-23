@@ -1,44 +1,42 @@
 const favicon = document.querySelector("#favicon");
+const preloader = document.querySelector('#preloader');
+const pageLoaded = "DOMContentLoaded";
+const closeButtons = document.querySelectorAll(".popup__close");
+
 const cardTemplate = document.querySelector('#cardTemplate').content;
-const elementsList = document.querySelector('#elementsList');
+const elementsContainer = document.querySelector('#elementsContainer');
 const elementsItem = cardTemplate.querySelector(".elements__item");
-const profileId = document.querySelector("#profileId");
+
+const profileEditButton = document.querySelector("#profileEditButton");
+const profileEditContainer = document.querySelector("#profileEditContainer");
+const profileEditContainerForm = document.forms.profileEditContainerForm;
+const profileEditNameInput = document.querySelector("#profileEditNameInput");
+const profileEditActivityInput = document.querySelector("#profileEditActivityInput");
 const profileName = document.querySelector("#profileName");
 const profileActivity = document.querySelector("#profileActivity");
-const editProfileNameInput = document.querySelector("#editProfileNameInput");
-const editProfileActivityInput = document.querySelector("#editProfileActivityInput");
-const editProfileSection = document.querySelector("#editProfileSection");
-const changeAvatarSection = document.querySelector("#changeAvatarSection");
-const profileAvatarImage = document.querySelector("#profileAvatarImage");
-const changeAvatarInput = document.querySelector("#changeAvatarInput");
+
 const profileAvatarWrapper = document.querySelector("#profileAvatarWrapper");
-const changeAvatarSectionForm = document.forms.changeAvatarSectionForm;
-const editProfileButton = document.querySelector("#editProfileButton");
-const editProfileSectionForm = document.forms.editProfileSectionForm;
-const addCardTitleInput = document.querySelector("#addCardTitleInput");
-const addCardImageLinkInput = document.querySelector("#addCardImageLinkInput");
-const addCardSection = document.querySelector("#addCardSection");
-const addCardButton = document.querySelector("#addCardButton");
-const addCardSectionForm = document.forms.addCardSectionForm;
-const removeCardSection = document.querySelector("#removeCardSection");
-const removeCardSectionButton = document.querySelector("#removeCardSectionButton");
-const openImageSection = document.querySelector("#openImageSection");
-const openedImage = document.querySelector("#openedImage");
+const changeAvatarContainer = document.querySelector("#changeAvatarContainer");
+const changeAvatarContainerForm = document.forms.changeAvatarContainerForm;
+const changeAvatarInput = document.querySelector("#changeAvatarInput");
+const profileAvatarImage = document.querySelector("#profileAvatarImage");
+
+const cardAddButton = document.querySelector("#cardAddButton");
+const cardAddContainer = document.querySelector("#cardAddContainer");
+const cardAddContainerForm = document.forms.cardAddContainerForm;
+const cardAddTitleInput = document.querySelector("#cardAddTitleInput");
+const cardAddImageLinkInput = document.querySelector("#cardAddImageLinkInput");
+
+const cardRemoveContainer = document.querySelector("#cardRemoveContainer");
+const cardRemoveContainerButton = document.querySelector("#cardRemoveContainerButton");
+
+const imageOpeningContainer = document.querySelector("#imageOpeningContainer");
+const imageOpeningWrapper = document.querySelector("#imageOpeningWrapper");
+const placeImage = document.querySelector("#placeImage");
 const placeName = document.querySelector("#placeName");
-const closeButtons = document.querySelectorAll(".popup__close");
-const preloader = document.querySelector('#preloader');
-const location = document.querySelector("#location")
-const author = document.querySelector("#author")
-const authorId = document.querySelector("#authorId")
-const openImageContainer = document.querySelector("#openImageContainer");
-const saveChangeAvatarButton = document.querySelector("#saveChangeAvatarButton");
-const saveEditProfileButton = document.querySelector("#saveEditProfileButton");
-const saveAddCardButton = document.querySelector("#saveAddCardButton");
-const pageLoaded = "DOMContentLoaded";
 
 const objectValidation = {
   formSelector: ".popup__form",
-  fieldsetSelector: ".popup__form-fieldset",
   inputSelector: ".popup__form-input",
   inputErrorClass: "popup__form-input_error",
   errorMessageElement: ".popup__error-message-element",
@@ -47,11 +45,11 @@ const objectValidation = {
   inactiveButtonClass: "popup__form-submit_disabled"
 };
 
-const cohort = "plus-cohort-18";
+const cohort = "plus-cohort-20"; //plus-cohort-18
 const requestUrl = `https://nomoreparties.co/v1/${cohort}`;
-const token = "dbbb73d9-482c-4ca9-b5e0-9835c4b5cfcc";
+const token = "b920c8ce-3925-48c5-9ff8-5e542e04acb8"; // dbbb73d9-482c-4ca9-b5e0-9835c4b5cfcc
 
-const link = {
+const endpoint = {
   me: "/users/me/",
   avatar: "/users/me/avatar/",
   cards: "/cards/",
@@ -66,46 +64,48 @@ const cfg = {
   }
 };
 
+const mtd = {
+  remove: "DELETE",
+  change: "PATCH",
+  send: "POST",
+  request: "GET",
+  add: "PUT"
+}
+
 export {
+  mtd,
   requestUrl,
   token,
-  link,
+  endpoint,
   cfg,
   favicon,
-  elementsList,
+  elementsContainer,
   elementsItem,
   profileName,
-  editProfileNameInput,
+  profileEditNameInput,
   profileActivity,
-  editProfileActivityInput,
-  editProfileSection,
-  changeAvatarSection,
+  profileEditActivityInput,
+  profileEditContainer,
+  changeAvatarContainer,
   profileAvatarImage,
   changeAvatarInput,
   profileAvatarWrapper,
-  changeAvatarSectionForm,
-  editProfileButton,
-  editProfileSectionForm,
-  addCardTitleInput,
-  addCardImageLinkInput,
-  addCardSection,
-  addCardButton,
-  addCardSectionForm,
-  removeCardSection,
-  removeCardSectionButton,
-  openImageSection,
-  openedImage,
+  changeAvatarContainerForm,
+  profileEditButton,
+  profileEditContainerForm,
+  cardAddButton,
+  cardAddTitleInput,
+  cardAddImageLinkInput,
+  cardAddContainer,
+  cardAddContainerForm,
+  cardRemoveContainer,
+  cardRemoveContainerButton,
+  imageOpeningContainer,
+  placeImage,
   placeName,
   closeButtons,
   preloader,
   objectValidation,
-  profileId,
-  location,
-  author,
-  authorId,
-  openImageContainer,
-  pageLoaded,
-  saveChangeAvatarButton,
-  saveEditProfileButton,
-  saveAddCardButton
+  imageOpeningWrapper,
+  pageLoaded
 };

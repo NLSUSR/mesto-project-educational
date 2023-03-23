@@ -10,6 +10,10 @@
   border-radius: 10px;
 }
 
+.opened-image{
+  background-color: transparent;
+}
+
 @media screen and (max-width: 767px) {
   .popup__container {
     max-width: 282px;

@@ -1,132 +1,207 @@
+// зависимости
 import * as styles from "./index.css";
-import { images } from "./components/arrays/imagesArray.js";
-import { enableValidation } from "./components/modules/validate.js";
 
 import {
-  changeAvatar,
-  editProfile,
-  addLocation
+  pageLoader
+} from "./components/modules/utils.js";
+
+import {
+  enableValidation,
+  changeButtonState
+} from "./components/modules/validate.js";
+
+import {
+  closePopup,
+  openPopup,
+  showSendStatus
 } from "./components/modules/modal.js";
 
 import {
-  favicon,
-  closeButtons,
-  objectValidation,
-  profileAvatarWrapper,
-  changeAvatarSection,
-  editProfileButton,
-  editProfileSection,
-  changeAvatarSectionForm,
-  addCardButton,
-  addCardSection,
-  addCardSectionForm,
-  editProfileSectionForm,
-  changeAvatarInput,
-  editProfileNameInput,
-  editProfileActivityInput,
-  addCardTitleInput,
-  addCardImageLinkInput,
-  pageLoaded
-} from "./components/modules/constants.js";
+  removeCard,
+  renderCard,
+  changeLikeState,
+  cardToBeRemoving,
+  checkLike,
+  likeMethod,
+} from "./components/modules/card.js";
 
 import {
-  getCards,
-  getData,
-  patchAvatar,
-  patchData,
-  checkResponse,
   responseError,
+  likeState,
+  deleteCard,
+  getDataAndCards,
+  patchAvatar,
   postCard,
-  getResponse
+  patchData,
 } from "./components/modules/api.js";
 
 import {
-  сlosureHandler,
-  pageLoader,
-  openPopup,
-  setFavicon,
-  setProfileData,
-  arrayIteration,
-  showSendStatus
-} from "./components/modules/utils.js";
+  profileAvatarWrapper,
+  changeAvatarContainer,
+  profileEditButton,
+  profileEditContainer,
+  changeAvatarContainerForm,
+  cardAddButton,
+  cardAddContainer,
+  cardAddContainerForm,
+  profileEditContainerForm,
+  changeAvatarInput,
+  profileEditNameInput,
+  profileEditActivityInput,
+  cardAddTitleInput,
+  cardAddImageLinkInput,
+  pageLoaded,
+  profileAvatarImage,
+  profileName,
+  profileActivity,
+  cardRemoveContainerButton,
+  cardRemoveContainer,
+  placeImage,
+  placeName,
+  imageOpeningContainer
+} from "./components/modules/constants.js";
 
 // импорт каскадной таблицы стилей
 styles;
 
-// установка фавикона
-setFavicon(favicon, images);
-
 // вызов прелоадера
-document.addEventListener(pageLoaded, () => { pageLoader(true) });
+document.addEventListener(pageLoaded, pageLoader(true));
 
-// инициализация обработчика закрытия модалок
-сlosureHandler(closeButtons);
+// вызов функции валидации
+enableValidation();
 
-// вызов функции валидации и передача параметров объектом
-enableValidation(objectValidation);
+// просмотр карточки
+const viewCard = card => {
+  imageOpeningContainer.classList.add("image-viewer")
 
-// слушатель открытия модалки редактирования аватара
-profileAvatarWrapper.addEventListener("click", (event) => {
+  placeName.textContent = card.name;
+  placeImage.src = card.link;
+  placeImage.alt = card.name;
+
+  openPopup(imageOpeningContainer);
+};
+
+// обработка лайка
+const likeCard = card => {
+  checkLike(card);
+  const cardId = card.dataset.cardId;
+  const method = likeMethod;
+  const data = { cardId, method };
+  likeState(data).then(data => {
+    changeLikeState(card, data.likes.length)
+  }).catch(error => responseError(error))
+};
+
+// обработка аватара
+const submitPatchAvatar = event => {
   event.preventDefault();
-  showSendStatus(true);
-  openPopup(changeAvatarSection);
-});
 
-// слушатель открытия модалки редактирования профиля
-editProfileButton.addEventListener("click", (event) => {
+  showSendStatus(true);
+
+  const url = `${changeAvatarInput.value}`;
+
+  patchAvatar(url).then(data => {
+    profileAvatarImage.src = data.avatar;
+    closePopup(changeAvatarContainer);
+  }).catch(error => responseError(error)).finally(() => {
+    showSendStatus(false)
+  });
+};
+
+// обработка данных профиля
+const submitPatchData = event => {
   event.preventDefault();
+
   showSendStatus(true);
 
-  openPopup(editProfileSection);
-});
+  const data = { name: `${profileEditNameInput.value}`, about: `${profileEditActivityInput.value}` };
 
-// слушатель кнопки открытия модалки добавления карточки
-addCardButton.addEventListener("click", (event) => {
+  patchData(data).then(data => {
+    profileName.textContent = data.name;
+    profileActivity.textContent = data.about;
+    closePopup(profileEditContainer);
+  }).catch(error => responseError(error)).finally(() => {
+    showSendStatus(false)
+  });
+};
+
+// обработка добавления карточки
+const submitPostCard = event => {
   event.preventDefault();
+
   showSendStatus(true);
-  openPopup(addCardSection);
-});
 
+  const card = { name: `${cardAddTitleInput.value}`, link: `${cardAddImageLinkInput.value}` }
 
-// слушатель сабмита формы редактирования аватара // avatar https://clck.ru/33DSrZ  dedsec https://clck.ru/33DSq5
-changeAvatarSectionForm.addEventListener("submit", () => {
-  changeAvatar(changeAvatarInput.value);
-  patchAvatar(changeAvatarInput.value)
-    .then(response => checkResponse(response))
-    .catch(error => { responseError(error) })
-    .finally(showSendStatus(false));
-});
+  postCard(card).then(card => {
+    renderCard(card, userId, likeCard, viewCard)
+    closePopup(cardAddContainer);
+    cardAddContainerForm.reset();
+  }).catch(error => responseError(error)).finally(() => {
+    showSendStatus(false)
+  });
+};
 
-// слушатель сабмита формы редактирования профиля
-editProfileSectionForm.addEventListener("submit", () => {
-  editProfile({ name: editProfileNameInput.value, about: editProfileActivityInput.value });
-  patchData({ name: editProfileNameInput.value, about: editProfileActivityInput.value })
-    .then(response => checkResponse(response))
-    .catch(error => { responseError(error) })
-    .finally(showSendStatus(false));
-});
+// обработка удаления карточки
+cardRemoveContainerButton.addEventListener("click", () => {
+  const card = cardToBeRemoving;
 
-// слушатель сабмита формы добавления карточки
-addCardSectionForm.addEventListener("submit", (event) => {
-  addLocation({ name: `${addCardTitleInput.value}`, link: `${addCardImageLinkInput.value}` });
-  postCard({ name: `${addCardTitleInput.value}`, link: `${addCardImageLinkInput.value}` })
-    .then(response => checkResponse(response))
-    .catch(error => { responseError(error) })
-    .finally(showSendStatus(false));
-  event.target.reset();
+  deleteCard(card.dataset.cardId).then(() => {
+    removeCard(card);
+    closePopup(cardRemoveContainer);
+  }).catch(error => responseError(error)).finally(() => {
+    showSendStatus(false)
+  });
 });
 
 // получение информации профиля с сервера
-getData()
-  .then(response => { return checkResponse(response) })
-  .then(data => { setProfileData(data) })
-  .catch(error => { responseError(error) });
-// рендер карточек с сервера
-getCards()
-  .then(response => { return checkResponse(response) })
-  .then(cards => { arrayIteration(cards) })
-  .catch(error => { responseError(error) });
-// общий промис
-getResponse()
-  .catch(error => { responseError(error) })
-  .finally(setTimeout(() => { pageLoader(false) }, 500));
+let userId = null;
+getDataAndCards().then(([data, cards]) => {
+  profileAvatarImage.src = data.avatar;
+  changeAvatarInput.value = data.avatar;
+
+  profileName.textContent = data.name;
+  profileEditNameInput.value = data.name;
+
+  profileActivity.textContent = data.about;
+  profileEditActivityInput.value = data.about;
+
+  userId = data._id;
+
+  // переварачиваем массив задом на перед
+  cards.reverse();
+
+  // функция перебора массива загружаемых с сервера карточек
+  cards.forEach(card => { renderCard(card, userId, likeCard, viewCard) });// рендер карточек с сервера
+
+}).catch(error => responseError(error)).finally(setTimeout(() => { pageLoader(false) }, 500));
+
+// слушатель открытия модалки редактирования аватара
+profileAvatarWrapper.addEventListener("click", () => {
+  showSendStatus(true);
+  openPopup(changeAvatarContainer);
+  changeButtonState(changeAvatarContainer);
+});
+
+// слушатель открытия модалки редактирования профиля
+profileEditButton.addEventListener("click", () => {
+  showSendStatus(true);
+  openPopup(profileEditContainer);
+  changeButtonState(profileEditContainer);
+});
+
+// слушатель кнопки открытия модалки добавления карточки
+cardAddButton.addEventListener("click", () => {
+  showSendStatus(true);
+  openPopup(cardAddContainer);
+  changeButtonState(cardAddContainer);
+});
+
+// слушатель сабмита формы редактирования аватара
+changeAvatarContainerForm.addEventListener("submit", submitPatchAvatar);
+
+// слушатель сабмита формы редактирования профиля
+profileEditContainerForm.addEventListener("submit", submitPatchData);
+
+// слушатель сабмита формы добавления карточки
+cardAddContainerForm.addEventListener("submit", submitPostCard);

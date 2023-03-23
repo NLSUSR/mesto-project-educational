@@ -1,14 +1,13 @@
 const path = require("path"); // подключаем path к конфигу вебпак
-const HtmlWebpackPlugin = require("html-webpack-plugin"); // подключите плагин 
+const HtmlWebpackPlugin = require("html-webpack-plugin"); // подключите плагин
 const { CleanWebpackPlugin } = require("clean-webpack-plugin"); // подключили плагин
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");// подключите к проекту mini-css-extract-plugin
-
 
 module.exports = {// module.exports — это синтаксис экспорта в Node.js
   entry: { main: "./src/index.js" },// указали первое место, куда заглянет webpack, — файл index.js в папке src
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "main.[contenthash].js",// указали в какой файл будет собираться весь js и дали ему имя 
+    filename: "main.[contenthash].js",// указали в какой файл будет собираться весь js и дали ему имя
     publicPath: ""
   },
   mode: "development", // добавили режим разработчика

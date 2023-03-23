@@ -22,7 +22,8 @@
   opacity: .5;
 }
 
-.element__like::after {
+.element__like-counter {
+  margin: 0;
   position: absolute;
   top: 20px;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
@@ -31,5 +32,4 @@
   font-size: 0.8125rem;
   line-height: 1rem;
   color: #000;
-  content: attr(data-like-counter);
 }

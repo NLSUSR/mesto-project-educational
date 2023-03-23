@@ -1,67 +1,57 @@
-import { cfg, link } from "./constants.js";
+// зависимости
+import { cfg, mtd, endpoint } from "./constants.js";
 
-const getResponse = () => {
-  return Promise.all([getCards, getData, patchAvatar, patchData, postCard, deleteCard, conditionLike])
-};
-
+// проверяем ответ сервера
 const checkResponse = (response) => {
-  if (response.ok) { return Promise.resolve(response.json()) } else { return Promise.reject("Ошибка: "`${response.status}`) };
+  if (response.ok) { return Promise.resolve(response.json()) } // ответ гуд подгружаем джейсон
+  else { return Promise.reject("Ошибка: "`${response.status}`) }; // ответ не гуд отклоняем промис выдаем код ошибки
 };
 
-const responseError = (error) => {
+// обрабатываем ошибку
+const responseError = error => {
   console.error(error);
-  // alert(error);
 };
 
-const getData = () => {
-  return fetch(`${cfg.url + link.me}`, {
-    method: "GET",
-    headers: cfg.headers
-  })
+// получаем данные и карточки с сервера
+const getDataAndCards = () => {
+  return Promise.all([
+    fetch(`${cfg.url + endpoint.me}`, { method: mtd.request, headers: cfg.headers }),
+    fetch(`${cfg.url + endpoint.cards}`, { method: mtd.request, headers: cfg.headers })
+  ]).then(array => Promise.all(array.map(response => checkResponse(response))));
 };
 
-const getCards = () => {
-  return fetch(`${cfg.url + link.cards}`, {
-    method: "GET", headers: cfg.headers
-  })
-};
-
-const patchAvatar = (url) => {
-  return fetch(`${cfg.url + link.avatar}`, {
-    method: "PATCH",
+const sendRequest = async (endpoint, method, data) => {
+  const response = await fetch(`${cfg.url + endpoint}`, {
+    method: method,
     headers: cfg.headers,
-    body: JSON.stringify({ avatar: url })
-  })
+    body: JSON.stringify(data)
+  });
+  return await checkResponse(response);
+}
+
+// замена аватара
+const patchAvatar = url => {
+  return sendRequest(endpoint.avatar, mtd.change, { avatar: url });
 };
 
-const patchData = (user) => {
-  return fetch(`${cfg.url + link.me}`, {
-    method: "PATCH",
-    headers: cfg.headers,
-    body: JSON.stringify({ name: user.name, about: user.about })
-  })
+// заменяем данные имя/деятельность
+const patchData = user => {
+  return sendRequest(endpoint.me, mtd.change, { name: user.name, about: user.about });
 };
 
-const postCard = (card) => {
-  return fetch(`${cfg.url + link.cards}`, {
-    method: "POST",
-    headers: cfg.headers,
-    body: JSON.stringify({ name: card.name, link: card.link })
-  })
+// выкладываем на сервер новую карточку
+const postCard = card => {
+  return sendRequest(endpoint.cards, mtd.send, { name: card.name, link: card.link });
 };
 
-const deleteCard = (cardId) => {
-  return fetch(`${cfg.url + link.cards + cardId}`, {
-    method: "DELETE",
-    headers: cfg.headers
-  })
+// удаляем карточку
+const deleteCard = cardId => {
+  return sendRequest(`${endpoint.cards + cardId}`, mtd.remove);
 };
 
-const conditionLike = (cardId, variable) => {
-  return fetch(`${cfg.url + link.likes + cardId}`, {
-    method: variable,
-    headers: cfg.headers
-  })
+// меняем состояние лайка
+const likeState = data => {
+  return sendRequest(`${endpoint.likes + data.cardId}`, data.method);
 };
 
-export { checkResponse, responseError, getCards, getData, patchAvatar, patchData, postCard, deleteCard, conditionLike, getResponse };
+export { checkResponse, responseError, getDataAndCards, patchAvatar, patchData, postCard, deleteCard, likeState };
