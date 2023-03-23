@@ -1,0 +1,6 @@
+.popup__form-submit_disabled {
+  background-color: white;
+  color: gray;
+  outline: 2px solid gray;
+  cursor: default;
+}

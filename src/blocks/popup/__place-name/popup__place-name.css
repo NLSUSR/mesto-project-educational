@@ -1,0 +1,32 @@
+.popup__place-name {
+  margin: 0;
+  padding: 0;
+  gap: 10px;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 767px) {
+  .popup__place-name {
+    flex-direction: column;
+    justify-content: left;
+  }
+
+  .location {
+    margin: 10px 0 0 0;
+  }
+
+  .author {
+    margin: 0;
+  }
+
+  .author-id {
+    margin: 0;
+  }
+}

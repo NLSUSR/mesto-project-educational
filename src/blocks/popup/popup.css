@@ -1,0 +1,33 @@
+.popup {
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  background-color: rgba(0, 0, 0, .9);
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  opacity: 0;
+  transition: all .3s linear;
+}
+
+.popup_preloader {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../../images/splash/splashBlack.svg")  ;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: visibility .5s, opacity .5s linear;
+}
