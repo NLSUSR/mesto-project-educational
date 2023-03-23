@@ -10,22 +10,18 @@
 
 ### Используемые технологии: 
 
-* HTML;
-* CSS: Flex, Grid, Адаптивная верстка;
-* JS: NodeJS, NPM;
-* BabelJS: edge: "17", ie: "11", firefox: "50", chrome: "64", safari: "11.1";
-* Webpack: html-webpack-plugin, clean-webpack-plugin, mini-css-extract-plugin;
-* PostCSS: autoprefixer, cssnano;
+* 1. Flex
+* 2. Grid
 
 #### Адаптив под
 
-* I Desktop 1280px+
-* II Tablet от 1279px до 768px 
-* III Mobile 320px
+* 1. Desktop 1280px+
+* 2. Tablet от 1279px до 768px 
+* 3. Mobile 320px
 
 ##### Функции:
 
-Валидация форм , Асинхронный JS , Подключение к серверу
+* Для появления модального окна ввода имени и рода занятий нужно зафлексить popup , по умолчанию popup - display: none;
 
 # Ссылка на проект в github pages: 
-https://nlsusr.github.io/mesto-project
+https://nlsusr.github.io/mesto-project/ 

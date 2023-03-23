@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./pages/index.css">
+    <title>Mesto</title>
+</head>
+
+<body class="page">
+
+    <header class="header">
+        <a class="header__logo-link link-hover" href="#"><img class="header__logo" src="./images/main-pics/logo.svg"
+                alt="Логотип"></a>
+    </header>
+
+    <main class="content">
+
+        <section class="profile">
+            <img class="profile__avatar" src="./images/avatars/jacques-yves-cousteau-asitis.jpg" alt="Аватар профиля">
+            <div class="profile__info">
+                <div class="profile__title-button-wrapper">
+                    <h1 class="profile__title">Жак-Ив Кусто </h1>
+                    <button type="button" class="profile__edit-button link-hover" id="openPopupButton"
+                        aria-label="Редактировать"></button>
+                </div>
+                <p class="profile__subtitle">Исследователь океана </p>
+            </div>
+
+            <button type="button" class="profile__add-button link-hover"></button>
+        </section>
+
+        <section class="elements">
+            <ul class="elements__list">
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1000x600.jpg"
+                            alt="Фото Жака-Ива Кусто На батискафе">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На батискафе</h2>
+                            <button type="button" class="element__like element__like_active"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1065x1024.jpg"
+                            alt="Фото Жака-Ива Кусто На картине">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На картине</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1600x1098.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне неба">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне неба</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1920x1080.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне океана">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне океана</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/470x246.jpg"
+                            alt="Жак-Ив Кусто на Черно-белой фотографии">
+                        <div class="element__description">
+                            <h2 class="element__place-name">Черно-белая фотография</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/824x1200.jpg"
+                            alt="Фото Жака-Ива Кусто В Акваланге">
+                        <div class="element__description">
+                            <h2 class="element__place-name">В Акваланге</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1000x600.jpg"
+                            alt="Фото Жака-Ива Кусто На батискафе">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На батискафе</h2>
+                            <button type="button" class="element__like element__like_active"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1065x1024.jpg"
+                            alt="Фото Жака-Ива Кусто На картине">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На картине</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1600x1098.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне неба">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне неба</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1920x1080.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне океана">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне океана</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/470x246.jpg"
+                            alt="Жак-Ив Кусто на Черно-белой фотографии">
+                        <div class="element__description">
+                            <h2 class="element__place-name">Черно-белая фотография</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/824x1200.jpg"
+                            alt="Фото Жака-Ива Кусто В Акваланге">
+                        <div class="element__description">
+                            <h2 class="element__place-name">В Акваланге</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1000x600.jpg"
+                            alt="Фото Жака-Ива Кусто На батискафе">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На батискафе</h2>
+                            <button type="button" class="element__like element__like_active"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1065x1024.jpg"
+                            alt="Фото Жака-Ива Кусто На картине">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На картине</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1600x1098.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне неба">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне неба</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1920x1080.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне океана">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне океана</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/470x246.jpg"
+                            alt="Жак-Ив Кусто на Черно-белой фотографии">
+                        <div class="element__description">
+                            <h2 class="element__place-name">Черно-белая фотография</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/824x1200.jpg"
+                            alt="Фото Жака-Ива Кусто В Акваланге">
+                        <div class="element__description">
+                            <h2 class="element__place-name">В Акваланге</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1000x600.jpg"
+                            alt="Фото Жака-Ива Кусто На батискафе">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На батискафе</h2>
+                            <button type="button" class="element__like element__like_active"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1065x1024.jpg"
+                            alt="Фото Жака-Ива Кусто На картине">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На картине</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1600x1098.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне неба">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне неба</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1920x1080.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне океана">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне океана</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/470x246.jpg"
+                            alt="Жак-Ив Кусто на Черно-белой фотографии">
+                        <div class="element__description">
+                            <h2 class="element__place-name">Черно-белая фотография</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/824x1200.jpg"
+                            alt="Фото Жака-Ива Кусто В Акваланге">
+                        <div class="element__description">
+                            <h2 class="element__place-name">В Акваланге</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1000x600.jpg"
+                            alt="Фото Жака-Ива Кусто На батискафе">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На батискафе</h2>
+                            <button type="button" class="element__like element__like_active"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1065x1024.jpg"
+                            alt="Фото Жака-Ива Кусто На картине">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На картине</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1600x1098.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне неба">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне неба</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1920x1080.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне океана">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне океана</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/470x246.jpg"
+                            alt="Жак-Ив Кусто на Черно-белой фотографии">
+                        <div class="element__description">
+                            <h2 class="element__place-name">Черно-белая фотография</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/824x1200.jpg"
+                            alt="Фото Жака-Ива Кусто В Акваланге">
+                        <div class="element__description">
+                            <h2 class="element__place-name">В Акваланге</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1000x600.jpg"
+                            alt="Фото Жака-Ива Кусто На батискафе">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На батискафе</h2>
+                            <button type="button" class="element__like element__like_active"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1065x1024.jpg"
+                            alt="Фото Жака-Ива Кусто На картине">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На картине</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1600x1098.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне неба">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне неба</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1920x1080.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне океана">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне океана</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/470x246.jpg"
+                            alt="Жак-Ив Кусто на Черно-белой фотографии">
+                        <div class="element__description">
+                            <h2 class="element__place-name">Черно-белая фотография</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/824x1200.jpg"
+                            alt="Фото Жака-Ива Кусто В Акваланге">
+                        <div class="element__description">
+                            <h2 class="element__place-name">В Акваланге</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1000x600.jpg"
+                            alt="Фото Жака-Ива Кусто На батискафе">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На батискафе</h2>
+                            <button type="button" class="element__like element__like_active"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1065x1024.jpg"
+                            alt="Фото Жака-Ива Кусто На картине">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На картине</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1600x1098.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне неба">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне неба</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1920x1080.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне океана">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне океана</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/470x246.jpg"
+                            alt="Жак-Ив Кусто на Черно-белой фотографии">
+                        <div class="element__description">
+                            <h2 class="element__place-name">Черно-белая фотография</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/824x1200.jpg"
+                            alt="Фото Жака-Ива Кусто В Акваланге">
+                        <div class="element__description">
+                            <h2 class="element__place-name">В Акваланге</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1000x600.jpg"
+                            alt="Фото Жака-Ива Кусто На батискафе">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На батискафе</h2>
+                            <button type="button" class="element__like element__like_active"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1065x1024.jpg"
+                            alt="Фото Жака-Ива Кусто На картине">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На картине</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1600x1098.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне неба">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне неба</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1920x1080.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне океана">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне океана</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/470x246.jpg"
+                            alt="Жак-Ив Кусто на Черно-белой фотографии">
+                        <div class="element__description">
+                            <h2 class="element__place-name">Черно-белая фотография</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/824x1200.jpg"
+                            alt="Фото Жака-Ива Кусто В Акваланге">
+                        <div class="element__description">
+                            <h2 class="element__place-name">В Акваланге</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1000x600.jpg"
+                            alt="Фото Жака-Ива Кусто На батискафе">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На батискафе</h2>
+                            <button type="button" class="element__like element__like_active"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1065x1024.jpg"
+                            alt="Фото Жака-Ива Кусто На картине">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На картине</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1600x1098.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне неба">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне неба</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1920x1080.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне океана">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне океана</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/470x246.jpg"
+                            alt="Жак-Ив Кусто на Черно-белой фотографии">
+                        <div class="element__description">
+                            <h2 class="element__place-name">Черно-белая фотография</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/824x1200.jpg"
+                            alt="Фото Жака-Ива Кусто В Акваланге">
+                        <div class="element__description">
+                            <h2 class="element__place-name">В Акваланге</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1000x600.jpg"
+                            alt="Фото Жака-Ива Кусто На батискафе">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На батискафе</h2>
+                            <button type="button" class="element__like element__like_active"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1065x1024.jpg"
+                            alt="Фото Жака-Ива Кусто На картине">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На картине</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1600x1098.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне неба">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне неба</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1920x1080.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне океана">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне океана</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/470x246.jpg"
+                            alt="Жак-Ив Кусто на Черно-белой фотографии">
+                        <div class="element__description">
+                            <h2 class="element__place-name">Черно-белая фотография</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/824x1200.jpg"
+                            alt="Фото Жака-Ива Кусто В Акваланге">
+                        <div class="element__description">
+                            <h2 class="element__place-name">В Акваланге</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1000x600.jpg"
+                            alt="Фото Жака-Ива Кусто На батискафе">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На батискафе</h2>
+                            <button type="button" class="element__like element__like_active"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1065x1024.jpg"
+                            alt="Фото Жака-Ива Кусто На картине">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На картине</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1600x1098.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне неба">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне неба</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1920x1080.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне океана">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне океана</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/470x246.jpg"
+                            alt="Жак-Ив Кусто на Черно-белой фотографии">
+                        <div class="element__description">
+                            <h2 class="element__place-name">Черно-белая фотография</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/824x1200.jpg"
+                            alt="Фото Жака-Ива Кусто В Акваланге">
+                        <div class="element__description">
+                            <h2 class="element__place-name">В Акваланге</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1000x600.jpg"
+                            alt="Фото Жака-Ива Кусто На батискафе">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На батискафе</h2>
+                            <button type="button" class="element__like element__like_active"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1065x1024.jpg"
+                            alt="Фото Жака-Ива Кусто На картине">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На картине</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1600x1098.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне неба">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне неба</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1920x1080.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне океана">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне океана</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/470x246.jpg"
+                            alt="Жак-Ив Кусто на Черно-белой фотографии">
+                        <div class="element__description">
+                            <h2 class="element__place-name">Черно-белая фотография</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/824x1200.jpg"
+                            alt="Фото Жака-Ива Кусто В Акваланге">
+                        <div class="element__description">
+                            <h2 class="element__place-name">В Акваланге</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1000x600.jpg"
+                            alt="Фото Жака-Ива Кусто На батискафе">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На батискафе</h2>
+                            <button type="button" class="element__like element__like_active"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1065x1024.jpg"
+                            alt="Фото Жака-Ива Кусто На картине">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На картине</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1600x1098.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне неба">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне неба</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/1920x1080.jpg"
+                            alt="Фото Жака-Ива Кусто На фоне океана">
+                        <div class="element__description">
+                            <h2 class="element__place-name">На фоне океана</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/470x246.jpg"
+                            alt="Жак-Ив Кусто на Черно-белой фотографии">
+                        <div class="element__description">
+                            <h2 class="element__place-name">Черно-белая фотография</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="elements__item">
+                    <div class="element">
+                        <img class="element__mask-group" src="./images/places/824x1200.jpg"
+                            alt="Фото Жака-Ива Кусто В Акваланге">
+                        <div class="element__description">
+                            <h2 class="element__place-name">В Акваланге</h2>
+                            <button type="button" class="element__like"></button>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p class="footer__copyright">&copy; 2020 Mesto Russia<a class="footer__copyleft-link link-hover"
+                href="https://vk.com/nlsusr/" target="_blank"><span class="footer__copyleft">&copy;</span> 2022 Сергеев
+                Илья</a></p>
+    </footer>
+
+     <section class="popup"> <!--оставляю комментарий чтобы незабыть вернуть модификатор popup_opened открывающий модальное окно-->
+        <div class="popup__container">
+            <button type="button" class="popup__container-exit link-hover"></button>
+            <h2 class="popup__container-title">Редактировать профиль</h2>
+            <form action="#" name="editform" class="popup__edit-profile-form">
+                <fieldset class="popup__edit-profile">
+                    <input type="text" name="profilename" class="popup__edit-profile-input" placeholder="Жак-Ив Кусто">
+                    <input type="text" name="profileactivity" class="popup__edit-profile-input" placeholder="Исследователь океана">
+                </fieldset>
+            </form>
+            <button type="button" class="popup__container-save">Сохранить</button>
+        </div>
+    </section>
+
+</body>
+
+</html>

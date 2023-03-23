@@ -1,0 +1,12 @@
+.footer__copyleft {
+    margin: 0 0 0 16px;
+    padding: 0;
+    display: inline-block;
+    transform: rotate(180deg);
+}
+
+@media screen and (max-width: 767px) {
+    .footer__copyleft {
+        margin: 0;
+    }
+}
