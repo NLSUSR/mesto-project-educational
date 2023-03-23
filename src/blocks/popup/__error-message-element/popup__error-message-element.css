@@ -1,0 +1,26 @@
+.popup__error-message-element {
+  margin: 0 auto;
+  opacity: 0;
+  transition: all .3s;
+  width: 362px;
+  min-height: 30px;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 0.9374rem;
+  color: #FF0000;
+}
+
+@media screen and (max-width: 767px) {
+  .popup__error-message-element {
+    width: 242px;
+    min-height: 30px
+  }
+}
+
+.change-avatar,
+.profile-activity,
+.card-image {
+  margin-bottom: 18px;
+}
