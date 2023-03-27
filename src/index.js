@@ -1,3 +1,5 @@
+// 'use strict'
+
 // зависимости
 import * as styles from "./index.css";
 
@@ -215,7 +217,6 @@ const popups = (function wrapper() {
   };
 
   const popupDelete = new PopupWithDeletions(deleting);
-  // popupDelete.setEventListeners();
 
   // создание экземпляра класса для просмотра карточки
   const image = {
@@ -227,7 +228,6 @@ const popups = (function wrapper() {
   };
 
   const popupImage = new PopupWithImages(image);
-  // popupImage.setEventListeners();
 
   return { popupFormAvatar, popupFormProfile, popupFormPlace, popupDelete, popupImage };
 
@@ -236,10 +236,7 @@ const popups = (function wrapper() {
 // создание экземлпяра карточки
 const createCardElement = (function wrapper() {
 
-  const data = {
-    template: constants.selectors.cardTemplate,
-    container: constants.selectors.elementsContainer,
-  };
+  const template = constants.selectors.cardTemplate;
 
   const callbacks = {
     deleteCallback: (card, id) => { popups.popupDelete.open(card, id) },
@@ -249,7 +246,7 @@ const createCardElement = (function wrapper() {
 
   const createCardElement = item => {
 
-    const cardElement = new Card(item, callbacks, data, userInfo.getUserId());
+    const cardElement = new Card(item, callbacks, template, userInfo.getUserId());
 
     return cardElement.getCard();
 

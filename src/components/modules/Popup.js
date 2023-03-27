@@ -1,9 +1,9 @@
 const Popup = class {
   constructor(selector) {
 
-    this._popup = selector;
-    this._close = this._popup.querySelector(".popup__close");
-    this._submit = this._popup.querySelector(".popup__form-submit");
+    this._$popup = selector;
+    this._$close = this._$popup.querySelector(".popup__close");
+    this._$submit = this._$popup.querySelector(".popup__form-submit");
 
     this._buttonClose = event => { if (event.target.closest(".popup__close")) { this.close() } };
     this._overlayClose = event => { if (event.target === event.currentTarget) { this.close() } };
@@ -15,8 +15,8 @@ const Popup = class {
   showSendStatus = boolean => {
 
     boolean
-      ? this._submit.textContent = this._submit.dataset.statusDefault
-      : this._submit.textContent = this._submit.dataset.statusSaving
+      ? this._$submit.textContent = this._$submit.dataset.statusDefault
+      : this._$submit.textContent = this._$submit.dataset.statusSaving
 
   };
 
@@ -33,16 +33,16 @@ const Popup = class {
   open() {
 
     // добавление слушателя закрытия на клик по крестику
-    this._close.addEventListener("click", this._closePopupHandler);
+    this._$close.addEventListener("click", this._$closePopupHandler);
 
     // добавление слушателя закрытия на клик по оверлею
-    this._popup.addEventListener("click", this._closePopupHandler);
+    this._$popup.addEventListener("click", this._$closePopupHandler);
 
     // добавление слушателя закрытия на Escape
-    document.addEventListener("keydown", this._closePopupHandler);
+    document.addEventListener("keydown", this._$closePopupHandler);
 
     // добавление сиэсэс класса открытого попапа
-    this._popup.classList.add("popup_opened");
+    this._$popup.classList.add("popup_opened");
 
   };
 
@@ -50,16 +50,16 @@ const Popup = class {
   close() {
 
     // удаление слушателя закрытия на клик по крестику
-    this._close.removeEventListener("click", this._closePopupHandler);
+    this._$close.removeEventListener("click", this._$closePopupHandler);
 
     // удаление слушателя закрытия на клик по оверлею
-    this._popup.removeEventListener("click", this._closePopupHandler);
+    this._$popup.removeEventListener("click", this._$closePopupHandler);
 
     // удаление слушателя закрытия на Escape
-    document.removeEventListener("keydown", this._closePopupHandler);
+    document.removeEventListener("keydown", this._$closePopupHandler);
 
     // удаление сиэсэс класса открытого попапа
-    this._popup.classList.remove("popup_opened");
+    this._$popup.classList.remove("popup_opened");
 
   };
 
