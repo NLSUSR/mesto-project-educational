@@ -14,7 +14,7 @@ const Api = class {
     this._hdr = this._cfg.hdr;
 
   };
-
+  
   // проверяем ответ сервера
   _checkResponse = response => {
 
