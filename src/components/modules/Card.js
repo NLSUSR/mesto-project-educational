@@ -32,7 +32,7 @@ const Card = class {
     this._$elementLike = ".element__like";
     this._$elementLikeCounter = ".element__like-counter";
 
-    this._likeActive = "element__like_active";
+    this._$likeActive = "element__like_active";
 
   };
 
@@ -57,8 +57,8 @@ const Card = class {
   _setLikeState = () => {
 
     this._myLike
-      ? this._$elementLike.classList.add(this._likeActive)
-      : this._$elementLike.classList.remove(this._likeActive);
+      ? this._$elementLike.classList.add(this._$likeActive)
+      : this._$elementLike.classList.remove(this._$likeActive);
 
     this._$elementLikeCounter.textContent = this._cardLikes.length;
 
