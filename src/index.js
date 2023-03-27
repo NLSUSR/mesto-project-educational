@@ -1,4 +1,4 @@
-// 'use strict'
+'use strict'
 
 // зависимости
 import * as styles from "./index.css";
