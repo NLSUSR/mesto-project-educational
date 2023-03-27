@@ -1,7 +1,7 @@
 // зависимости
-import * as styles from "./index.css";
+const styles = import("./index.css");
+const images = import("./components/utils/images.js");
 
-import images from "./components/utils/images.js";
 import constants from "./components/utils/constants.js";
 import pageLoader from "./components/utils/utils.js";
 import Api from "./components/modules/Api.js";
@@ -26,7 +26,7 @@ document.addEventListener(constants.pageLoaded, pageLoader(true));
 const api = new Api(constants.cfg);
 
 // валидация
-const validation = (function wrapper() {
+const validation = (function wrapper() { // почему в обертке ? по-моему так удобно ! целесообразно ? нет !
 
   // обьект с селекторами форм для класса валидации
   const formElement = {
@@ -155,6 +155,7 @@ const deleteElement = (card, id) => {
     popups.popupDelete.showSendStatus(false);
 
   });
+
 };
 
 // обработка лайка
@@ -167,6 +168,7 @@ const likeCard = (card, id, method) => {
     card.changeLikeState(data.likes);
 
   }).catch(error => api.responseError(error))
+
 };
 
 // попапы
@@ -270,36 +272,53 @@ api.getDataAndCards().then(([data, cards]) => {
 
 }).catch(error => api.responseError(error)).finally(window.onload = () => { setTimeout(() => { pageLoader(false) }, 500) });
 
-// слушатель открытия модалки редактирования аватара
-constants.selectors.profileAvatarWrapper.addEventListener("click", () => {
+// обработка слушателей кнопок
+(function () {
+  const avatar = {
+    button: constants.selectors.profileAvatarWrapper,
+    popup: popups.popupFormAvatar,
+    validation: validation.avatarFormValidation,
+    link: constants.selectors.changeAvatarInput
+  };
 
-  const user = userInfo.getUserInfo();
-  constants.selectors.changeAvatarInput.value = user.avatar;
+  const profile = {
+    button: constants.selectors.profileEditButton,
+    popup: popups.popupFormProfile,
+    validation: validation.profileFormValidation,
+    data: {
+      name: constants.selectors.profileEditNameInput,
+      about: constants.selectors.profileEditActivityInput
+    }
+  };
 
-  popups.popupFormAvatar.showSendStatus(true);
-  popups.popupFormAvatar.open();
-  validation.avatarFormValidation.changeButtonState();
+  const add = {
+    button: constants.selectors.cardAddButton,
+    popup: popups.popupFormPlace,
+    validation: validation.cardFormValidation
+  };
 
-});
+  const submiting = (button, popup, validation) => {
 
-// слушатель открытия модалки редактирования профиля
-constants.selectors.profileEditButton.addEventListener("click", () => {
+    button.addEventListener("click", () => {
 
-  const user = userInfo.getUserInfo();
-  constants.selectors.profileEditNameInput.value = user.name;
-  constants.selectors.profileEditActivityInput.value = user.about;
+      const user = userInfo.getUserInfo();
 
-  popups.popupFormProfile.showSendStatus(true);
-  popups.popupFormProfile.open();
-  validation.profileFormValidation.changeButtonState();
+      avatar.link.value = user.avatar;
+      profile.data.name.value = user.name;
+      profile.data.about.value = user.about;
 
-});
+      popup.showSendStatus(true);
+      validation.changeButtonState();
+      popup.open();
 
-// слушатель кнопки открытия модалки добавления карточки
-constants.selectors.cardAddButton.addEventListener("click", () => {
+    });
 
-  popups.popupFormPlace.showSendStatus(true);
-  popups.popupFormPlace.open();
-  validation.cardFormValidation.changeButtonState();
+  };
 
-});
+  [avatar, profile, add].forEach(item => {
+
+    submiting(item.button, item.popup, item.validation);
+
+  });
+
+}());
