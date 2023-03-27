@@ -33,13 +33,13 @@ const Popup = class {
   open() {
 
     // добавление слушателя закрытия на клик по крестику
-    this._$close.addEventListener("click", this._$closePopupHandler);
+    this._$close.addEventListener("click", this._closePopupHandler);
 
     // добавление слушателя закрытия на клик по оверлею
-    this._$popup.addEventListener("click", this._$closePopupHandler);
+    this._$popup.addEventListener("click", this._closePopupHandler);
 
     // добавление слушателя закрытия на Escape
-    document.addEventListener("keydown", this._$closePopupHandler);
+    document.addEventListener("keydown", this._closePopupHandler);
 
     // добавление сиэсэс класса открытого попапа
     this._$popup.classList.add("popup_opened");
@@ -50,13 +50,13 @@ const Popup = class {
   close() {
 
     // удаление слушателя закрытия на клик по крестику
-    this._$close.removeEventListener("click", this._$closePopupHandler);
+    this._$close.removeEventListener("click", this._closePopupHandler);
 
     // удаление слушателя закрытия на клик по оверлею
-    this._$popup.removeEventListener("click", this._$closePopupHandler);
+    this._$popup.removeEventListener("click", this._closePopupHandler);
 
     // удаление слушателя закрытия на Escape
-    document.removeEventListener("keydown", this._$closePopupHandler);
+    document.removeEventListener("keydown", this._closePopupHandler);
 
     // удаление сиэсэс класса открытого попапа
     this._$popup.classList.remove("popup_opened");
