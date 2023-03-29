@@ -235,8 +235,6 @@ const popups = (function () {
 
 }());
 
-
-
 // создание экземлпяра карточки
 const createCardElement = (function () {
 

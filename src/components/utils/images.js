@@ -13,4 +13,4 @@ const images = {
 
 };
 
-export default images
+export default images;

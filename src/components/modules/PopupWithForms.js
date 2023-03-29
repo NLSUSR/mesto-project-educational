@@ -29,8 +29,6 @@ const PopupWithForms = class extends Popup {
 
   setEventListeners = () => {
 
-    // super.setEventListeners();
-
     this._$popup.addEventListener('submit', event => {
 
       event.preventDefault();
@@ -38,6 +36,7 @@ const PopupWithForms = class extends Popup {
       this._submiter(this._getInputValues());
 
     });
+    
   };
 
   close = () => {
