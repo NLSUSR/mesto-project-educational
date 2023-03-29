@@ -1,17 +1,17 @@
 const Api = class {
-  constructor(configurations) {
+  constructor(cfg) {
 
-    this._configurations = configurations;
-    this._url = this._configurations.url;
-    this._me = this._configurations.ept.me;
-    this._cards = this._configurations.ept.cards;
-    this._avatar = this._configurations.ept.avatar;
-    this._likes = this._configurations.ept.likes;
-    this._request = this._configurations.mtd.request;
-    this._change = this._configurations.mtd.change;
-    this._send = this._configurations.mtd.send;
-    this._remove = this._configurations.mtd.remove;
-    this._headers = this._configurations.hdr;
+    this._cfg = cfg;
+    this._url = this._cfg.url;
+    this._me = this._cfg.ept.me;
+    this._cards = this._cfg.ept.cards;
+    this._avatar = this._cfg.ept.avatar;
+    this._likes = this._cfg.ept.likes;
+    this._request = this._cfg.mtd.request;
+    this._change = this._cfg.mtd.change;
+    this._send = this._cfg.mtd.send;
+    this._remove = this._cfg.mtd.remove;
+    this._hdr = this._cfg.hdr;
 
   };
 
