@@ -29,8 +29,7 @@ document.addEventListener(constants.pageLoaded, pageLoader(true));
 const api = new Api(constants.cfg);
 
 // валидация
-const validation = (function wrapper() { // почему в обертке ? по-моему так удобно ! целесообразно ? нет !
-
+const validation = (function () { // почему в обертке ? по-моему так удобно !
   // обьект с селекторами форм для класса валидации
   const formElement = {
     changeAvatar: constants.selectors.changeAvatarContainerForm,
@@ -67,7 +66,7 @@ const validation = (function wrapper() { // почему в обертке ? п�
 }());
 
 // данные пользователя
-const userInfo = (function wrapper() {
+const userInfo = (function () {
 
   // создание экземпляра класса с пользовательскими данными
   const info = {
@@ -83,7 +82,7 @@ const userInfo = (function wrapper() {
 }());
 
 // создание экземпляра класса добавления карточки
-const cardsSection = (function wrapper() {
+const cardsSection = (function () {
 
   const add = {
     container: constants.selectors.elementsContainer,
@@ -175,7 +174,7 @@ const likeCard = (card, id, method) => {
 };
 
 // попапы
-const popups = (function wrapper() {
+const popups = (function () {
 
   // создание экземпляра класса для формы смены аватара
   const avatar = {
@@ -236,8 +235,10 @@ const popups = (function wrapper() {
 
 }());
 
+
+
 // создание экземлпяра карточки
-const createCardElement = (function wrapper() {
+const createCardElement = (function () {
 
   const template = constants.selectors.cardTemplate;
 
@@ -305,8 +306,8 @@ api.getDataAndCards().then(([data, cards]) => {
       profile.data.name.value = user.name;
       profile.data.about.value = user.about;
 
-      popup.showSendStatus(true);
       validation.changeButtonState();
+      popup.showSendStatus(true);
       popup.open();
 
     });
