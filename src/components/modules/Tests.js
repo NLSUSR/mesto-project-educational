@@ -134,13 +134,12 @@ export const initialCards = [
 // });
 
 // Тест на удаление последствий предыдущего теста
-
 // api.getDataAndCards().then(([data, cards]) => {
-//   let i = 0;
+//   let i;console.log(i);
 //   cards.forEach((item, index) => {
 //     setTimeout(() => {
-//       if (item.owner._id === "28497debba4d03be6d0ac41e") { api.deleteCard(item._id); return i++ };
+//       if (item.owner._id === "28497debba4d03be6d0ac41e") { api.deleteCard(item._id);};
 //     }, (index + 1) * 100);
 //   });
-//   console.log(i);
+//
 // });
