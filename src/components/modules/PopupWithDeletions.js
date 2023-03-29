@@ -6,7 +6,6 @@ const PopupWithDeletions = class extends Popup {
     super(object.container);
     this._button = object.button;
     this._remover = object.handler;
-    this._delete = this._delete.bind(this);
 
   };
 

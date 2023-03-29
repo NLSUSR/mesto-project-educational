@@ -128,6 +128,19 @@ export const initialCards = [
 // Тест - прогоняет массив из 30 картинок
 // initialCards.forEach((item, index) => {
 //   setTimeout(() => {
+//     let i; console.log(i);
 //     api.postCard({ name: item.name, link: item.link });
-//   }, (index + 1) * 100);
+//   }, (index + 1) * 1000);
+// });
+
+// Тест на удаление последствий предыдущего теста
+
+// api.getDataAndCards().then(([data, cards]) => {
+//   let i = 0;
+//   cards.forEach((item, index) => {
+//     setTimeout(() => {
+//       if (item.owner._id === "28497debba4d03be6d0ac41e") { api.deleteCard(item._id); return i++ };
+//     }, (index + 1) * 100);
+//   });
+//   console.log(i);
 // });

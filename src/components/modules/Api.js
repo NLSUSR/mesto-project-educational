@@ -91,9 +91,9 @@ const Api = class {
   };
 
   // удаляем карточку
-  deleteCard = id => {
+  deleteCard = cardId => {
 
-    const request = { endpoint: `${this._cards + id} `, method: this._remove };
+    const request = { endpoint: `${this._cards + cardId} `, method: this._remove };
 
     return this._sendRequest(request.endpoint, request.method);
 

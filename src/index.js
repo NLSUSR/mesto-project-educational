@@ -15,6 +15,8 @@ import PopupWithForms from "./components/modules/PopupWithForms.js";
 import PopupWithImages from "./components/modules/PopupWithImages.js";
 import PopupWithDeletions from "./components/modules/PopupWithDeletions.js";
 import Card from "./components/modules/Card.js";
+import { initialCards } from "./components/modules/Tests.js"; // для тестов
+
 
 // импорт каскадной таблицы стилей
 styles;
@@ -145,9 +147,9 @@ const submitPostCard = ([name, link]) => {
 };
 
 // обработка удаления карточки
-const deleteElement = (card, id) => {
+const deleteElement = (card, cardId) => {
 
-  api.deleteCard(id).then(() => {
+  api.deleteCard(cardId).then(() => {
 
     card.removeCard();
     popups.popupDelete.close();
