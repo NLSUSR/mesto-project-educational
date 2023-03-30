@@ -1,12 +1,12 @@
 const cohort = "plus-cohort-20"; // plus-cohort-18
 const token = "b920c8ce-3925-48c5-9ff8-5e542e04acb8"; // dbbb73d9-482c-4ca9-b5e0-9835c4b5cfcc
 
-const cfg = {
+const configuration = {
 
-  url: `https://nomoreparties.co/v1/${cohort}`,
-  ept: { me: "/users/me/", avatar: "/users/me/avatar/", cards: "/cards/", likes: "/cards/likes/" },
-  mtd: { remove: "DELETE", change: "PATCH", send: "POST", request: "GET", add: "PUT" },
-  hdr: { authorization: token, "content-type": "application/json" }
+  resource: `https://nomoreparties.co/v1/${cohort}`,
+  endpoints: { main: "/users/me/", avatar: "/users/me/avatar/", cards: "/cards/", likes: "/cards/likes/" },
+  methods: { remove: "DELETE", change: "PATCH", send: "POST", request: "GET", add: "PUT" },
+  headers: { authorization: token, "content-type": "application/json" }
 
 };
 
@@ -31,8 +31,6 @@ const selectors = {
   cardAddContainerForm: document.forms.cardAddContainerForm,
 
   preloader: document.querySelector("#preloader"),
-
-  // closeButtons: document.querySelectorAll(".popup__close"),
 
   cardTemplate: document.querySelector("#cardTemplate"),
   elementsContainer: document.querySelector("#elementsContainer"),
@@ -76,7 +74,7 @@ const states = {
   popupOpened: "popup_opened",
 };
 
-const constants = { cfg, objectValidation, pageLoaded, selectors, classes, states };
+const constants = { configuration, objectValidation, pageLoaded, selectors, classes, states };
 
 export default constants;
 

@@ -1,6 +1,6 @@
 import constants from "./constants.js";
 import Api from "./Api.js";
-const api = new Api(constants.cfg);
+const api = new Api(constants.configuration);
 
 export const initialCards = [
   {
@@ -140,7 +140,7 @@ const count = () => {
 };
 
 // Тест - прогоняет массив из 30 картинок
-document.querySelector(".footer__copyright").addEventListener("click", () => {
+document.querySelector(".test1").addEventListener("click", () => {
   initialCards.forEach((item, index) => {
     setTimeout(() => {
       api.postCard({ name: item.name, link: item.link });
@@ -150,7 +150,7 @@ document.querySelector(".footer__copyright").addEventListener("click", () => {
 });
 
 // Тест на удаление последствий предыдущего теста
-document.querySelector(".header__logo").addEventListener("click", () => {
+document.querySelector(".test2").addEventListener("click", () => {
   api.getDataAndCards().then(([data, cards]) => {
     cards.forEach((item, index) => {
       setTimeout(() => {

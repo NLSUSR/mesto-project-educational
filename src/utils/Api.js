@@ -1,17 +1,16 @@
 const Api = class {
-  constructor(cfg) {
+  constructor(object) {
 
-    this._cfg = cfg;
-    this._url = this._cfg.url;
-    this._me = this._cfg.ept.me;
-    this._cards = this._cfg.ept.cards;
-    this._avatar = this._cfg.ept.avatar;
-    this._likes = this._cfg.ept.likes;
-    this._request = this._cfg.mtd.request;
-    this._change = this._cfg.mtd.change;
-    this._send = this._cfg.mtd.send;
-    this._remove = this._cfg.mtd.remove;
-    this._hdr = this._cfg.hdr;
+    this._resource = object.resource;
+    this._main = object.endpoints.main;
+    this._cards = object.endpoints.cards;
+    this._avatar = object.endpoints.avatar;
+    this._likes = object.endpoints.likes;
+    this._request = object.methods.request;
+    this._change = object.methods.change;
+    this._send = object.methods.send;
+    this._remove = object.methods.remove;
+    this._headers = object.headers;
 
   };
 
@@ -34,18 +33,18 @@ const Api = class {
 
     const request = {
 
-      me: { url: `${this._url + this._me}` },
-      cards: { url: `${this._url + this._cards} ` },
-      mtd: this._request,
-      hdr: this._hdr
+      main: { resource: `${this._resource + this._main}` },
+      cards: { resource: `${this._resource + this._cards} ` },
+      method: this._request,
+      headers: this._headers
 
     };
 
     const array = await Promise.all(
 
       [
-        fetch(request.me.url, { method: request.mtd, headers: request.hdr }),
-        fetch(request.cards.url, { method: request.mtd, headers: request.hdr })
+        fetch(request.main.resource, { method: request.method, headers: request.headers }),
+        fetch(request.cards.resource, { method: request.method, headers: request.headers })
       ]
 
     );
@@ -54,57 +53,57 @@ const Api = class {
 
   };
 
-  _sendRequest = async (ept, mtd, data) => {
+  _sendRequest = async (endpoints, method, data) => {
 
-    const request = { url: `${this._url + ept} `, hdr: this._hdr };
-    const response = await fetch(request.url, { method: mtd, headers: request.hdr, body: JSON.stringify(data) });
+    const request = { resource: `${this._resource + endpoints} `, headers: this._headers };
+    const response = await fetch(request.resource, { method: method, headers: request.headers, body: JSON.stringify(data) });
 
     return await this._checkResponse(response);
 
   };
 
   // замена аватара
-  patchAvatar = url => {
+  patchAvatar = resource => {
 
-    const request = { endpoint: this._avatar, method: this._change, body: { avatar: url } };
+    const request = { endpoints: this._avatar, method: this._change, body: { avatar: resource } };
 
-    return this._sendRequest(request.endpoint, request.method, request.body);
+    return this._sendRequest(request.endpoints, request.method, request.body);
 
   };
 
   // заменяем данные имя/деятельность
-  patchData = me => {
+  patchData = main => {
 
-    const request = { endpoint: this._me, method: this._change, body: { name: me.name, about: me.about } };
+    const request = { endpoints: this._main, method: this._change, body: { name: main.name, about: main.about } };
 
-    return this._sendRequest(request.endpoint, request.method, request.body);
+    return this._sendRequest(request.endpoints, request.method, request.body);
 
   };
 
   // выкладываем на сервер новую карточку
   postCard = card => {
 
-    const request = { endpoint: this._cards, method: this._send, body: { name: card.name, link: card.link } };
+    const request = { endpoints: this._cards, method: this._send, body: { name: card.name, link: card.link } };
 
-    return this._sendRequest(request.endpoint, request.method, request.body);
+    return this._sendRequest(request.endpoints, request.method, request.body);
 
   };
 
   // удаляем карточку
   deleteCard = cardId => {
 
-    const request = { endpoint: `${this._cards + cardId} `, method: this._remove };
+    const request = { endpoints: `${this._cards + cardId} `, method: this._remove };
 
-    return this._sendRequest(request.endpoint, request.method);
+    return this._sendRequest(request.endpoints, request.method);
 
   };
 
   // меняем состояние лайка
   likeState = data => {
 
-    const request = { endpoint: `${this._likes + data.id} `, method: data.method };
+    const request = { endpoints: `${this._likes + data.id} `, method: data.method };
 
-    return this._sendRequest(request.endpoint, request.method);
+    return this._sendRequest(request.endpoints, request.method);
 
   };
 };

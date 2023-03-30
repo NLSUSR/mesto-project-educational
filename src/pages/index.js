@@ -28,7 +28,7 @@ images; // зачем они ? хз!
 document.addEventListener(constants.pageLoaded, pageLoader(true));
 
 // создание экземпляра класса для Application Programming Interface
-const api = new Api(constants.cfg);
+const api = new Api(constants.configuration);
 
 // валидация
 const validation = (function () { // почему в обертке ? по-моему так удобно !

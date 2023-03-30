@@ -1,0 +1,19 @@
+.test1 {
+  width: fit-content;
+  height: fit-content;
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: transparent;
+  background-color: transparent;
+}
+
+.test2 {
+  width: fit-content;
+  height: fit-content;
+  position: fixed;
+  top: 0;
+  right: 0;
+  color: transparent;
+  background-color: transparent;
+}
