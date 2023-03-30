@@ -17,8 +17,4 @@
     flex-direction: column;
     justify-content: left;
   }
-  .popup__place-name-description {
-    gap: 0;
-    flex-direction: column;
-  }
 }
