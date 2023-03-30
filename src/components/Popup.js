@@ -1,3 +1,5 @@
+import constants from "../utils/constants.js";
+
 const Popup = class {
   constructor(selector) {
 
@@ -42,7 +44,7 @@ const Popup = class {
     document.addEventListener("keydown", this._closePopupHandler);
 
     // добавление сиэсэс класса открытого попапа
-    this._$popup.classList.add("popup_opened");
+    this._$popup.classList.add(constants.states.popupOpened);
 
   };
 
@@ -59,7 +61,7 @@ const Popup = class {
     document.removeEventListener("keydown", this._closePopupHandler);
 
     // удаление сиэсэс класса открытого попапа
-    this._$popup.classList.remove("popup_opened");
+    this._$popup.classList.remove(constants.states.popupOpened);
 
   };
 

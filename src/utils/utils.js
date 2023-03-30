@@ -5,11 +5,11 @@ import constants from "./constants.js";
 const pageLoader = (boolean) => {
 
   boolean
-    ? constants.selectors.preloader.classList.add("popup__preloader_active")
+    ? constants.selectors.preloader.classList.add(constants.states.preloaderActive)
     && constants.selectors.preloader.open()
-    : constants.selectors.preloader.classList.remove("popup__preloader_active")
+    : constants.selectors.preloader.classList.remove(constants.states.preloaderActive)
     && constants.selectors.preloader.close()
-    
+
 };
 
 export default pageLoader;
