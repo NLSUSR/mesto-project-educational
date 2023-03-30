@@ -227,7 +227,8 @@ const popups = (function () {
 
     container: constants.selectors.imageOpeningContainer,
     name: constants.selectors.placeName,
-    image: constants.selectors.placeImage
+    image: constants.selectors.placeImage,
+    owner: constants.selectors.ownerName
 
   };
 
@@ -244,7 +245,7 @@ const createCardElement = (function () {
 
   const callbacks = {
     deleteCallback: (card, id) => { popups.popupDelete.open(card, id) },
-    cardCallback: (name, link) => { popups.popupImage.open(name, link) },
+    cardCallback: (name, link, owner) => { popups.popupImage.open(name, link, owner) },
     likeCallback: (card, id, method) => { likeCard(card, id, method) }
   };
 

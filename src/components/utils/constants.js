@@ -62,6 +62,7 @@ const selectors = {
 
   placeImage: document.querySelector("#placeImage"),
   placeName: document.querySelector("#placeName"),
+  ownerName: document.querySelector("#ownerName")
 
 };
 

@@ -5,7 +5,8 @@ const Card = class {
     this._cardId = item._id;
     this._cardName = item.name;
     this._cardLink = item.link;
-    this._cardOwner = item.owner._id;
+    this._cardOwnerId = item.owner._id;
+    this._cardOwnerName = item.owner.name;
     this._cardCreatedAt = item.createdAt;
 
 
@@ -49,7 +50,7 @@ const Card = class {
   _setEventListeners = () => {
 
     this._$elementTrash.addEventListener("click", () => { this._deleteCallback(this, this._cardId) });
-    this._$elementImage.addEventListener("click", () => { this._cardCallback(this._cardName, this._cardLink) });
+    this._$elementImage.addEventListener("click", () => { this._cardCallback(this._cardName, this._cardLink, this._cardOwnerName) });
     this._$elementLike.addEventListener("click", () => { this._checkLike() });
 
   };
@@ -76,12 +77,13 @@ const Card = class {
 
     this._$elementImage.src = this._cardLink;
     this._$elementImage.alt = this._cardName;
+    this._$elementImage.setAttribute("loading", "lazy");
 
     this._$elementName.textContent = this._cardName;
     this._$elementName.title = this._cardName;
 
     this._$cardNode.dataset.cardId = this._cardId;
-    this._$cardNode.dataset.cardOwner = this._cardOwner;
+    this._$cardNode.dataset.cardOwner = this._cardOwnerId;
 
     this._$cardContainer.dataset.createdAt = this._cardCreatedAt;
 
