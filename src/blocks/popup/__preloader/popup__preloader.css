@@ -14,16 +14,3 @@
   background-position: center;
   transition: visibility 1s, opacity 1s linear;
 }
-
-/* .container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  height: fit-content;
-} */
-
-/* .load{
- width: 100%;
- height: fit-content;
-} */
