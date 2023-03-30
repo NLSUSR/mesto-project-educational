@@ -1,12 +1,12 @@
 const cohort = "plus-cohort-20"; // plus-cohort-18
 const token = "b920c8ce-3925-48c5-9ff8-5e542e04acb8"; // dbbb73d9-482c-4ca9-b5e0-9835c4b5cfcc
 
-const cfg = {
+const config = {
 
-  url: `https://nomoreparties.co/v1/${cohort}`,
-  ept: { me: "/users/me/", avatar: "/users/me/avatar/", cards: "/cards/", likes: "/cards/likes/" },
-  mtd: { remove: "DELETE", change: "PATCH", send: "POST", request: "GET", add: "PUT" },
-  hdr: { authorization: token, "content-type": "application/json" }
+  resource: `https://nomoreparties.co/v1/${cohort}`,
+  endpoint: { main: "/users/me/", avatar: "/users/me/avatar/", cards: "/cards/", likes: "/cards/likes/" },
+  method: { remove: "DELETE", change: "PATCH", send: "POST", request: "GET", add: "PUT" },
+  headers: { authorization: token, "content-type": "application/json" }
 
 };
 
@@ -66,7 +66,7 @@ const selectors = {
 
 };
 
-const constants = { cfg, objectValidation, pageLoaded, selectors };
+const constants = { config, objectValidation, pageLoaded, selectors };
 
 export default constants;
 

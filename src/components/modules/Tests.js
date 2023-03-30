@@ -1,6 +1,6 @@
 import constants from "../utils/constants.js";
 import Api from "./Api";
-const api = new Api(constants.cfg);
+const api = new Api(constants.config);
 
 export const initialCards = [
   {

@@ -1,17 +1,17 @@
 const Api = class {
-  constructor(cfg) {
+  constructor(configuration) {
 
-    this._cfg = cfg;
-    this._url = this._cfg.url;
-    this._me = this._cfg.ept.me;
-    this._cards = this._cfg.ept.cards;
-    this._avatar = this._cfg.ept.avatar;
-    this._likes = this._cfg.ept.likes;
-    this._request = this._cfg.mtd.request;
-    this._change = this._cfg.mtd.change;
-    this._send = this._cfg.mtd.send;
-    this._remove = this._cfg.mtd.remove;
-    this._hdr = this._cfg.hdr;
+    this._configuration = configuration;
+    this._resource = this._configuration.resource;
+    this._main = this._configuration.endpoint.main;
+    this._cards = this._configuration.endpoint.cards;
+    this._avatar = this._configuration.endpoint.avatar;
+    this._likes = this._configuration.endpoint.likes;
+    this._request = this._configuration.method.request;
+    this._change = this._configuration.method.change;
+    this._send = this._configuration.method.send;
+    this._remove = this._configuration.method.remove;
+    this._headers = this._configuration.headers;
 
   };
 
@@ -34,18 +34,18 @@ const Api = class {
 
     const request = {
 
-      me: { url: `${this._url + this._me}` },
-      cards: { url: `${this._url + this._cards} ` },
-      mtd: this._request,
-      hdr: this._hdr
+      main: { resource: `${this._resource + this._main}` },
+      cards: { resource: `${this._resource + this._cards} ` },
+      method: this._request,
+      headers: this._headers
 
     };
 
     const array = await Promise.all(
 
       [
-        fetch(request.me.url, { method: request.mtd, headers: request.hdr }),
-        fetch(request.cards.url, { method: request.mtd, headers: request.hdr })
+        fetch(request.main.resource, { method: request.method, headers: request.headers }),
+        fetch(request.cards.resource, { method: request.method, headers: request.headers })
       ]
 
     );
@@ -54,28 +54,28 @@ const Api = class {
 
   };
 
-  _sendRequest = async (ept, mtd, data) => {
+  _sendRequest = async (endpoint, method, data) => {
 
-    const request = { url: `${this._url + ept} `, hdr: this._hdr };
-    const response = await fetch(request.url, { method: mtd, headers: request.hdr, body: JSON.stringify(data) });
+    const request = { resource: `${this._resource + endpoint} `, headers: this._headers };
+    const response = await fetch(request.resource, { method: method, headers: request.headers, body: JSON.stringify(data) });
 
     return await this._checkResponse(response);
 
   };
 
   // замена аватара
-  patchAvatar = url => {
+  patchAvatar = resource => {
 
-    const request = { endpoint: this._avatar, method: this._change, body: { avatar: url } };
+    const request = { endpoint: this._avatar, method: this._change, body: { avatar: resource } };
 
     return this._sendRequest(request.endpoint, request.method, request.body);
 
   };
 
   // заменяем данные имя/деятельность
-  patchData = me => {
+  patchData = main => {
 
-    const request = { endpoint: this._me, method: this._change, body: { name: me.name, about: me.about } };
+    const request = { endpoint: this._main, method: this._change, body: { name: main.name, about: main.about } };
 
     return this._sendRequest(request.endpoint, request.method, request.body);
 
