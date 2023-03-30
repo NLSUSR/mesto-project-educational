@@ -7,7 +7,7 @@ const images = import("../utils/images.js");
 
 import constants from "../utils/constants.js";
 import pageLoader from "../utils/utils.js";
-import Api from "../utils/Api.js";
+import Api from "../components/Api.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";

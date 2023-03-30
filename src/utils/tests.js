@@ -1,5 +1,5 @@
 import constants from "./constants.js";
-import Api from "./Api.js";
+import Api from "../components/Api.js";
 const api = new Api(constants.configuration);
 
 export const initialCards = [
@@ -140,7 +140,9 @@ const count = () => {
 };
 
 // Тест - прогоняет массив из 30 картинок
-document.querySelector(".test1").addEventListener("click", () => {
+const test1 = document.querySelector(".test1");
+test1.title = "Залить массив тестовых карточек";
+test1.addEventListener("click", () => {
   initialCards.forEach((item, index) => {
     setTimeout(() => {
       api.postCard({ name: item.name, link: item.link });
@@ -150,7 +152,9 @@ document.querySelector(".test1").addEventListener("click", () => {
 });
 
 // Тест на удаление последствий предыдущего теста
-document.querySelector(".test2").addEventListener("click", () => {
+const test2 = document.querySelector(".test2");
+test2.title = "Удалить все свои карточки";
+test2.addEventListener("click", () => {
   api.getDataAndCards().then(([data, cards]) => {
     cards.forEach((item, index) => {
       setTimeout(() => {
