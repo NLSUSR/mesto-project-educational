@@ -25,7 +25,7 @@ const Card = class {
     this._removeTrash = () => { if (!this._myCard) { this._$elementTrash.remove() } };
     this._setLikeBase = () => { if (this._noLikes) { return this._cardLikes = [] } };
     this._nonsense = () => { this._myLike = !this._myLike; };
-    
+
   };
 
   _getElement = () => {
@@ -68,6 +68,8 @@ const Card = class {
 
     this._$elementImage.src = this._cardLink;
     this._$elementImage.alt = this._cardName;
+    
+    this._$elementImage.setAttribute("decoding", "async");
     this._$elementImage.setAttribute("loading", "lazy");
 
     this._$elementName.textContent = this._cardName;
