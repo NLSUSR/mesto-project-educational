@@ -15,20 +15,11 @@
   cursor: pointer;
 }
 
-.close {
-  width: 32px;
-  height: 32px;
-}
-
 @media screen and (max-width: 767px) {
   .popup__close {
     background-size: 20px 20px;
     width: 20px;
     height: 20px;
     right: 0px;
-  }
-  .close {
-    width: 20px;
-    height: 20px;
   }
 }
