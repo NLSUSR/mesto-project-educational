@@ -31,41 +31,31 @@ document.addEventListener(constants.pageLoaded, pageLoader(true));
 const api = new Api(constants.configuration);
 
 // валидация
-const validation = (function () { // почему в обертке ? по-моему так удобно !
-  // обьект с селекторами форм для класса валидации
-  const formElement = {
-    changeAvatar: constants.selectors.changeAvatarContainerForm,
-    profileEdit: constants.selectors.profileEditContainerForm,
-    cardAdd: constants.selectors.cardAddContainerForm
-  };
+const validation = { 
 
   // создание экземпляра класса для валидации формы смены аватара
-  const avatarFormValidation = new FormValidator(
+  avatarFormValidation: new FormValidator(
     constants.objectValidation,
-    formElement.changeAvatar
-  );
-
-  avatarFormValidation.enableValidation();
+    constants.selectors.changeAvatarContainerForm
+  ),
 
   // создание экземпляра класса для валидации формы редактирования профиля
-  const profileFormValidation = new FormValidator(
+  profileFormValidation: new FormValidator(
     constants.objectValidation,
-    formElement.profileEdit
-  );
-
-  profileFormValidation.enableValidation();
+    constants.selectors.profileEditContainerForm
+  ),
 
   // создание экземпляра класса для валидации формы добавления карточки
-  const cardFormValidation = new FormValidator(
+  cardFormValidation: new FormValidator(
     constants.objectValidation,
-    formElement.cardAdd
-  );
+    constants.selectors.cardAddContainerForm
+  )
+  
+};
 
-  cardFormValidation.enableValidation();
-
-  return { avatarFormValidation, profileFormValidation, cardFormValidation };
-
-}());
+validation.avatarFormValidation.enableValidation();
+validation.profileFormValidation.enableValidation();
+validation.cardFormValidation.enableValidation();
 
 // данные пользователя
 const userInfo = (function () {
