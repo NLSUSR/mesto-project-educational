@@ -65,17 +65,12 @@ const userInfo = new UserInfo({
   });
 
 // создание экземпляра класса добавления карточки
-const cardsSection = (function () {
+const cardsSection = new Section({
 
-  const add = {
     container: constants.selectors.elementsContainer,
     render: item => { cardsSection.appendItem(createCardElement(item)) }
-  };
-  const cardsSection = new Section(add);
-
-  return cardsSection;
-
-}());
+    
+});
 
 // обработка аватара
 const submitPatchAvatar = ([link]) => {
