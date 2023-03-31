@@ -16,11 +16,6 @@
   cursor: pointer;
 }
 
-.trash {
-  width: 18px;
-  height: 19px;
-}
-
 .element__delete:hover {
   opacity: 0.6;
 }
