@@ -50,7 +50,7 @@ const validation = {
     constants.objectValidation,
     constants.selectors.cardAddContainerForm
   )
-  
+
 };
 
 validation.avatarFormValidation.enableValidation();
@@ -58,20 +58,11 @@ validation.profileFormValidation.enableValidation();
 validation.cardFormValidation.enableValidation();
 
 // данные пользователя
-const userInfo = (function () {
-
-  // создание экземпляра класса с пользовательскими данными
-  const info = {
+const userInfo = new UserInfo({
     avatar: constants.selectors.profileAvatarImage,
     name: constants.selectors.profileName,
     about: constants.selectors.profileActivity,
-  };
-
-  const userInfo = new UserInfo(info);
-
-  return userInfo;
-
-}());
+  });
 
 // создание экземпляра класса добавления карточки
 const cardsSection = (function () {
