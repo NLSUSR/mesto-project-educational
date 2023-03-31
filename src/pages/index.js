@@ -69,7 +69,7 @@ const cardsSection = new Section({
 
     container: constants.selectors.elementsContainer,
     render: item => { cardsSection.appendItem(createCardElement(item)) }
-    
+
 });
 
 // обработка аватара
@@ -152,67 +152,53 @@ const likeCard = (card, id, method) => {
 };
 
 // попапы
-const popups = (function () {
+const popups = {
 
   // создание экземпляра класса для формы смены аватара
-  const avatar = {
 
+  popupFormAvatar: new PopupWithForms({
     container: constants.selectors.changeAvatarContainer,
     handler: submitPatchAvatar
+  }),
 
-  };
-
-  const popupFormAvatar = new PopupWithForms(avatar);
-  popupFormAvatar.setEventListeners();
 
   // создание экземпляра класса для формы редактирования профиля
-  const profile = {
 
+  popupFormProfile: new PopupWithForms({
     container: constants.selectors.profileEditContainer,
     handler: submitPatchData
-
-  };
-
-  const popupFormProfile = new PopupWithForms(profile);
-  popupFormProfile.setEventListeners();
+  }),
+  
 
   // создание экземпляра класса для формы добавления места
-  const place = {
 
+  popupFormPlace: new PopupWithForms({
     container: constants.selectors.cardAddContainer,
     handler: submitPostCard
-
-  };
-
-  const popupFormPlace = new PopupWithForms(place);
-  popupFormPlace.setEventListeners();
+  }),
 
   // создание экземпляра класса для удаления карточки
-  const deleting = {
 
+  popupDelete: new PopupWithDeletions({
     container: constants.selectors.cardRemoveContainer,
     button: constants.selectors.cardRemoveContainerButton,
     handler: deleteElement
-
-  };
-
-  const popupDelete = new PopupWithDeletions(deleting);
+  }),
 
   // создание экземпляра класса для просмотра карточки
-  const image = {
 
+  popupImage: new PopupWithImages({
     container: constants.selectors.imageOpeningContainer,
     name: constants.selectors.placeName,
     image: constants.selectors.placeImage,
     owner: constants.selectors.ownerName
+  })
 
-  };
+};
 
-  const popupImage = new PopupWithImages(image);
-
-  return { popupFormAvatar, popupFormProfile, popupFormPlace, popupDelete, popupImage };
-
-}());
+popups.popupFormAvatar.setEventListeners();
+popups.popupFormProfile.setEventListeners();
+popups.popupFormPlace.setEventListeners();
 
 // создание экземлпяра карточки
 const createCardElement = (function () {
