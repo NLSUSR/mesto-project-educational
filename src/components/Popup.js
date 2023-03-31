@@ -4,10 +4,10 @@ const Popup = class {
   constructor(selector) {
 
     this._$popup = selector;
-    this._$close = this._$popup.querySelector(".popup__close");
-    this._$submit = this._$popup.querySelector(".popup__form-submit");
+    this._$close = this._$popup.querySelector(constants.classes.close);
+    this._$submit = this._$popup.querySelector(constants.classes.formSubmit);
 
-    this._buttonClose = event => { if (event.target.closest(".popup__close")) { this.close() } };
+    this._buttonClose = event => { if (event.target.closest(constants.classes.close)) { this.close() } };
     this._overlayClose = event => { if (event.target === event.currentTarget) { this.close() } };
     this._keyClose = event => { if (event.key === "Escape") { this.close() } };
 

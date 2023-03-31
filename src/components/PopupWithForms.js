@@ -1,3 +1,4 @@
+import constants from "../utils/constants.js";
 import Popup from "./Popup.js";
 
 const PopupWithForms = class extends Popup {
@@ -6,8 +7,8 @@ const PopupWithForms = class extends Popup {
     super(object.container);
     this._$popup = object.container;
     this._submiter = object.handler;
-    
-    this._$inputList = this._$popup.querySelectorAll(".popup__form-input");
+
+    this._$inputList = this._$popup.querySelectorAll(constants.classes.formInput);
 
   };
 
@@ -46,7 +47,7 @@ const PopupWithForms = class extends Popup {
 
   reset = () => {
 
-    this._$popup.querySelector(".popup__form").reset();
+    this._$popup.querySelector(constants.classes.form).reset();
 
   };
 }

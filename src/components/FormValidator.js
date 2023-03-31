@@ -1,10 +1,8 @@
 const FormValidator = class {
   constructor(object, form) {
 
-    // this._formSelector = object.formSelector;
     this._$inputSelector = object.inputSelector;
     this._$inputErrorClass = object.inputErrorClass;
-    // this._$errorMessageElement = object.errorMessageElement;
     this._$errorActiveElement = object.errorActiveElement;
     this._$submitButtonSelector = object.submitButtonSelector;
     this._$inactiveButtonClass = object.inactiveButtonClass;

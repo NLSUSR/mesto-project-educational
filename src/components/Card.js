@@ -1,3 +1,5 @@
+import constants from "../utils/constants";
+
 const Card = class {
   constructor(item, callbacks, template, userId) {
 
@@ -9,6 +11,12 @@ const Card = class {
     this._cardOwnerName = item.owner.name;
     this._cardCreatedAt = item.createdAt;
 
+    this._deleteCallback = callbacks.deleteCallback;
+    this._cardCallback = callbacks.cardCallback;
+    this._likeCallback = callbacks.likeCallback;
+
+    this._$template = template;
+    this._userId = userId;
 
     this._myCard = item.owner._id === userId;
     this._noLikes = this._cardLikes === undefined;
@@ -17,30 +25,13 @@ const Card = class {
     this._removeTrash = () => { if (!this._myCard) { this._$elementTrash.remove() } };
     this._setLikeBase = () => { if (this._noLikes) { return this._cardLikes = [] } };
     this._nonsense = () => { this._myLike = !this._myLike; };
-
-    this._deleteCallback = callbacks.deleteCallback;
-    this._cardCallback = callbacks.cardCallback;
-    this._likeCallback = callbacks.likeCallback;
-
-    this._$template = template;
-    this._userId = userId;
-
-    this._$elementsItem = ".elements__item";
-    this._$element = ".element";
-    this._$elementPlaceName = ".element__place-name";
-    this._$elementPlaceImage = ".element__place-image";
-    this._$elementDelete = ".element__delete";
-    this._$elementLike = ".element__like";
-    this._$elementLikeCounter = ".element__like-counter";
-
-    this._$likeActive = "element__like_active";
-
+    
   };
 
   _getElement = () => {
 
     const cardTemplate = this._$template.content;
-    const elementsItem = cardTemplate.querySelector(this._$elementsItem);
+    const elementsItem = cardTemplate.querySelector(constants.classes.item);
     const cardNode = elementsItem.cloneNode(true);
 
     return cardNode;
@@ -58,8 +49,8 @@ const Card = class {
   _setLikeState = () => {
 
     this._myLike
-      ? this._$elementLike.classList.add(this._$likeActive)
-      : this._$elementLike.classList.remove(this._$likeActive);
+      ? this._$elementLike.classList.add(constants.states.likeActive)
+      : this._$elementLike.classList.remove(constants.states.likeActive);
 
     this._$elementLikeCounter.textContent = this._cardLikes.length;
 
@@ -68,12 +59,12 @@ const Card = class {
   _createCard = () => {
 
     this._$cardNode = this._getElement();
-    this._$cardContainer = this._$cardNode.querySelector(this._$element);
-    this._$elementName = this._$cardNode.querySelector(this._$elementPlaceName);
-    this._$elementImage = this._$cardNode.querySelector(this._$elementPlaceImage);
-    this._$elementTrash = this._$cardNode.querySelector(this._$elementDelete);
-    this._$elementLike = this._$cardNode.querySelector(this._$elementLike);
-    this._$elementLikeCounter = this._$cardNode.querySelector(this._$elementLikeCounter);
+    this._$cardContainer = this._$cardNode.querySelector(constants.classes.element);
+    this._$elementName = this._$cardNode.querySelector(constants.classes.placeName);
+    this._$elementImage = this._$cardNode.querySelector(constants.classes.placeImage);
+    this._$elementTrash = this._$cardNode.querySelector(constants.classes.delete);
+    this._$elementLike = this._$cardNode.querySelector(constants.classes.like);
+    this._$elementLikeCounter = this._$cardNode.querySelector(constants.classes.likeCounter);
 
     this._$elementImage.src = this._cardLink;
     this._$elementImage.alt = this._cardName;
@@ -109,8 +100,8 @@ const Card = class {
     let method = null;
 
     this._myLike
-      ? method = "DELETE"
-      : method = "PUT";
+      ? method = constants.configuration.methods.remove
+      : method = constants.configuration.methods.add;
 
     this._likeCallback(this, this._cardId, method);
 

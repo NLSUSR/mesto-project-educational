@@ -66,12 +66,23 @@ const selectors = {
 };
 
 const classes = {
-  popupClose: ".popup__close",
+  formInput: ".popup__form-input",
+  form: ".popup__form",
+  close: ".popup__close",
+  formSubmit: ".popup__form-submit",
+  element: ".element",
+  item: ".elements__item",
+  placeName: ".element__place-name",
+  placeImage: ".element__place-image",
+  delete: ".element__delete",
+  like: ".element__like",
+  likeCounter: ".element__like-counter",
 };
 
 const states = {
   preloaderActive: "popup__preloader_active",
   popupOpened: "popup_opened",
+  likeActive: "element__like_active",
 };
 
 const constants = { configuration, objectValidation, pageLoaded, selectors, classes, states };

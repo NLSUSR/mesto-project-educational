@@ -164,3 +164,19 @@ test2.addEventListener("click", () => {
     });
   });
 });
+
+// Тест лайков
+const test3 = document.querySelector(".test3");
+test3.title = "Протестировать лайки";
+test3.addEventListener("click", () => {
+  api.getDataAndCards().then(([data, cards]) => {
+    cards.forEach((item, index) => {
+      setTimeout(() => {
+        let method = null;
+        if (item.likes.some(like => { return like._id === data._id })) { method = "DELETE" } else { method = "PUT" };
+        api.likeState({ id: item._id, method: method })
+        count();
+      }, (index + 1) * 100);
+    });
+  });
+});
