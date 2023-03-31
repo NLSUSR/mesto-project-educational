@@ -210,7 +210,7 @@ const card = {
   },
 
   template: constants.selectors.cardTemplate,
-  
+
 };
 
 const createCardElement = item => {
@@ -230,15 +230,16 @@ api.getDataAndCards().then(([data, cards]) => {
 }).catch(error => api.responseError(error)).finally(window.onload = () => { setTimeout(() => { pageLoader(false) }, 500) });
 
 // обработка слушателей кнопок
-(function () {
-  const avatar = {
+const submits = {
+
+  avatar: {
     button: constants.selectors.profileAvatarWrapper,
     popup: popups.popupFormAvatar,
     validation: validation.avatarFormValidation,
     link: constants.selectors.changeAvatarInput
-  };
+  },
 
-  const profile = {
+  profile: {
     button: constants.selectors.profileEditButton,
     popup: popups.popupFormProfile,
     validation: validation.profileFormValidation,
@@ -246,36 +247,29 @@ api.getDataAndCards().then(([data, cards]) => {
       name: constants.selectors.profileEditNameInput,
       about: constants.selectors.profileEditActivityInput
     }
-  };
+  },
 
-  const add = {
+  add: {
     button: constants.selectors.cardAddButton,
     popup: popups.popupFormPlace,
     validation: validation.cardFormValidation
-  };
-
-  const submiting = (button, popup, validation) => {
-
+  },
+  
+  submiting: (button, popup, validation) => {
     button.addEventListener("click", () => {
-
       const user = userInfo.getUserInfo();
-
-      avatar.link.value = user.avatar;
-      profile.data.name.value = user.name;
-      profile.data.about.value = user.about;
+      submits.avatar.link.value = user.avatar;
+      submits.profile.data.name.value = user.name;
+      submits.profile.data.about.value = user.about;
 
       validation.changeButtonState();
       popup.showSendStatus(true);
       popup.open();
 
     });
+  }
+};
 
-  };
-
-  [avatar, profile, add].forEach(item => {
-
-    submiting(item.button, item.popup, item.validation);
-
-  });
-
-}());
+[submits.avatar, submits.profile, submits.add].forEach(item => {
+  submits.submiting(item.button, item.popup, item.validation);
+});
