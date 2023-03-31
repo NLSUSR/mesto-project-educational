@@ -201,27 +201,22 @@ popups.popupFormProfile.setEventListeners();
 popups.popupFormPlace.setEventListeners();
 
 // создание экземлпяра карточки
-const createCardElement = (function () {
+const card = {
 
-  const template = constants.selectors.cardTemplate;
-
-  const callbacks = {
+  callbacks: {
     deleteCallback: (card, id) => { popups.popupDelete.open(card, id) },
     cardCallback: (name, link, owner) => { popups.popupImage.open(name, link, owner) },
     likeCallback: (card, id, method) => { likeCard(card, id, method) }
-  };
+  },
 
-  const createCardElement = item => {
+  template: constants.selectors.cardTemplate,
+  
+};
 
-    const cardElement = new Card(item, callbacks, template, userInfo.getUserId());
-
-    return cardElement.getCard();
-
-  };
-
-  return createCardElement;
-
-}());
+const createCardElement = item => {
+  const cardElement = new Card(item, card.callbacks, card.template, userInfo.getUserId());
+  return cardElement.getCard();
+};
 
 // получение информации профиля с сервера
 api.getDataAndCards().then(([data, cards]) => {
