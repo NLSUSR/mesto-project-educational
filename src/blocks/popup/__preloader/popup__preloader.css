@@ -1,16 +1,12 @@
 .popup__preloader_active {
-  visibility: visible;
-  opacity: 1;
-  background-color: white;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 9999;
+  background: url("../../../images/splash/splash.svg") center/50% no-repeat white;
   width: 100vw;
   height: 100vh;
-  background-image: url(../../../images/splash/splash.svg);
-  background-size: 50%;
-  background-repeat: no-repeat;
-  background-position: center;
+  visibility: visible;
+  opacity: 1;
   transition: visibility 1s, opacity 1s linear;
 }
