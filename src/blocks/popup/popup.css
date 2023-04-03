@@ -16,11 +16,3 @@
   opacity: 0;
   transition: all 0.3s linear;
 }
-
-.image-viewer {
-  background-color: rgba(0, 0, 0, 0.9);
-}
-
-.card-add {
-  z-index: 355;
-}
