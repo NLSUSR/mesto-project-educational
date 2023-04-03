@@ -147,7 +147,7 @@ test1.addEventListener("click", () => {
     setTimeout(() => {
       api.postCard({ name: item.name, link: item.link });
       count();
-    }, (index + 1) * 1000);
+    }, (index + 1) * 300);
   });
 });
 

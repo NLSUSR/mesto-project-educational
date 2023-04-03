@@ -1,111 +1,80 @@
 const Api = class {
+
+  #resource;
+  #main;
+  #cards;
+  #avatar;
+  #likes;
+  #request;
+  #change;
+  #send;
+  #remove;
+  #headers;
+  #resolve;
+  #reject;
+  #head;
+  #getMain;
+  #getCards;
+  #getEndpoints;
+  #getHeadlines;
+  #getRequest;
+  #check;
+  #checkReceiving;
+  #promiseMap;
+
   constructor(object) {
 
-    this._resource = object.resource;
-    this._main = object.endpoints.main;
-    this._cards = object.endpoints.cards;
-    this._avatar = object.endpoints.avatar;
-    this._likes = object.endpoints.likes;
-    this._request = object.methods.request;
-    this._change = object.methods.change;
-    this._send = object.methods.send;
-    this._remove = object.methods.remove;
-    this._headers = object.headers;
+    this.#resource = object.resource;
+    this.#main = object.endpoints.main;
+    this.#cards = object.endpoints.cards;
+    this.#avatar = object.endpoints.avatar;
+    this.#likes = object.endpoints.likes;
+    this.#request = object.methods.request;
+    this.#change = object.methods.change;
+    this.#send = object.methods.send;
+    this.#remove = object.methods.remove;
+    this.#headers = object.headers;
+    this.#resolve = async response => await Promise.resolve(response.json());
+    this.#reject = async response => await Promise.reject("Ошибка: "`${response.status}`);
+    this.#check = response => { if (response.ok) { return this.#resolve(response) } else { return this.#reject(response) } };
+    this.#getHeadlines = (method, data) => { return { method: method, headers: this.#headers, body: JSON.stringify(data) } };
+    this.#getEndpoints = endpoints => `${this.#resource + endpoints}`;
+    this.#getRequest = async (endpoints, method, data) => await fetch(this.#getEndpoints(endpoints), this.#getHeadlines(method, data));
+    this.#checkReceiving = async (endpoints, method, data) => await this.#checkResponse(await this.#getRequest(endpoints, method, data));
+    this.#head = { method: this.#request, headers: this.#headers };
+    this.#getMain = fetch(`${this.#resource + this.#main}`, this.#head);
+    this.#getCards = fetch(`${this.#resource + this.#cards}`, this.#head);
+    this.#promiseMap = async array => await Promise.all(array.map(response => this.#checkResponse(response)));
 
   };
 
   // проверяем ответ сервера
-  _checkResponse = response => {
+  #checkResponse = async response => { return await this.#check(response) };
 
-    if (response.ok) {
-      return Promise.resolve(response.json())
-    } else {
-      return Promise.reject("Ошибка: "`${response.status}`)
-    };
-
-  };
+  // универсальная функция отправки запросов
+  #sendRequest = async (endpoints, method, data) => { return await this.#checkReceiving(endpoints, method, data) };
 
   // обрабатываем ошибку
-  responseError = error => { console.error(error) };
+  responseError = error => console.error(error);
 
   // получаем данные и карточки с сервера
-  getDataAndCards = async () => {
-
-    const request = {
-
-      main: { resource: `${this._resource + this._main}` },
-      cards: { resource: `${this._resource + this._cards} ` },
-      method: this._request,
-      headers: this._headers
-
-    };
-
-    const array = await Promise.all(
-
-      [
-        fetch(request.main.resource, { method: request.method, headers: request.headers }),
-        fetch(request.cards.resource, { method: request.method, headers: request.headers })
-      ]
-
-    );
-
-    return await Promise.all(array.map(response => this._checkResponse(response)));
-
-  };
-
-  _sendRequest = async (endpoints, method, data) => {
-
-    const request = { resource: `${this._resource + endpoints} `, headers: this._headers };
-    const response = await fetch(request.resource, { method: method, headers: request.headers, body: JSON.stringify(data) });
-
-    return await this._checkResponse(response);
-
-  };
+  getDataAndCards = async () => { return await this.#promiseMap(await Promise.all([this.#getMain, this.#getCards])); };
 
   // замена аватара
-  patchAvatar = resource => {
-
-    const request = { endpoints: this._avatar, method: this._change, body: { avatar: resource } };
-
-    return this._sendRequest(request.endpoints, request.method, request.body);
-
-  };
+  patchAvatar = resource => { return this.#sendRequest(this.#avatar, this.#change, { avatar: resource }) };
 
   // заменяем данные имя/деятельность
-  patchData = main => {
-
-    const request = { endpoints: this._main, method: this._change, body: { name: main.name, about: main.about } };
-
-    return this._sendRequest(request.endpoints, request.method, request.body);
-
-  };
+  patchData = main => { return this.#sendRequest(this.#main, this.#change, { name: main.name, about: main.about }) };
 
   // выкладываем на сервер новую карточку
-  postCard = card => {
-
-    const request = { endpoints: this._cards, method: this._send, body: { name: card.name, link: card.link } };
-
-    return this._sendRequest(request.endpoints, request.method, request.body);
-
-  };
+  postCard = card => { return this.#sendRequest(this.#cards, this.#send, { name: card.name, link: card.link }) };
 
   // удаляем карточку
-  deleteCard = cardId => {
-
-    const request = { endpoints: `${this._cards + cardId} `, method: this._remove };
-
-    return this._sendRequest(request.endpoints, request.method);
-
-  };
+  deleteCard = cardId => { return this.#sendRequest(`${this.#cards + cardId} `, this.#remove) };
 
   // меняем состояние лайка
-  likeState = data => {
-
-    const request = { endpoints: `${this._likes + data.id} `, method: data.method };
-
-    return this._sendRequest(request.endpoints, request.method);
-
-  };
+  likeState = data => { return this.#sendRequest(`${this.#likes + data.id} `, data.method) };
+  
 };
 
 export default Api;

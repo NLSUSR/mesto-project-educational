@@ -1,8 +1,12 @@
 const Section = class {
+
+  #container;
+  #render;
+  
   constructor(object) {
 
-    this._container = object.container;
-    this._render = object.render;
+    this.#container = object.container;
+    this.#render = object.render;
 
   };
 
@@ -10,7 +14,7 @@ const Section = class {
 
     items.forEach(item => {
 
-      this._render(item);
+      this.#render(item);
 
     })
 
@@ -18,13 +22,13 @@ const Section = class {
 
   appendItem = item => {
 
-    this._container.append(item);
+    this.#container.append(item);
 
   };
 
   prependItem = item => {
 
-    this._container.prepend(item);
+    this.#container.prepend(item);
 
   };
 

@@ -3,9 +3,7 @@
   padding: 0;
   width: 18px;
   height: 19px;
-  background-color: transparent;
-  background-image: url(../../../images/main-pics/delete.svg);
-  background-size: 18px 19px;
+  background: url("../../../images/main-pics/delete.svg") center/100% no-repeat transparent;
   border: none;
   outline: none;
   position: absolute;

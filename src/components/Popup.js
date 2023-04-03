@@ -1,15 +1,23 @@
 import constants from "../utils/constants.js";
 
 const Popup = class {
+
+  #$popup;
+  #$close;
+  #$submit;
+  #buttonClose;
+  #overlayClose;
+  #keyClose;
+
   constructor(selector) {
 
-    this._$popup = selector;
-    this._$close = this._$popup.querySelector(constants.classes.close);
-    this._$submit = this._$popup.querySelector(constants.classes.formSubmit);
+    this.#$popup = selector;
+    this.#$close = this.#$popup.querySelector(constants.classes.close);
+    this.#$submit = this.#$popup.querySelector(constants.classes.formSubmit);
 
-    this._buttonClose = event => { if (event.target.closest(constants.classes.close)) { this.close() } };
-    this._overlayClose = event => { if (event.target === event.currentTarget) { this.close() } };
-    this._keyClose = event => { if (event.key === "Escape") { this.close() } };
+    this.#buttonClose = event => { if (event.target.closest(constants.classes.close)) { this.close() } };
+    this.#overlayClose = event => { if (event.target === event.currentTarget) { this.close() } };
+    this.#keyClose = event => { if (event.key === "Escape") { this.close() } };
 
   };
 
@@ -17,17 +25,17 @@ const Popup = class {
   showSendStatus = boolean => {
 
     boolean
-      ? this._$submit.textContent = this._$submit.dataset.statusDefault
-      : this._$submit.textContent = this._$submit.dataset.statusSaving
+      ? this.#$submit.textContent = this.#$submit.dataset.statusDefault
+      : this.#$submit.textContent = this.#$submit.dataset.statusSaving;
 
   };
 
-  _closePopupHandler = event => {
+  #closePopupHandler = event => {
     event.stopImmediatePropagation();
 
-    this._buttonClose(event);
-    this._overlayClose(event);
-    this._keyClose(event);
+    this.#buttonClose(event);
+    this.#overlayClose(event);
+    this.#keyClose(event);
 
   };
 
@@ -35,16 +43,16 @@ const Popup = class {
   open() {
 
     // добавление слушателя закрытия на клик по крестику
-    this._$close.addEventListener("click", this._closePopupHandler);
+    this.#$close.addEventListener("click", this.#closePopupHandler);
 
     // добавление слушателя закрытия на клик по оверлею
-    this._$popup.addEventListener("click", this._closePopupHandler);
+    this.#$popup.addEventListener("click", this.#closePopupHandler);
 
     // добавление слушателя закрытия на Escape
-    document.addEventListener("keydown", this._closePopupHandler);
+    document.addEventListener("keydown", this.#closePopupHandler);
 
     // добавление сиэсэс класса открытого попапа
-    this._$popup.classList.add(constants.states.popupOpened);
+    this.#$popup.classList.add(constants.states.popupOpened);
 
   };
 
@@ -52,16 +60,16 @@ const Popup = class {
   close() {
 
     // удаление слушателя закрытия на клик по крестику
-    this._$close.removeEventListener("click", this._closePopupHandler);
+    this.#$close.removeEventListener("click", this.#closePopupHandler);
 
     // удаление слушателя закрытия на клик по оверлею
-    this._$popup.removeEventListener("click", this._closePopupHandler);
+    this.#$popup.removeEventListener("click", this.#closePopupHandler);
 
     // удаление слушателя закрытия на Escape
-    document.removeEventListener("keydown", this._closePopupHandler);
+    document.removeEventListener("keydown", this.#closePopupHandler);
 
     // удаление сиэсэс класса открытого попапа
-    this._$popup.classList.remove(constants.states.popupOpened);
+    this.#$popup.classList.remove(constants.states.popupOpened);
 
   };
 

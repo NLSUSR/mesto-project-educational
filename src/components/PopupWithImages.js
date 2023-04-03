@@ -1,22 +1,27 @@
 import Popup from './Popup.js';
 
 const PopupWithImages = class extends Popup {
+
+  #$placeName;
+  #$placeImage;
+  #$ownerName;
+
   constructor(object) {
 
     super(object.container);
 
-    this._placeName = object.name;
-    this._placeImage = object.image;
-    this._ownerName = object.owner;
+    this.#$placeName = object.name;
+    this.#$placeImage = object.image;
+    this.#$ownerName = object.owner;
 
   };
 
   open = (name, link, owner) => {
 
-    this._placeName.textContent = name;
-    this._placeImage.alt = name;
-    this._placeImage.src = link;
-    this._ownerName.textContent = owner;
+    this.#$placeName.textContent = name;
+    this.#$placeImage.alt = name;
+    this.#$placeImage.src = link;
+    this.#$ownerName.textContent = owner;
 
     super.open();
 

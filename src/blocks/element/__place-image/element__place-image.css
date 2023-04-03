@@ -7,5 +7,7 @@
   border-radius: 10px 10px 0 0;
   object-fit: cover;
   object-position: center;
+  text-align: center;
+  background: url("../../../images/splash/splash.svg") center/50% no-repeat grey;
   aspect-ratio: 1/1;
 }

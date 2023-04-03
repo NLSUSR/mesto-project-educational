@@ -2,13 +2,18 @@ import constants from "../utils/constants.js";
 import Popup from "./Popup.js";
 
 const PopupWithForms = class extends Popup {
+
+  #$popup;
+  #submiter;
+  #$inputList;
+
   constructor(object) {
 
     super(object.container);
-    this._$popup = object.container;
-    this._submiter = object.handler;
+    this.#$popup = object.container;
+    this.#submiter = object.handler;
 
-    this._$inputList = this._$popup.querySelectorAll(constants.classes.formInput);
+    this.#$inputList = this.#$popup.querySelectorAll(constants.classes.formInput);
 
   };
 
@@ -18,22 +23,21 @@ const PopupWithForms = class extends Popup {
 
   };
 
-  _getInputValues = () => {
+  #getInputValues = () => {
 
-    const data = [];
-
-    Array.from(this._$inputList).forEach(item => { data.push(item.value) });
-
+    let data = [];
+    Array.from(this.#$inputList).forEach(item => { data.push(item.value) });
     return data;
+    
   };
 
   setEventListeners = () => {
 
-    this._$popup.addEventListener('submit', event => {
+    this.#$popup.addEventListener('submit', event => {
 
       event.preventDefault();
 
-      this._submiter(this._getInputValues());
+      this.#submiter(this.#getInputValues());
 
     });
 
@@ -47,7 +51,7 @@ const PopupWithForms = class extends Popup {
 
   reset = () => {
 
-    this._$popup.querySelector(constants.classes.form).reset();
+    this.#$popup.querySelector(constants.classes.form).reset();
 
   };
 }

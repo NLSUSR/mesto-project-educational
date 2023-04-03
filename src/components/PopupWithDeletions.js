@@ -1,11 +1,23 @@
 import Popup from "./Popup.js";
 
 const PopupWithDeletions = class extends Popup {
+
+  #button;
+  #remover;
+  #card;
+  #cardId;
+
   constructor(object) {
 
     super(object.container);
-    this._button = object.button;
-    this._remover = object.handler;
+    this.#button = object.button;
+    this.#remover = object.handler;
+
+  };
+
+  #delete = () => {
+
+    this.#remover(this.#card, this.#cardId);
 
   };
 
@@ -15,26 +27,20 @@ const PopupWithDeletions = class extends Popup {
 
   };
 
-  open = (card, cardId) => {
+ open = (card, cardId) => {
 
     super.open();
     this.showSendStatus(true);
-    this._card = card;
-    this._cardId = cardId;
-    this._button.addEventListener('click', this._delete);
-
-  };
-
-  _delete = () => {
-
-    this._remover(this._card, this._cardId);
+    this.#card = card;
+    this.#cardId = cardId;
+    this.#button.addEventListener('click', this.#delete);
 
   };
 
   close = () => {
 
     super.close();
-    this._button.removeEventListener('click', this._delete);
+    this.#button.removeEventListener('click', this.#delete);
 
   };
 };

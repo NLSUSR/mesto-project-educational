@@ -1,23 +1,32 @@
 const UserInfo = class {
+
+  #$avatarNode;
+  #$nameNode;
+  #$aboutNode;
+  #name;
+  #about;
+  #avatar;
+  #id;
+
   constructor(object) {
 
-    this._avatarNode = object.avatar;
-    this._nameNode = object.name;
-    this._aboutNode = object.about;
+    this.#$avatarNode = object.avatar;
+    this.#$nameNode = object.name;
+    this.#$aboutNode = object.about;
 
   };
 
   setUserInfo = data => {
 
-    this._avatarNode.src = data.avatar;
-    this._nameNode.textContent = data.name;
-    this._aboutNode.textContent = data.about;
+    this.#$avatarNode.src = data.avatar;
+    this.#$nameNode.textContent = data.name;
+    this.#$aboutNode.textContent = data.about;
 
-    this._name = data.name;
-    this._about = data.about;
-    this._avatar = data.avatar;
+    this.#name = data.name;
+    this.#about = data.about;
+    this.#avatar = data.avatar;
 
-    this._id = data._id;
+    this.#id = data._id;
 
   };
 
@@ -25,9 +34,9 @@ const UserInfo = class {
 
     return {
 
-      name: this._name,
-      about: this._about,
-      avatar: this._avatar
+      name: this.#name,
+      about: this.#about,
+      avatar: this.#avatar
 
     };
 
@@ -35,7 +44,7 @@ const UserInfo = class {
 
   getUserId = () => {
 
-    return this._id;
+    return this.#id;
 
   };
 
