@@ -2,14 +2,8 @@
 import constants from "./constants.js";
 
 // прелоадер страницы
-const pageLoader = (boolean) => {
-
-  boolean
-    ? constants.selectors.preloader.classList.add(constants.states.preloaderActive)
-    && constants.selectors.preloader.open()
-    : constants.selectors.preloader.classList.remove(constants.states.preloaderActive)
-    && constants.selectors.preloader.close()
-
+const pageLoader = () => {
+  constants.selectors.preloader.classList.remove(constants.states.preloaderActive)
 };
 
 export default pageLoader;
