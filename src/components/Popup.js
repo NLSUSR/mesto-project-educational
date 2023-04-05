@@ -18,27 +18,23 @@ const Popup = class {
 
   };
 
-  #closePopupHandler = event => {
+  #handleButtonClose = event => { this.#buttonClose(event) };
 
-    event.stopImmediatePropagation();
+  #handleOverlayClose = event => { this.#overlayClose(event) };
 
-    this.#buttonClose(event);
-    this.#overlayClose(event);
-    this.#keyClose(event);
-
-  };
+  #handleEscClose = event => { this.#keyClose(event) };
 
   // унифицированая функция открытия попапа
   open() {
 
     // добавление слушателя закрытия на клик по крестику
-    this.#$close.addEventListener("click", this.#closePopupHandler);
+    this.#$close.addEventListener("click", this.#handleButtonClose);
 
     // добавление слушателя закрытия на клик по оверлею
-    this.#$popup.addEventListener("click", this.#closePopupHandler);
+    this.#$popup.addEventListener("click", this.#handleOverlayClose);
 
     // добавление слушателя закрытия на Escape
-    document.addEventListener("keydown", this.#closePopupHandler);
+    document.addEventListener("keydown", this.#handleEscClose);
 
     // добавление сиэсэс класса открытого попапа
     this.#$popup.classList.add(constants.states.popupOpened);
@@ -49,13 +45,13 @@ const Popup = class {
   close() {
 
     // удаление слушателя закрытия на клик по крестику
-    this.#$close.removeEventListener("click", this.#closePopupHandler);
+    this.#$close.removeEventListener("click", this.#handleButtonClose);
 
     // удаление слушателя закрытия на клик по оверлею
-    this.#$popup.removeEventListener("click", this.#closePopupHandler);
+    this.#$popup.removeEventListener("click", this.#handleOverlayClose);
 
     // удаление слушателя закрытия на Escape
-    document.removeEventListener("keydown", this.#closePopupHandler);
+    document.removeEventListener("keydown", this.#handleEscClose);
 
     // удаление сиэсэс класса открытого попапа
     this.#$popup.classList.remove(constants.states.popupOpened);
