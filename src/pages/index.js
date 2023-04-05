@@ -65,7 +65,7 @@ const cardsSection = new Section({
 const server = {
   // обработка аватара
   submitPatchAvatar: ([link]) => {
-    popups.popupFormProfile.showSendStatus(false);
+    popups.popupFormAvatar.showSendStatus(false);
     api.patchAvatar(link).then(url => {
       userInfo.setUserInfo(url)
       popups.popupFormAvatar.close();
@@ -104,7 +104,7 @@ const server = {
   },
   // обработка удаления карточки
   deleteElement: (card, cardId) => {
-    popups.popupFormProfile.showSendStatus(false);
+    popups.popupDelete.showSendStatus(false);
     api.deleteCard(cardId).then(() => {
       card.removeCard();
       popups.popupDelete.close();
