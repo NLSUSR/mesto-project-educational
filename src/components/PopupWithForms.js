@@ -32,7 +32,7 @@ const PopupWithForms = class extends Popup {
     let data = {};
 
     Array.from(this.#$inputList).forEach(item => { data[item.name] = item.value });
-console.log('data', data)
+
     return data;
 
   };
