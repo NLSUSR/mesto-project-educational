@@ -65,30 +65,33 @@ const cardsSection = new Section({
 const server = {
   // обработка аватара
   submitPatchAvatar: ([link]) => {
+    popups.popupFormProfile.showSendStatus(false);
     api.patchAvatar(link).then(url => {
       userInfo.setUserInfo(url)
       popups.popupFormAvatar.close();
     }).catch(error => {
       api.responseError(error)
     }).finally(() => {
-      popups.popupFormAvatar.showSendStatus(false);
+      popups.popupFormAvatar.showSendStatus(true);
     });
   },
   // обработка данных профиля
   submitPatchData: ([name, about]) => {
     const user = { name, about };
+    popups.popupFormProfile.showSendStatus(false);
     api.patchData(user).then(user => {
       userInfo.setUserInfo(user);
       popups.popupFormProfile.close();
     }).catch(error => {
       api.responseError(error)
     }).finally(() => {
-      popups.popupFormProfile.showSendStatus(false);
+      popups.popupFormProfile.showSendStatus(true);
     });
   },
   // обработка добавления карточки
   submitPostCard: ([name, link]) => {
     const card = { name, link };
+    popups.popupFormPlace.showSendStatus(false);
     api.postCard(card).then(card => {
       cardsSection.prependItem(create.cardElement(card));
       popups.popupFormPlace.reset();
@@ -96,18 +99,19 @@ const server = {
     }).catch(error => {
       api.responseError(error)
     }).finally(() => {
-      popups.popupFormPlace.showSendStatus(false);
+      popups.popupFormPlace.showSendStatus(true);
     });
   },
   // обработка удаления карточки
   deleteElement: (card, cardId) => {
+    popups.popupFormProfile.showSendStatus(false);
     api.deleteCard(cardId).then(() => {
       card.removeCard();
       popups.popupDelete.close();
     }).catch(error => {
       api.responseError(error)
     }).finally(() => {
-      popups.popupDelete.showSendStatus(false);
+      popups.popupDelete.showSendStatus(true);
     });
   },
   // обработка лайка
