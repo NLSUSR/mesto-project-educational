@@ -99,7 +99,6 @@ const server = {
   },
   // обработка удаления карточки
   deleteElement: (card, cardId) => {
-    popups.popupDelete.showSendStatus(false);
     api.deleteCard(cardId).then(() => {
       card.removeCard();
     }).catch(error => {
@@ -212,19 +211,17 @@ const submits = {
   }
 };
 
-{ // люблю обертки готов все обернуть :D
+{
   [
     validation.avatarFormValidation,
     validation.profileFormValidation,
     validation.cardFormValidation,
   ].forEach(item => item.enableValidation());
-
   [
     popups.popupFormAvatar,
     popups.popupFormProfile,
     popups.popupFormPlace,
   ].forEach(item => item.setEventListeners());
-
   [
     submits.avatar,
     submits.profile,
