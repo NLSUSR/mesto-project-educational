@@ -54,7 +54,6 @@
 @import url("../blocks/popup/__close/popup__close.css");
 @import url("../blocks/popup/__form/form.css");
 @import url("../blocks/popup/__image/popup__image.css");
-@import url("../blocks/popup/_image-opacity/popup_image-opacity.css");
 @import url("../blocks/popup/__place-name/popup__place-name.css");
 @import url("../blocks/popup/__place-name-description/popup__place-name-description.css");
 @import url("../blocks/popup/__container/_opened-image/popup__container_opened-image.css");

@@ -4,10 +4,11 @@
 // зависимости
 const styles = import("../pages/index.css"); // динамические импорты
 const images = import("../utils/images.js");
+const initialCards = import("../utils/tests.js");
 
 import constants from "../utils/constants.js"; // статические импорты
 import pageLoaded from "../utils/utils.js";
-import initialCards from "../utils/tests.js";
+
 import Api from "../components/Api.js";
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
@@ -23,7 +24,7 @@ styles; // тут вопросов нет
 // импорт картинок
 images; // зачем мы это делали ? хз!
 
-initialCards; // для тестов
+const testCards =  initialCards.then(data => { return data.default }); // для тестов
 
 // создание экземпляра класса для Application Programming Interface
 const api = new Api(constants.configuration);
@@ -134,28 +135,28 @@ const server = {
 const popups = {
   // создание экземпляра класса для формы смены аватара
   popupFormAvatar: new PopupWithForms({
-    container: constants.selectors.changeAvatarContainer,
+    container: constants.classes.popupAvatar,
     handler: server.submitPatchAvatar
   }),
   // создание экземпляра класса для формы редактирования профиля
   popupFormProfile: new PopupWithForms({
-    container: constants.selectors.profileEditContainer,
+    container: constants.classes.popupData,
     handler: server.submitPatchData
   }),
   // создание экземпляра класса для формы добавления места
   popupFormPlace: new PopupWithForms({
-    container: constants.selectors.cardAddContainer,
+    container: constants.classes.popupCard,
     handler: server.submitPostCard
   }),
   // создание экземпляра класса для удаления карточки
   popupDelete: new PopupWithDeletions({
-    container: constants.selectors.cardRemoveContainer,
+    container: constants.classes.popupDelete,
     button: constants.selectors.cardRemoveContainerButton,
     handler: server.deleteElement
   }),
   // создание экземпляра класса для просмотра карточки
   popupImage: new PopupWithImages({
-    container: constants.selectors.imageOpeningContainer,
+    container: constants.classes.popupImage,
     name: constants.selectors.placeName,
     image: constants.selectors.placeImage,
     owner: constants.selectors.ownerName

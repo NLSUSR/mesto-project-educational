@@ -8,9 +8,9 @@ const Popup = class {
   #overlayClose;
   #keyClose;
 
-  constructor(element) {
+  constructor($selector) {
 
-    this.#$popup = element;
+    this.#$popup = document.querySelector($selector);
     this.#$close = this.#$popup.querySelector(constants.classes.close);
     this.#buttonClose = event => { if (event.target.closest(constants.classes.close)) { this.close() } };
     this.#overlayClose = event => { if (event.target === event.currentTarget) { this.close() } };
@@ -18,6 +18,7 @@ const Popup = class {
 
   };
 
+  // слушатели
   #handleButtonClose = event => { this.#buttonClose(event) };
 
   #handleOverlayClose = event => { this.#overlayClose(event) };

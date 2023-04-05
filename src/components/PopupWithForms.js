@@ -11,7 +11,7 @@ const PopupWithForms = class extends Popup {
   constructor(object) {
 
     super(object.container);
-    this.#$popup = object.container;
+    this.#$popup = document.querySelector(object.container);
     this.#submiter = object.handler;
 
     this.#$inputList = this.#$popup.querySelectorAll(constants.classes.formInput);
@@ -46,12 +46,6 @@ const PopupWithForms = class extends Popup {
       this.#submiter(this.#getInputValues());
 
     });
-
-  };
-
-  close = () => {
-
-    super.close();
 
   };
 

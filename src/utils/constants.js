@@ -39,7 +39,6 @@ const selectors = {
   elementsContainer: document.querySelector("#elementsContainer"),
 
   profileEditButton: document.querySelector("#profileEditButton"),
-  profileEditContainer: document.querySelector("#profileEditContainer"),
   profileEditNameInput: document.querySelector("#profileEditNameInput"),
   profileEditActivityInput: document.querySelector("#profileEditActivityInput"),
 
@@ -47,21 +46,17 @@ const selectors = {
   profileActivity: document.querySelector("#profileActivity"),
 
   profileAvatarWrapper: document.querySelector("#profileAvatarWrapper"),
-  changeAvatarContainer: document.querySelector("#changeAvatarContainer"),
   changeAvatarInput: document.querySelector("#changeAvatarInput"),
   profileAvatarImage: document.querySelector("#profileAvatarImage"),
 
   cardAddButton: document.querySelector("#cardAddButton"),
-  cardAddContainer: document.querySelector("#cardAddContainer"),
   cardAddTitleInput: document.querySelector("#cardAddTitleInput"),
   cardAddImageLinkInput: document.querySelector("#cardAddImageLinkInput"),
 
   cardRemoveContainer: document.querySelector("#cardRemoveContainer"),
   cardRemoveContainerButton: document.querySelector("#cardRemoveContainerButton"),
 
-  imageOpeningContainer: document.querySelector("#imageOpeningContainer"),
   imageOpeningWrapper: document.querySelector("#imageOpeningWrapper"),
-
   placeImage: document.querySelector("#placeImage"),
   placeName: document.querySelector("#placeName"),
   ownerName: document.querySelector("#ownerName")
@@ -80,6 +75,11 @@ const classes = {
   delete: ".element__delete",
   like: ".element__like",
   likeCounter: ".element__like-counter",
+  popupAvatar:".popup-avatar",
+  popupData:".popup-data",
+  popupCard:".popup-card",
+  popupDelete:".popup-delete",
+  popupImage:".popup-image"
 };
 
 const states = {
