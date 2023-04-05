@@ -75,11 +75,11 @@ const classes = {
   delete: ".element__delete",
   like: ".element__like",
   likeCounter: ".element__like-counter",
-  popupAvatar:".popup-avatar",
-  popupData:".popup-data",
-  popupCard:".popup-card",
-  popupDelete:".popup-delete",
-  popupImage:".popup-image"
+  popupAvatar: ".popup-avatar",
+  popupData: ".popup-data",
+  popupCard: ".popup-card",
+  popupDelete: ".popup-delete",
+  popupImage: ".popup_image"
 };
 
 const states = {
