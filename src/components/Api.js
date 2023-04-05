@@ -74,7 +74,7 @@ const Api = class {
 
   // меняем состояние лайка
   likeState = data => { return this.#sendRequest(`${this.#likes + data.id} `, data.method) };
-  
+
 };
 
 export default Api;

@@ -57,58 +57,56 @@ const userInfo = new UserInfo({
 // создание экземпляра класса добавления карточки
 const cardsSection = new Section({
   container: constants.selectors.elementsContainer,
-  render: item => {
-    cardsSection.appendItem(create.cardElement(item))
-  }
+  render: item => { cardsSection.appendItem(create.cardElement(item)) },
 });
 
 const server = {
   // обработка аватара
-  submitPatchAvatar: ([link]) => {
-    api.patchAvatar(link).then(url => {
+  submitPatchAvatar: (data) => {
+    api.patchAvatar(data.userAvatar).then(url => {
       userInfo.setUserInfo(url)
-      popups.popupFormAvatar.close();
     }).catch(error => {
-      api.responseError(error)
-    }).finally(() => {
+      api.responseError(error);
+    }).then(() => {
       popups.popupFormAvatar.showSendStatus(false);
-    });
+      setTimeout(() => { popups.popupFormAvatar.close() }, 1000);
+    }).finally(popups.popupFormAvatar.showSendStatus(true));
   },
   // обработка данных профиля
-  submitPatchData: ([name, about]) => {
-    const user = { name, about };
-    api.patchData(user).then(user => {
+  submitPatchData: (data) => {
+    api.patchData({ name: data.userName, about: data.userAbout }).then(user => {
       userInfo.setUserInfo(user);
-      popups.popupFormProfile.close();
     }).catch(error => {
-      api.responseError(error)
-    }).finally(() => {
+      api.responseError(error);
+    }).then(() => {
       popups.popupFormProfile.showSendStatus(false);
-    });
+      setTimeout(() => { popups.popupFormProfile.close() }, 1000);
+    }).finally(popups.popupFormProfile.showSendStatus(true));
   },
   // обработка добавления карточки
-  submitPostCard: ([name, link]) => {
-    const card = { name, link };
-    api.postCard(card).then(card => {
+  submitPostCard: (data) => {
+    api.postCard({ name: data.cardTitle, link: data.cardImage }).then(card => {
       cardsSection.prependItem(create.cardElement(card));
-      popups.popupFormPlace.reset();
-      popups.popupFormPlace.close();
     }).catch(error => {
-      api.responseError(error)
-    }).finally(() => {
+      api.responseError(error);
+    }).then(() => {
       popups.popupFormPlace.showSendStatus(false);
-    });
+      setTimeout(() => {
+        popups.popupFormPlace.reset();
+        popups.popupFormPlace.close();
+      }, 1000);
+    }).finally(popups.popupFormPlace.showSendStatus(true));
   },
   // обработка удаления карточки
   deleteElement: (card, cardId) => {
     api.deleteCard(cardId).then(() => {
       card.removeCard();
-      popups.popupDelete.close();
     }).catch(error => {
       api.responseError(error)
-    }).finally(() => {
-      popups.popupDelete.showSendStatus(false);
-    });
+    }).then(() => {
+      popups.popupDelete.showDeleteStatus(false);
+      setTimeout(() => { popups.popupDelete.close() }, 1000)
+    }).finally(popups.popupDelete.showDeleteStatus(true));
   },
   // обработка лайка
   likeCard: (card, id, method) => {
@@ -117,7 +115,7 @@ const server = {
       card.changeLikeState(data.likes);
     }).catch(error => {
       api.responseError(error)
-    })
+    });
   },
   // получение информации профиля с сервера
   getAll: api.getDataAndCards().then(([data, cards]) => {
@@ -128,10 +126,8 @@ const server = {
   }).catch(error => {
     api.responseError(error)
   }).finally(window.onload = () => {
-    setTimeout(() => {
-      pageLoaded()
-    }, 1000)
-  })
+    setTimeout(() => { pageLoaded() }, 1000);
+  }),
 };
 
 // попапы
@@ -163,7 +159,7 @@ const popups = {
     name: constants.selectors.placeName,
     image: constants.selectors.placeImage,
     owner: constants.selectors.ownerName
-  })
+  }),
 };
 
 // создание экземлпяра карточки
@@ -216,19 +212,21 @@ const submits = {
 };
 
 { // люблю обертки готов все обернуть :D
-  {
-    validation.avatarFormValidation.enableValidation();
-    validation.profileFormValidation.enableValidation();
-    validation.cardFormValidation.enableValidation();
-  };
-  {
-    popups.popupFormAvatar.setEventListeners();
-    popups.popupFormProfile.setEventListeners();
-    popups.popupFormPlace.setEventListeners();
-  };
-  {
-    [submits.avatar, submits.profile, submits.add].forEach(item => {
-      submits.submiting(item.button, item.popup, item.validation);
-    });
-  };
+  [
+    validation.avatarFormValidation,
+    validation.profileFormValidation,
+    validation.cardFormValidation,
+  ].forEach(item => item.enableValidation());
+
+  [
+    popups.popupFormAvatar,
+    popups.popupFormProfile,
+    popups.popupFormPlace,
+  ].forEach(item => item.setEventListeners());
+
+  [
+    submits.avatar,
+    submits.profile,
+    submits.add,
+  ].forEach(item => { submits.submiting(item.button, item.popup, item.validation) });
 };

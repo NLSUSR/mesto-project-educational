@@ -4,33 +4,22 @@ const Popup = class {
 
   #$popup;
   #$close;
-  #$submit;
   #buttonClose;
   #overlayClose;
   #keyClose;
 
-  constructor(selector) {
+  constructor(element) {
 
-    this.#$popup = selector;
+    this.#$popup = element;
     this.#$close = this.#$popup.querySelector(constants.classes.close);
-    this.#$submit = this.#$popup.querySelector(constants.classes.formSubmit);
-
     this.#buttonClose = event => { if (event.target.closest(constants.classes.close)) { this.close() } };
     this.#overlayClose = event => { if (event.target === event.currentTarget) { this.close() } };
     this.#keyClose = event => { if (event.key === "Escape") { this.close() } };
 
   };
 
-  // показываем статус отправки
-  showSendStatus = boolean => {
-
-    boolean
-      ? this.#$submit.textContent = this.#$submit.dataset.statusDefault
-      : this.#$submit.textContent = this.#$submit.dataset.statusSaving;
-
-  };
-
   #closePopupHandler = event => {
+
     event.stopImmediatePropagation();
 
     this.#buttonClose(event);

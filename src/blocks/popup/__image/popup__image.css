@@ -11,3 +11,7 @@
     background: url("../../../images/splash/splash.svg") center/50% no-repeat gray;
     color: red;
 }
+
+.popup-background{
+  background-color: rgba(0, 0, 0, 0.9);
+}

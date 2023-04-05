@@ -1,5 +1,8 @@
-const cohort = "plus-cohort-20"; // plus-cohort-18
-const token = "b920c8ce-3925-48c5-9ff8-5e542e04acb8"; // dbbb73d9-482c-4ca9-b5e0-9835c4b5cfcc
+// const cohort = "plus-cohort-18"; // данные прошлой моей когорты
+// const token = "dbbb73d9-482c-4ca9-b5e0-9835c4b5cfcc";
+
+const cohort = "plus-cohort-20";
+const token = "b920c8ce-3925-48c5-9ff8-5e542e04acb8";
 
 const configuration = {
 

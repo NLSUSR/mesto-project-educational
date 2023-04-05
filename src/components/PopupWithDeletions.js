@@ -21,16 +21,19 @@ const PopupWithDeletions = class extends Popup {
 
   };
 
-  showSendStatus(boolean) {
+  // показываем статус удаления
+  showDeleteStatus = boolean => {
 
-    super.showSendStatus(boolean);
+    boolean
+      ? this.#button.textContent = this.#button.dataset.statusDefault
+      : this.#button.textContent = this.#button.dataset.statusSaving;
 
   };
 
- open = (card, cardId) => {
+  open = (card, cardId) => {
 
     super.open();
-    this.showSendStatus(true);
+    this.showDeleteStatus(true);
     this.#card = card;
     this.#cardId = cardId;
     this.#button.addEventListener('click', this.#delete);

@@ -4,6 +4,7 @@ import Popup from "./Popup.js";
 const PopupWithForms = class extends Popup {
 
   #$popup;
+  #$submit
   #submiter;
   #$inputList;
 
@@ -14,21 +15,26 @@ const PopupWithForms = class extends Popup {
     this.#submiter = object.handler;
 
     this.#$inputList = this.#$popup.querySelectorAll(constants.classes.formInput);
-
+    this.#$submit = this.#$popup.querySelector(constants.classes.formSubmit);
   };
 
-  showSendStatus(boolean) {
+  // показываем статус отправки
+  showSendStatus = boolean => {
 
-    super.showSendStatus(boolean);
+    boolean
+      ? this.#$submit.textContent = this.#$submit.dataset.statusDefault
+      : this.#$submit.textContent = this.#$submit.dataset.statusSaving;
 
   };
 
   #getInputValues = () => {
 
-    let data = [];
-    Array.from(this.#$inputList).forEach(item => { data.push(item.value) });
+    let data = {};
+
+    Array.from(this.#$inputList).forEach(item => { data[item.name] = item.value });
+console.log('data', data)
     return data;
-    
+
   };
 
   setEventListeners = () => {
