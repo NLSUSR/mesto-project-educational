@@ -99,6 +99,7 @@ const server = {
   },
   // обработка удаления карточки
   deleteElement: (card, cardId) => {
+    popups.popupDelete.showSendStatus(false);
     api.deleteCard(cardId).then(() => {
       card.removeCard();
     }).catch(error => {
