@@ -58,7 +58,7 @@ const userInfo = new UserInfo({
 // создание экземпляра класса добавления карточки
 const cardsSection = new Section({
   container: constants.selectors.elementsContainer,
-  render: item => { cardsSection.appendItem(createOneCard.cardElement(item)) },
+  render: item => { cardsSection.appendItem(createCardInstance.cardElement(item)) },
 });
 
 const server = {
@@ -90,7 +90,7 @@ const server = {
   submitPostCard: (data) => {
     popups.popupFormPlace.showSendStatus(false);
     api.postCard({ name: data.cardTitle, link: data.cardImage }).then(card => {
-      cardsSection.prependItem(createOneCard.cardElement(card));
+      cardsSection.prependItem(createCardInstance.cardElement(card));
     }).catch(error => {
       api.responseError(error);
     }).finally(() => {
@@ -111,8 +111,7 @@ const server = {
   },
   // обработка лайка
   likeCard: (card, id, method) => {
-    const data = { id, method };
-    api.likeState(data).then(data => {
+    api.likeState({ id, method }).then(data => {
       card.changeLikeState(data.likes);
     }).catch(error => {
       api.responseError(error)
@@ -164,7 +163,7 @@ const popups = {
 };
 
 // создание экземлпяра карточки
-const createOneCard = {
+const createCardInstance = {
   callbacks: {
     deleteCallback: (card, id) => { popups.popupDelete.open(card, id) },
     cardCallback: (name, link, owner) => { popups.popupImage.open(name, link, owner) },
@@ -172,7 +171,7 @@ const createOneCard = {
   },
   template: constants.selectors.cardTemplate,
   cardElement: item => {
-    const cardElement = new Card(item, createOneCard.callbacks, createOneCard.template, userInfo.getUserId());
+    const cardElement = new Card(item, createCardInstance.callbacks, createCardInstance.template, userInfo.getUserId());
     return cardElement.getCard();
   }
 };
