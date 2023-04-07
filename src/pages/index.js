@@ -24,7 +24,7 @@ styles; // тут вопросов нет
 // импорт картинок
 images; // зачем мы это делали ? хз!
 
-const testCards =  initialCards.then(data => { return data.default }); // для тестов
+const testCards = initialCards.then(data => { return data.default }); // для тестов
 
 // создание экземпляра класса для Application Programming Interface
 const api = new Api(constants.configuration);
@@ -95,8 +95,8 @@ const server = {
       api.responseError(error);
     }).finally(() => {
       popups.popupFormPlace.showSendStatus(true);
-        popups.popupFormPlace.reset();
-        popups.popupFormPlace.close();
+      popups.popupFormPlace.reset();
+      popups.popupFormPlace.close();
     });
   },
   // обработка удаления карточки

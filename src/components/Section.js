@@ -2,7 +2,7 @@ const Section = class {
 
   #container;
   #render;
-  
+
   constructor(object) {
 
     this.#container = object.container;
