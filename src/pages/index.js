@@ -66,47 +66,47 @@ const server = {
   submitPatchAvatar: (data) => {
     api.patchAvatar(data.userAvatar).then(url => {
       userInfo.setUserInfo(url)
-    }).catch(error => {
-      api.responseError(error);
     }).then(() => {
       popups.popupFormAvatar.showSendStatus(false);
       setTimeout(() => { popups.popupFormAvatar.close() }, 1000);
+    }).catch(error => {
+      api.responseError(error);
     }).finally(popups.popupFormAvatar.showSendStatus(true));
   },
   // обработка данных профиля
   submitPatchData: (data) => {
     api.patchData({ name: data.userName, about: data.userAbout }).then(user => {
       userInfo.setUserInfo(user);
-    }).catch(error => {
-      api.responseError(error);
     }).then(() => {
       popups.popupFormProfile.showSendStatus(false);
       setTimeout(() => { popups.popupFormProfile.close() }, 1000);
+    }).catch(error => {
+      api.responseError(error);
     }).finally(popups.popupFormProfile.showSendStatus(true));
   },
   // обработка добавления карточки
   submitPostCard: (data) => {
     api.postCard({ name: data.cardTitle, link: data.cardImage }).then(card => {
       cardsSection.prependItem(createOneCard.cardElement(card));
-    }).catch(error => {
-      api.responseError(error);
     }).then(() => {
       popups.popupFormPlace.showSendStatus(false);
       setTimeout(() => {
         popups.popupFormPlace.reset();
         popups.popupFormPlace.close();
       }, 1000);
+    }).catch(error => {
+      api.responseError(error);
     }).finally(popups.popupFormPlace.showSendStatus(true));
   },
   // обработка удаления карточки
   deleteElement: (card, cardId) => {
     api.deleteCard(cardId).then(() => {
       card.removeCard();
-    }).catch(error => {
-      api.responseError(error)
     }).then(() => {
       popups.popupDelete.showDeleteStatus(false);
       setTimeout(() => { popups.popupDelete.close() }, 1000)
+    }).catch(error => {
+      api.responseError(error)
     }).finally(popups.popupDelete.showDeleteStatus(true));
   },
   // обработка лайка
