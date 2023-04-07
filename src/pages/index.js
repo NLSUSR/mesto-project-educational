@@ -95,10 +95,8 @@ const server = {
       api.responseError(error);
     }).finally(() => {
       popups.popupFormPlace.showSendStatus(true);
-      setTimeout(() => {
         popups.popupFormPlace.reset();
         popups.popupFormPlace.close();
-      }, 1000);
     });
   },
   // обработка удаления карточки
@@ -108,7 +106,7 @@ const server = {
       card.removeCard();
     }).finally(() => {
       popups.popupDelete.showDeleteStatus(true);
-      setTimeout(() => { popups.popupDelete.close() }, 1000);
+      popups.popupDelete.close()ж
     });
   },
   // обработка лайка
