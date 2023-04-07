@@ -106,7 +106,7 @@ const server = {
       card.removeCard();
     }).finally(() => {
       popups.popupDelete.showDeleteStatus(true);
-      popups.popupDelete.close()ж
+      popups.popupDelete.close();
     });
   },
   // обработка лайка
