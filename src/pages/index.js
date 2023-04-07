@@ -64,14 +64,15 @@ const cardsSection = new Section({
 const server = {
   // обработка аватара
   submitPatchAvatar: (data) => {
+    popups.popupFormAvatar.showSendStatus(false);
     api.patchAvatar(data.userAvatar).then(url => {
       userInfo.setUserInfo(url)
-    }).then(() => {
-      popups.popupFormAvatar.showSendStatus(false);
-      setTimeout(() => { popups.popupFormAvatar.close() }, 1000);
     }).catch(error => {
       api.responseError(error);
-    }).finally(popups.popupFormAvatar.showSendStatus(true));
+    }).finally(() => {
+      popups.popupFormAvatar.showSendStatus(true);
+      popups.popupFormAvatar.close();
+    });
   },
   // обработка данных профиля
   submitPatchData: (data) => {
@@ -105,8 +106,6 @@ const server = {
     }).then(() => {
       popups.popupDelete.showDeleteStatus(false);
       setTimeout(() => { popups.popupDelete.close() }, 1000)
-    }).catch(error => {
-      api.responseError(error)
     }).finally(popups.popupDelete.showDeleteStatus(true));
   },
   // обработка лайка
