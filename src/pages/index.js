@@ -76,37 +76,40 @@ const server = {
   },
   // обработка данных профиля
   submitPatchData: (data) => {
+    popups.popupFormProfile.showSendStatus(false);
     api.patchData({ name: data.userName, about: data.userAbout }).then(user => {
       userInfo.setUserInfo(user);
-    }).then(() => {
-      popups.popupFormProfile.showSendStatus(false);
-      setTimeout(() => { popups.popupFormProfile.close() }, 1000);
     }).catch(error => {
       api.responseError(error);
-    }).finally(popups.popupFormProfile.showSendStatus(true));
+    }).finally(() => {
+      popups.popupFormProfile.showSendStatus(true)
+      popups.popupFormProfile.close()
+    });
   },
   // обработка добавления карточки
   submitPostCard: (data) => {
+    popups.popupFormPlace.showSendStatus(false);
     api.postCard({ name: data.cardTitle, link: data.cardImage }).then(card => {
       cardsSection.prependItem(createOneCard.cardElement(card));
-    }).then(() => {
-      popups.popupFormPlace.showSendStatus(false);
+    }).catch(error => {
+      api.responseError(error);
+    }).finally(() => {
+      popups.popupFormPlace.showSendStatus(true);
       setTimeout(() => {
         popups.popupFormPlace.reset();
         popups.popupFormPlace.close();
       }, 1000);
-    }).catch(error => {
-      api.responseError(error);
-    }).finally(popups.popupFormPlace.showSendStatus(true));
+    });
   },
   // обработка удаления карточки
   deleteElement: (card, cardId) => {
+    popups.popupDelete.showDeleteStatus(false);
     api.deleteCard(cardId).then(() => {
       card.removeCard();
-    }).then(() => {
-      popups.popupDelete.showDeleteStatus(false);
-      setTimeout(() => { popups.popupDelete.close() }, 1000)
-    }).finally(popups.popupDelete.showDeleteStatus(true));
+    }).finally(() => {
+      popups.popupDelete.showDeleteStatus(true);
+      setTimeout(() => { popups.popupDelete.close() }, 1000);
+    });
   },
   // обработка лайка
   likeCard: (card, id, method) => {
