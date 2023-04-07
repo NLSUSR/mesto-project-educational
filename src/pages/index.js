@@ -58,7 +58,7 @@ const userInfo = new UserInfo({
 // создание экземпляра класса добавления карточки
 const cardsSection = new Section({
   container: constants.selectors.elementsContainer,
-  render: item => { cardsSection.appendItem(create.cardElement(item)) },
+  render: item => { cardsSection.appendItem(createOneCard.cardElement(item)) },
 });
 
 const server = {
@@ -87,7 +87,7 @@ const server = {
   // обработка добавления карточки
   submitPostCard: (data) => {
     api.postCard({ name: data.cardTitle, link: data.cardImage }).then(card => {
-      cardsSection.prependItem(create.cardElement(card));
+      cardsSection.prependItem(createOneCard.cardElement(card));
     }).catch(error => {
       api.responseError(error);
     }).then(() => {
@@ -164,7 +164,7 @@ const popups = {
 };
 
 // создание экземлпяра карточки
-const create = {
+const createOneCard = {
   callbacks: {
     deleteCallback: (card, id) => { popups.popupDelete.open(card, id) },
     cardCallback: (name, link, owner) => { popups.popupImage.open(name, link, owner) },
@@ -172,7 +172,7 @@ const create = {
   },
   template: constants.selectors.cardTemplate,
   cardElement: item => {
-    const cardElement = new Card(item, create.callbacks, create.template, userInfo.getUserId());
+    const cardElement = new Card(item, createOneCard.callbacks, createOneCard.template, userInfo.getUserId());
     return cardElement.getCard();
   }
 };
