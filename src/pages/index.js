@@ -67,11 +67,12 @@ const server = {
     popups.popupFormAvatar.showSendStatus(false);
     api.patchAvatar(data.userAvatar).then(url => {
       userInfo.setUserInfo(url)
+    }).then(() => {
+      popups.popupFormAvatar.close();
     }).catch(error => {
       api.responseError(error);
     }).finally(() => {
       popups.popupFormAvatar.showSendStatus(true);
-      popups.popupFormAvatar.close();
     });
   },
   // обработка данных профиля
@@ -79,11 +80,12 @@ const server = {
     popups.popupFormProfile.showSendStatus(false);
     api.patchData({ name: data.userName, about: data.userAbout }).then(user => {
       userInfo.setUserInfo(user);
+    }).then(() => {
+      popups.popupFormProfile.close()
     }).catch(error => {
       api.responseError(error);
     }).finally(() => {
       popups.popupFormProfile.showSendStatus(true)
-      popups.popupFormProfile.close()
     });
   },
   // обработка добавления карточки
@@ -91,12 +93,13 @@ const server = {
     popups.popupFormPlace.showSendStatus(false);
     api.postCard({ name: data.cardTitle, link: data.cardImage }).then(card => {
       cardsSection.prependItem(createCardInstance.cardElement(card));
+    }).then(() => {
+      popups.popupFormPlace.reset();
+      popups.popupFormPlace.close();
     }).catch(error => {
       api.responseError(error);
     }).finally(() => {
       popups.popupFormPlace.showSendStatus(true);
-      popups.popupFormPlace.reset();
-      popups.popupFormPlace.close();
     });
   },
   // обработка удаления карточки
@@ -104,9 +107,9 @@ const server = {
     popups.popupDelete.showDeleteStatus(false);
     api.deleteCard(cardId).then(() => {
       card.removeCard();
+      popups.popupDelete.close();
     }).finally(() => {
       popups.popupDelete.showDeleteStatus(true);
-      popups.popupDelete.close();
     });
   },
   // обработка лайка
