@@ -1,4 +1,4 @@
-import constants from "../utils/constants.js";
+// import constants from "../utils/constants.js";
 
 const Popup = class {
 
@@ -7,12 +7,14 @@ const Popup = class {
   #buttonClose;
   #overlayClose;
   #keyClose;
+  #constants;
 
-  constructor($selector) {
+  constructor($selector, constants) {
 
+    this.#constants = constants;
     this.#$popup = document.querySelector($selector);
-    this.#$close = this.#$popup.querySelector(constants.classes.close);
-    this.#buttonClose = event => { if (event.target.closest(constants.classes.close)) { this.close() } };
+    this.#$close = this.#$popup.querySelector(this.#constants.$close);
+    this.#buttonClose = event => { if (event.target.closest(this.#constants.$close)) { this.close() } };
     this.#overlayClose = event => { if (event.target === event.currentTarget) { this.close() } };
     this.#keyClose = event => { if (event.key === "Escape") { this.close() } };
 
@@ -38,7 +40,7 @@ const Popup = class {
     document.addEventListener("keydown", this.#handleEscClose);
 
     // добавление сиэсэс класса открытого попапа
-    this.#$popup.classList.add(constants.states.popupOpened);
+    this.#$popup.classList.add(this.#constants.$opened);
 
   };
 
@@ -55,7 +57,7 @@ const Popup = class {
     document.removeEventListener("keydown", this.#handleEscClose);
 
     // удаление сиэсэс класса открытого попапа
-    this.#$popup.classList.remove(constants.states.popupOpened);
+    this.#$popup.classList.remove(this.#constants.$opened);
 
   };
 

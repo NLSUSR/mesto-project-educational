@@ -1,29 +1,37 @@
-import constants from "../utils/constants.js";
 import Popup from "./Popup.js";
 
 const PopupWithForms = class extends Popup {
 
   #$popup;
-  #$submit
   #submiter;
+  #$container;
+  #constants;
+  #$submit
   #$inputList;
 
   constructor(object) {
 
-    super(object.container);
-    this.#$popup = document.querySelector(object.container);
-    this.#submiter = object.handler;
+    super(object.container, object.constants);
 
-    this.#$inputList = this.#$popup.querySelectorAll(constants.classes.formInput);
-    this.#$submit = this.#$popup.querySelector(constants.classes.formSubmit);
+    this.#$container = object.container;
+    this.#$popup = document.querySelector(this.#$container);
+    this.#submiter = object.handler;
+    this.#constants = object.constants;
+
+    this.#$inputList = this.#$popup.querySelectorAll(this.#constants.$input);
+    this.#$submit = this.#$popup.querySelector(this.#constants.$submit);
+
   };
 
   // показываем статус отправки
   showSendStatus = boolean => {
 
-    boolean
-      ? this.#$submit.textContent = this.#$submit.dataset.statusDefault
-      : this.#$submit.textContent = this.#$submit.dataset.statusSaving;
+    if (boolean) {
+      if (this.#$container === ".popup-card") { this.#$submit.textContent = "Создать" } else { this.#$submit.textContent = "Сохранить" };
+    } else {
+      if (this.#$container === ".popup-card") { this.#$submit.textContent = "Создание..." } else { this.#$submit.textContent = "Сохрание..." };
+    }
+
 
   };
 
@@ -51,7 +59,7 @@ const PopupWithForms = class extends Popup {
 
   reset = () => {
 
-    this.#$popup.querySelector(constants.classes.form).reset();
+    this.#$popup.querySelector(this.#constants.$form).reset();
 
   };
 }

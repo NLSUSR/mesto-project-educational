@@ -9,7 +9,7 @@ const PopupWithDeletions = class extends Popup {
 
   constructor(object) {
 
-    super(object.container);
+    super(object.container, object.constants);
     this.#button = object.button;
     this.#remover = object.handler;
 
@@ -24,9 +24,7 @@ const PopupWithDeletions = class extends Popup {
   // показываем статус удаления
   showDeleteStatus = boolean => {
 
-    boolean
-      ? this.#button.textContent = this.#button.dataset.statusDefault
-      : this.#button.textContent = this.#button.dataset.statusSaving;
+    boolean ? this.#button.textContent = "Да" : this.#button.textContent = "Удаление...";
 
   };
 

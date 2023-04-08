@@ -1,5 +1,3 @@
-import constants from "../utils/constants";
-
 const Card = class {
 
   #cardLikes;
@@ -19,6 +17,7 @@ const Card = class {
   #setLikeBase;
   #nonsense;
   #$template;
+  #constants
   #$cardNode
   #$cardContainer
   #$elementName
@@ -27,7 +26,7 @@ const Card = class {
   #$elementLike
   #$elementLikeCounter
 
-  constructor(item, callbacks, template, userId) {
+  constructor(item, callbacks, template, constants, userId) {
 
     this.#cardLikes = item.likes;
     this.#cardId = item._id;
@@ -42,6 +41,7 @@ const Card = class {
     this.#likeCallback = callbacks.likeCallback;
 
     this.#$template = template;
+    this.#constants = constants;
 
     this.#myCard = item.owner._id === userId;
     this.#noLikes = this.#cardLikes === undefined;
@@ -56,7 +56,7 @@ const Card = class {
   #getElement = () => {
 
     const cardTemplate = this.#$template.content;
-    const elementsItem = cardTemplate.querySelector(constants.classes.item);
+    const elementsItem = cardTemplate.querySelector(this.#constants.$item);
     const cardNode = elementsItem.cloneNode(true);
 
     return cardNode;
@@ -74,8 +74,8 @@ const Card = class {
   #setLikeState = () => {
 
     this.#myLike
-      ? this.#$elementLike.classList.add(constants.states.likeActive)
-      : this.#$elementLike.classList.remove(constants.states.likeActive);
+      ? this.#$elementLike.classList.add(this.#constants.$likeActive)
+      : this.#$elementLike.classList.remove(this.#constants.$likeActive);
 
     this.#$elementLikeCounter.textContent = this.#cardLikes.length;
 
@@ -84,12 +84,12 @@ const Card = class {
   #createCard = () => {
 
     this.#$cardNode = this.#getElement();
-    this.#$cardContainer = this.#$cardNode.querySelector(constants.classes.element);
-    this.#$elementName = this.#$cardNode.querySelector(constants.classes.placeName);
-    this.#$elementImage = this.#$cardNode.querySelector(constants.classes.placeImage);
-    this.#$elementTrash = this.#$cardNode.querySelector(constants.classes.delete);
-    this.#$elementLike = this.#$cardNode.querySelector(constants.classes.like);
-    this.#$elementLikeCounter = this.#$cardNode.querySelector(constants.classes.likeCounter);
+    this.#$cardContainer = this.#$cardNode.querySelector(this.#constants.$element);
+    this.#$elementName = this.#$cardNode.querySelector(this.#constants.$placeName);
+    this.#$elementImage = this.#$cardNode.querySelector(this.#constants.$placeImage);
+    this.#$elementTrash = this.#$cardNode.querySelector(this.#constants.$delete);
+    this.#$elementLike = this.#$cardNode.querySelector(this.#constants.$like);
+    this.#$elementLikeCounter = this.#$cardNode.querySelector(this.#constants.$likeCounter);
 
     this.#$elementImage.src = this.#cardLink;
     this.#$elementImage.alt = this.#cardName;
@@ -127,8 +127,8 @@ const Card = class {
     let method = null;
 
     this.#myLike
-      ? method = constants.configuration.methods.remove
-      : method = constants.configuration.methods.add;
+      ? method = this.#constants.remove
+      : method = this.#constants.add;
 
     this.#likeCallback(this, this.#cardId, method);
 

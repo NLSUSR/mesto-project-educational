@@ -133,35 +133,48 @@ const server = {
   }),
 };
 
+const variables = {
+  $input: constants.classes.formInput,
+  $submit: constants.classes.formSubmit,
+  $form: constants.classes.form,
+  $close: constants.classes.close,
+  $opened: constants.states.popupOpened
+}
+
 // попапы
 const popups = {
   // создание экземпляра класса для формы смены аватара
   popupFormAvatar: new PopupWithForms({
     container: constants.classes.popupAvatar,
-    handler: server.submitPatchAvatar
+    handler: server.submitPatchAvatar,
+    constants: variables
   }),
   // создание экземпляра класса для формы редактирования профиля
   popupFormProfile: new PopupWithForms({
     container: constants.classes.popupData,
-    handler: server.submitPatchData
+    handler: server.submitPatchData,
+    constants: variables
   }),
   // создание экземпляра класса для формы добавления места
   popupFormPlace: new PopupWithForms({
     container: constants.classes.popupCard,
-    handler: server.submitPostCard
+    handler: server.submitPostCard,
+    constants: variables
   }),
   // создание экземпляра класса для удаления карточки
   popupDelete: new PopupWithDeletions({
     container: constants.classes.popupDelete,
     button: constants.selectors.cardRemoveContainerButton,
-    handler: server.deleteElement
+    handler: server.deleteElement,
+    constants: variables
   }),
   // создание экземпляра класса для просмотра карточки
   popupImage: new PopupWithImages({
     container: constants.classes.popupImage,
     name: constants.selectors.placeName,
     image: constants.selectors.placeImage,
-    owner: constants.selectors.ownerName
+    owner: constants.selectors.ownerName,
+    constants: variables
   }),
 };
 
@@ -173,8 +186,20 @@ const createCardInstance = {
     likeCallback: (card, id, method) => { server.likeCard(card, id, method) }
   },
   template: constants.selectors.cardTemplate,
+  constants: {
+    $item: constants.classes.item,
+    $element: constants.classes.element,
+    $placeName: constants.classes.placeName,
+    $placeImage: constants.classes.placeImage,
+    $delete: constants.classes.delete,
+    $like: constants.classes.like,
+    $likeActive: constants.states.likeActive,
+    $likeCounter: constants.classes.likeCounter,
+    remove: constants.configuration.methods.remove,
+    add: constants.configuration.methods.add
+  },
   cardElement: item => {
-    const cardElement = new Card(item, createCardInstance.callbacks, createCardInstance.template, userInfo.getUserId());
+    const cardElement = new Card(item, createCardInstance.callbacks, createCardInstance.template, createCardInstance.constants, userInfo.getUserId());
     return cardElement.getCard();
   }
 };

@@ -8,7 +8,7 @@ const PopupWithImages = class extends Popup {
 
   constructor(object) {
 
-    super(object.container);
+    super(object.container, object.constants);
 
     this.#$placeName = object.name;
     this.#$placeImage = object.image;
