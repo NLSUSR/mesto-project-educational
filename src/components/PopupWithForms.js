@@ -24,7 +24,7 @@ const PopupWithForms = class extends Popup {
   };
 
   // показываем статус отправки
-  showSendStatus = () => {
+  returnSendStatus = () => {
 
     if (this.#$submit.textContent === "Сохранение...") {
       return this.#$submit.textContent = "Сохранить";
@@ -35,8 +35,7 @@ const PopupWithForms = class extends Popup {
 
   };
 
-  returnSendStatus = () => {
-
+  showSendStatus = () => {
     if (this.#$submit.textContent === "Сохранить") {
       return this.#$submit.textContent = "Сохранение..."
     }

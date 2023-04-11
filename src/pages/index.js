@@ -64,7 +64,7 @@ const cardFormValidation = new FormValidator(
 // сервер
 // обработка аватара
 const submitPatchAvatar = (data) => {
-  popupFormAvatar.showSendStatus();
+  popupFormAvatar.returnSendStatus();
   api.patchAvatar(data.userAvatar).then(url => {
     userInfo.setUserInfo(url)
   }).then(() => {
@@ -72,13 +72,13 @@ const submitPatchAvatar = (data) => {
   }).catch(error => {
     api.responseError(error);
   }).finally(() => {
-    popupFormAvatar.returnSendStatus();
+    popupFormAvatar.showSendStatus();
   });
 };
 
 // обработка данных профиля
 const submitPatchData = (data) => {
-  popupFormProfile.showSendStatus();
+  popupFormProfile.returnSendStatus();
   api.patchData({ name: data.userName, about: data.userAbout }).then(user => {
     userInfo.setUserInfo(user);
   }).then(() => {
@@ -86,13 +86,13 @@ const submitPatchData = (data) => {
   }).catch(error => {
     api.responseError(error);
   }).finally(() => {
-    popupFormProfile.returnSendStatus()
+    popupFormProfile.showSendStatus();
   });
 };
 
 // обработка добавления карточки
 const submitPostCard = (data) => {
-  popupFormPlace.showSendStatus();
+  popupFormPlace.returnSendStatus();
   api.postCard({ name: data.cardTitle, link: data.cardImage }).then(card => {
     cardsSection.prependItem(createCardElement(card));
   }).then(() => {
@@ -101,7 +101,7 @@ const submitPostCard = (data) => {
   }).catch(error => {
     api.responseError(error);
   }).finally(() => {
-    popupFormPlace.returnSendStatus();
+    popupFormPlace.showSendStatus();
   });
 };
 
@@ -218,7 +218,7 @@ constants.selectors.profileAvatarWrapper.addEventListener("click", () => {
   const user = userInfo.getUserInfo();
   constants.selectors.changeAvatarInput.value = user.avatar;
 
-  popupFormAvatar.showSendStatus();
+  popupFormAvatar.returnSendStatus();
   popupFormAvatar.open();
   avatarFormValidation.changeButtonState();
 
@@ -231,7 +231,7 @@ constants.selectors.profileEditButton.addEventListener("click", () => {
   constants.selectors.profileEditNameInput.value = user.name;
   constants.selectors.profileEditActivityInput.value = user.about;
 
-  popupFormProfile.showSendStatus();
+  popupFormProfile.returnSendStatus();
   popupFormProfile.open();
   profileFormValidation.changeButtonState();
 
@@ -240,7 +240,7 @@ constants.selectors.profileEditButton.addEventListener("click", () => {
 // слушатель кнопки открытия модалки добавления карточки
 constants.selectors.cardAddButton.addEventListener("click", () => {
 
-  popupFormPlace.showSendStatus();
+  popupFormPlace.returnSendStatus();
   popupFormPlace.open();
   cardFormValidation.changeButtonState();
 
