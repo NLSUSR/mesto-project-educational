@@ -26,10 +26,23 @@ const PopupWithForms = class extends Popup {
   // показываем статус отправки
   showSendStatus = () => {
 
+    if (this.#$submit.textContent === "Сохранение...") {
+      return this.#$submit.textContent = "Сохранить";
+    }
+    else if (this.#$submit.textContent === "Создание...") {
+      return this.#$submit.textContent = "Создать";
+    };
 
-    if (this.#$submit.textContent === "Сохранить") { return this.#$submit.textContent = "Сохранение..." }
-    else if (this.#$submit.textContent === "Создать") { return this.#$submit.textContent = "Создание..." }
+  };
 
+  returnSendStatus = () => {
+
+    if (this.#$submit.textContent === "Сохранить") {
+      return this.#$submit.textContent = "Сохранение..."
+    }
+    else if (this.#$submit.textContent === "Создать") {
+      return this.#$submit.textContent = "Создание..."
+    }
 
   };
 

@@ -64,7 +64,7 @@ const cardFormValidation = new FormValidator(
 // сервер
 // обработка аватара
 const submitPatchAvatar = (data) => {
-  popupFormAvatar.showSendStatus(false);
+  popupFormAvatar.showSendStatus();
   api.patchAvatar(data.userAvatar).then(url => {
     userInfo.setUserInfo(url)
   }).then(() => {
@@ -72,13 +72,13 @@ const submitPatchAvatar = (data) => {
   }).catch(error => {
     api.responseError(error);
   }).finally(() => {
-    popupFormAvatar.showSendStatus(true);
+    popupFormAvatar.returnSendStatus();
   });
 };
 
 // обработка данных профиля
 const submitPatchData = (data) => {
-  popupFormProfile.showSendStatus(false);
+  popupFormProfile.showSendStatus();
   api.patchData({ name: data.userName, about: data.userAbout }).then(user => {
     userInfo.setUserInfo(user);
   }).then(() => {
@@ -86,13 +86,13 @@ const submitPatchData = (data) => {
   }).catch(error => {
     api.responseError(error);
   }).finally(() => {
-    popupFormProfile.showSendStatus(true)
+    popupFormProfile.returnSendStatus()
   });
 };
 
 // обработка добавления карточки
 const submitPostCard = (data) => {
-  popupFormPlace.showSendStatus(false);
+  popupFormPlace.showSendStatus();
   api.postCard({ name: data.cardTitle, link: data.cardImage }).then(card => {
     cardsSection.prependItem(createCardElement(card));
   }).then(() => {
@@ -101,7 +101,7 @@ const submitPostCard = (data) => {
   }).catch(error => {
     api.responseError(error);
   }).finally(() => {
-    popupFormPlace.showSendStatus(true);
+    popupFormPlace.returnSendStatus();
   });
 };
 
