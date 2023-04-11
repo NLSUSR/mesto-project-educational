@@ -91,7 +91,7 @@ const FormValidator = class {
 
     this.#$input.forEach(input => {
 
-      input.addEventListener('input', () => {
+      input.addEventListener("input", () => {
 
         this.#checkInputValidity(input);
         this.#toggleButtonState();

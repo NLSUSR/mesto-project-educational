@@ -6,8 +6,8 @@ const PopupWithForms = class extends Popup {
   #submiter;
   #$container;
   #constants;
-  #$submit
   #$inputList;
+  #$submit;
 
   constructor(object) {
 
@@ -24,13 +24,11 @@ const PopupWithForms = class extends Popup {
   };
 
   // показываем статус отправки
-  showSendStatus = boolean => {
+  showSendStatus = () => {
 
-    if (boolean) {
-      if (this.#$container === ".popup-card") { this.#$submit.textContent = "Создать" } else { this.#$submit.textContent = "Сохранить" };
-    } else {
-      if (this.#$container === ".popup-card") { this.#$submit.textContent = "Создание..." } else { this.#$submit.textContent = "Сохрание..." };
-    }
+
+    if (this.#$submit.textContent === "Сохранить") { return this.#$submit.textContent = "Сохранение..." }
+    else if (this.#$submit.textContent === "Создать") { return this.#$submit.textContent = "Создание..." }
 
 
   };
@@ -62,6 +60,7 @@ const PopupWithForms = class extends Popup {
     this.#$popup.querySelector(this.#constants.$form).reset();
 
   };
+
 }
 
 export default PopupWithForms;
