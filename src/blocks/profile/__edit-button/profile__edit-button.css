@@ -4,10 +4,10 @@
   width: 24px;
   height: 24px;
   background-color: #000;
-  background-image: url(../../../images/main-pics/edit-pen.svg);
-  background-size: 10px 10px;
-  background-position: center;
-  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../../../images/main-pics/edit.svg") center/10px 10px no-repeat transparent;
   border: 1px solid #fff;
   grid-area: b-e;
   cursor: pointer;

@@ -4,10 +4,10 @@
   width: 150px;
   height: 50px;
   background-color: #000;
-  background-image: url(../../../images/main-pics/profile-plus.svg);
-  background-size: 22px 22px;
-  background-repeat: no-repeat;
-  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../../../images/main-pics/add.svg") center/22px 22px no-repeat transparent;
   border: 2px solid #fff;
   border-radius: 2px;
   align-self: center;

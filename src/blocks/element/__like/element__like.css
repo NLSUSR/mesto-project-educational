@@ -3,33 +3,18 @@
   padding: 0;
   width: 22px;
   height: 19px;
-  background-image: url(../../../images/main-pics/like.svg);
-  background-repeat: no-repeat;
-  background-size: 22px 19px;
-  background-color: transparent;
+  background: url("../../../images/main-pics/inactive-like.svg") center/100% no-repeat transparent;
   border: none;
   outline: none;
   justify-self: end;
   grid-area: like;
   cursor: pointer;
-  transition: opacity .5s ease;
+  transition: opacity 0.5s ease;
   position: relative;
   display: flex;
   justify-content: center;
 }
 
 .element__like:hover {
-  opacity: .5;
-}
-
-.element__like-counter {
-  margin: 0;
-  position: absolute;
-  top: 20px;
-  font-family: 'Inter', Arial, Helvetica, sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 0.8125rem;
-  line-height: 1rem;
-  color: #000;
+  opacity: 0.5;
 }

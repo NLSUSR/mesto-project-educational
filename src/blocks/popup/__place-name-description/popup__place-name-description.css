@@ -1,0 +1,12 @@
+.popup__place-name-description {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+@media screen and (max-width: 767px) {
+  .popup__place-name-description {
+    gap: 0;
+    flex-direction: column;
+  }
+}

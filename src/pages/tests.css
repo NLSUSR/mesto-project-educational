@@ -1,0 +1,21 @@
+.test1,
+.test2,
+.test3 {
+  width: fit-content;
+  height: fit-content;
+  position: fixed;
+  color: transparent;
+  background-color: transparent;
+}
+.test1 {
+  top: 0;
+  left: 0;
+}
+.test2 {
+  top: 0;
+  right: 0;
+}
+.test3 {
+  top: 30px;
+  right: 0;
+}

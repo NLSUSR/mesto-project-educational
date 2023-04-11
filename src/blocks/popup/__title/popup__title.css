@@ -1,5 +1,5 @@
 .popup__title {
-  margin: 34px 64px 50px 36px;
+  margin: 34px 64px 38px 36px;
   padding: 0;
   max-width: 330px;
   grid-column: 1/2;
@@ -11,13 +11,9 @@
   color: #000;
 }
 
-.delete-card {
-  margin-bottom: 38px;
-}
-
 @media screen and (max-width: 767px) {
   .popup__title {
-    margin: 25px auto 75px;
+    margin: 25px auto 38px;
     width: 238px;
     font-size: 1.125rem;
     line-height: 1.375rem;

@@ -23,16 +23,3 @@
     width: 238px;
   }
 }
-
-.popup__form-input-error-wrapper{
-  margin: 0 auto;
-  width: 358px;
-  display: flex;
-  flex-direction: column;
-}
-
-@media screen and (max-width: 767px) {
-  .popup__form-input-error-wrapper{
-    width: 238px;
-  }
-}

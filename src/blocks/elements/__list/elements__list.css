@@ -4,7 +4,7 @@
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(auto-fit, 1fr);
+  grid-template-rows: 1fr;
   grid-template-areas:
     "el el el"
     "el el el";
@@ -17,7 +17,7 @@
 @media screen and (max-width: 1024px) {
   .elements__list {
     justify-content: center;
-    grid-template-columns: repeat(auto-fit, 282px);
+    grid-template-columns: 282px;
     grid-template-rows: repeat(3, minmax(min-content, max-content));
     grid-template-areas:
       "el el"
@@ -29,7 +29,7 @@
 @media screen and (max-width: 767px) {
   .elements__list {
     max-width: 282px;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr;
     grid-template-rows: repeat(6, 1fr);
     grid-template-areas:
       "el"
