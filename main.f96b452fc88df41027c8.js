@@ -1,1 +1,0 @@
-(self.webpackChunkmesto_project=self.webpackChunkmesto_project||[]).push([[396],{396:()=>{}}]);
