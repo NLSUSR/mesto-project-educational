@@ -1,5 +1,10 @@
-@import url("../vendor/normalize.css");
-@import url("../vendor/fonts/inter-fonts.css");
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@import url(https://fonts.googleapis.com/css2?family=Inter&display=swap);
+
 @import url("../blocks/page/page.css");
 @import url("../blocks/content/content.css");
 @import url("../blocks/scrollbar/scrollbar.css");

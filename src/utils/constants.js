@@ -1,34 +1,21 @@
-// const cohort = "plus-cohort-18"; // данные прошлой моей когорты
-// const token = "dbbb73d9-482c-4ca9-b5e0-9835c4b5cfcc";
-
-const cohort = "plus-cohort-20";
-const token = "b920c8ce-3925-48c5-9ff8-5e542e04acb8";
-
-const configuration = {
-
-  resource: `https://nomoreparties.co/v1/${cohort}`,
-  endpoints: { main: "/users/me/", avatar: "/users/me/avatar/", cards: "/cards/", likes: "/cards/likes/" },
-  methods: { remove: "DELETE", change: "PATCH", send: "POST", request: "GET", add: "PUT" },
-  headers: { authorization: token, "content-type": "application/json" }
-
-};
-
 const objectValidation = {
-
   formSelector: ".popup__form",
   inputSelector: ".popup__form-input",
   inputErrorClass: "popup__form-input_error",
   errorMessageElement: ".popup__error-message-element",
   errorActiveElement: "popup__error-message-element_active",
   submitButtonSelector: ".popup__form-submit",
-  inactiveButtonClass: "popup__form-submit_disabled"
-
+  inactiveButtonClass: "popup__form-submit_disabled",
 };
 
 const pageLoaded = "DOMContentLoaded";
 
-const selectors = {
+const methods = {
+  add: "PUT",
+  remove: "DELETE",
+};
 
+const selectors = {
   profileEditContainerForm: document.forms.profileEditContainerForm,
   changeAvatarContainerForm: document.forms.changeAvatarContainerForm,
   cardAddContainerForm: document.forms.cardAddContainerForm,
@@ -54,13 +41,14 @@ const selectors = {
   cardAddImageLinkInput: document.querySelector("#cardAddImageLinkInput"),
 
   cardRemoveContainer: document.querySelector("#cardRemoveContainer"),
-  cardRemoveContainerButton: document.querySelector("#cardRemoveContainerButton"),
+  cardRemoveContainerButton: document.querySelector(
+    "#cardRemoveContainerButton"
+  ),
 
   imageOpeningWrapper: document.querySelector("#imageOpeningWrapper"),
   placeImage: document.querySelector("#placeImage"),
   placeName: document.querySelector("#placeName"),
-  ownerName: document.querySelector("#ownerName")
-
+  ownerName: document.querySelector("#ownerName"),
 };
 
 const classes = {
@@ -79,7 +67,7 @@ const classes = {
   popupData: ".popup-data",
   popupCard: ".popup-card",
   popupDelete: ".popup-delete",
-  popupImage: ".popup_image"
+  popupImage: ".popup_image",
 };
 
 const states = {
@@ -88,7 +76,13 @@ const states = {
   likeActive: "element__like_active",
 };
 
-const constants = { configuration, objectValidation, pageLoaded, selectors, classes, states };
+const constants = {
+  objectValidation,
+  pageLoaded,
+  methods,
+  selectors,
+  classes,
+  states,
+};
 
 export default constants;
-
