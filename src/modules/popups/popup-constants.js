@@ -1,3 +1,5 @@
+"use strict";
+
 import constants from "../../utils/constants.js";
 
 const popupConstants = {

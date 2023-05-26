@@ -1,3 +1,5 @@
+"use strict";
+
 const objectValidation = {
   formSelector: ".popup__form",
   inputSelector: ".popup__form-input",

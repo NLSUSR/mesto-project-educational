@@ -1,3 +1,5 @@
+"use strict";
+
 const UserInfo = class {
   #$avatarNode;
   #$nameNode;

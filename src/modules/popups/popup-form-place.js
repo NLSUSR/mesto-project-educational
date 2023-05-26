@@ -1,3 +1,5 @@
+"use strict";
+
 import PopupWithForms from "../popups/popup-with-forms.js";
 import constants from "../../utils/constants.js";
 import submitPostCard from "../server/submit-post-card.js";

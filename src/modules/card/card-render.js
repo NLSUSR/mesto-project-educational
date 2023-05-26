@@ -1,3 +1,5 @@
+"use strict";
+
 import Section from "./section.js";
 import constants from "../../utils/constants.js";
 import createCardElement from "./create-card-element.js";

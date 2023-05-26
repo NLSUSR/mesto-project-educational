@@ -1,3 +1,5 @@
+"use strict";
+
 const Section = class {
   #container;
   #render;

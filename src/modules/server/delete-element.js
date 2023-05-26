@@ -1,3 +1,5 @@
+"use strict";
+
 import popupDelete from "../popups/popup-delete.js";
 import api from "../server/api/api.js";
 

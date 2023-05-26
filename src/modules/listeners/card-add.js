@@ -1,3 +1,5 @@
+"use strict";
+
 import constants from "../../utils/constants.js";
 import popupFormPlace from "../popups/popup-form-place.js";
 import cardFormValidation from "../validation/card-form-validation.js";

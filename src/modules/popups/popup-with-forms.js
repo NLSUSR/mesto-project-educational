@@ -1,3 +1,5 @@
+"use strict";
+
 import Popup from "./popup.js";
 
 const PopupWithForms = class extends Popup {

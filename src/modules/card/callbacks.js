@@ -1,3 +1,5 @@
+"use strict";
+
 import popupDelete from "../popups/popup-delete.js";
 import popupImage from "../popups/popup-image.js";
 import likeCard from "../server/like-card.js";

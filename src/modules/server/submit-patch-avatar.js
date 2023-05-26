@@ -1,3 +1,5 @@
+"use strict";
+
 import api from "../server/api/api.js";
 import userData from "../info/user-data.js";
 import popupFormAvatar from "../popups/popup-form-avatar.js";

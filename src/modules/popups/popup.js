@@ -1,3 +1,5 @@
+"use strict";
+
 const Popup = class {
   #$popup;
   #$close;

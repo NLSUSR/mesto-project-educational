@@ -1,3 +1,5 @@
+"use strict";
+
 import PopupWithImages from "../popups/popup-with-images.js";
 import constants from "../../utils/constants.js";
 import popupConstants from "./popup-constants.js";

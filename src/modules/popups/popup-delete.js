@@ -1,3 +1,5 @@
+"use strict";
+
 import PopupWithDeletions from "../popups/popup-with-deletions.js";
 import constants from "../../utils/constants.js";
 import deleteElement from "../server/delete-element.js";

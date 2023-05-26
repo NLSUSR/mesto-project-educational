@@ -1,3 +1,5 @@
+"use strict";
+
 import Api from "./application-programming-interface.js";
 
 // создание экземпляра класса для Application Programming Interface

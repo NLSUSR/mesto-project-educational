@@ -1,3 +1,5 @@
+"use strict";
+
 import api from "./api/api.js";
 
 // обработка лайка

@@ -1,3 +1,5 @@
+"use strict";
+
 import PopupWithForms from "./popup-with-forms.js";
 import constants from "../../utils/constants.js";
 import submitPatchAvatar from "../server/submit-patch-avatar.js";

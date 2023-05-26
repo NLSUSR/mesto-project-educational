@@ -1,3 +1,5 @@
+"use strict";
+
 import popupFormProfile from "../popups/popup-form-profile.js";
 import api from "./api/api.js";
 import userData from "../info/user-data.js";

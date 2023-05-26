@@ -1,3 +1,5 @@
+"use strict";
+
 const Api = class {
   #resource;
   #main;

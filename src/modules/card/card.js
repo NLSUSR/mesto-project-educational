@@ -1,3 +1,5 @@
+"use strict";
+
 const Card = class {
   #cardLikes;
   #cardId;

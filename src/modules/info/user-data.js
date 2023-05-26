@@ -1,3 +1,5 @@
+"use strict";
+
 import UserInfo from "../info/user-info.js";
 import constants from "../../utils/constants.js";
 

@@ -1,3 +1,5 @@
+"use strict";
+
 import popupFormPlace from "../popups/popup-form-place.js";
 import api from "./api/api.js";
 import cardRender from "../card/card-render.js";

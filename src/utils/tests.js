@@ -1,3 +1,5 @@
+"use strict";
+
 import api from "../modules/server/api/api.js";
 
 const string = (length) => {

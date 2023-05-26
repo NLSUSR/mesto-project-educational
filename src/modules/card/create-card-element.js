@@ -1,3 +1,5 @@
+"use strict";
+
 import Card from "./card.js";
 import callbacks from "./callbacks.js";
 import template from "./template.js";

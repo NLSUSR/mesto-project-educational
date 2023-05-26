@@ -1,3 +1,5 @@
+"use strict";
+
 import FormValidator from "./form-validator.js";
 import constants from "../../utils/constants.js";
 

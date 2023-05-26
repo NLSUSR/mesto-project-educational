@@ -1,3 +1,5 @@
+"use strict";
+
 const images = {
   faviconSvg: new URL("../images/favicon/practicum.svg", import.meta.url),
   faviconIco: new URL("../images/favicon/practicum.ico", import.meta.url),

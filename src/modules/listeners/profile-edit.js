@@ -1,3 +1,5 @@
+"use strict";
+
 import constants from "../../utils/constants.js";
 import userData from "../info/user-data.js";
 import popupFormProfile from "../popups/popup-form-profile.js";
