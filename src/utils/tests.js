@@ -24,7 +24,7 @@ const cards = (length) => {
   return Array.from({ length }, () => {
     return {
       name: `${string(15)}`,
-      link: `http://placekitten.com/g/${size()}/${size()}`,
+      link: `https://placekitten.com/g/${size()}/${size()}`,
     };
   });
 };

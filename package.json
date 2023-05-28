@@ -4,8 +4,7 @@
   "description": "* Mesto Russia 2022",
   "main": "./src/index.js",
   "scripts": {
-    "deploy": "gh-pages -d dist",
-    "predeploy": "npm run build",
+    "deploy": "npm run build && gh-pages -d dist",
     "build": "webpack --mode production",
     "develop": "webpack serve"
   },
