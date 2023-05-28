@@ -1,19 +1,19 @@
 "use strict";
 
-import popupDelete from "../popups/popup-delete.js";
-import api from "../server/api/api.js";
+import newPopupWithDeletions from "../popups/instance-new-popup-with-deletions.js";
+import newAPI from "../api/instance-new-api.js";
 
 // обработка удаления карточки
 const deleteElement = (card, cardId) => {
-  popupDelete.showDeleteStatus(false);
-  api
+  newPopupWithDeletions.showDeleteStatus(false);
+  newAPI
     .deleteCard(cardId)
     .then(() => {
       card.removeCard();
-      popupDelete.close();
+      newPopupWithDeletions.close();
     })
     .finally(() => {
-      popupDelete.showDeleteStatus(true);
+      newPopupWithDeletions.showDeleteStatus(true);
     });
 };
 

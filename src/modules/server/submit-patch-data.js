@@ -1,25 +1,25 @@
 "use strict";
 
-import popupFormProfile from "../popups/popup-form-profile.js";
-import api from "./api/api.js";
-import userData from "../info/user-data.js";
+import newPopupWithFormsProfile from "../popups/instance-new-popup-with-forms-profile.js";
+import newAPI from "../api/instance-new-api.js";
+import newUserInfo from "../info/instance-new-user-info.js";
 
 // обработка данных профиля
 const submitPatchData = (data) => {
-  popupFormProfile.returnSendStatus();
-  api
+  newPopupWithFormsProfile.returnSendStatus();
+  newAPI
     .patchData({ name: data.userName, about: data.userAbout })
     .then((user) => {
-      userData.setUserInfo(user);
+      newUserInfo.setUserInfo(user);
     })
     .then(() => {
-      popupFormProfile.close();
+      newPopupWithFormsProfile.close();
     })
     .catch((error) => {
-      api.responseError(error);
+      newAPI.responseError(error);
     })
     .finally(() => {
-      popupFormProfile.showSendStatus();
+      newPopupWithFormsProfile.showSendStatus();
     });
 };
 

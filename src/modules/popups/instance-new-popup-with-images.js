@@ -1,11 +1,11 @@
 "use strict";
 
-import PopupWithImages from "../popups/popup-with-images.js";
+import PopupWithImages from "./extends-popup-with-images.js";
 import constants from "../../utils/constants.js";
 import popupConstants from "./popup-constants.js";
 
 // создание экземпляра класса для просмотра карточки
-const popupImage = new PopupWithImages({
+const newPopupWithImages = new PopupWithImages({
   container: constants.classes.popupImage,
   name: constants.selectors.placeName,
   image: constants.selectors.placeImage,
@@ -13,4 +13,4 @@ const popupImage = new PopupWithImages({
   constants: popupConstants,
 });
 
-export default popupImage;
+export default newPopupWithImages;

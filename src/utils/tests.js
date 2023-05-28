@@ -1,6 +1,8 @@
 "use strict";
 
-import api from "../modules/server/api/api.js";
+import API from "../modules/api/class-api.js";
+import configuration from "../modules/api/configuration.js";
+const api = new API(configuration);
 
 const string = (length) => {
   const chars = "abcdefghijklmnopqrstuvwxyz";
@@ -10,7 +12,10 @@ const string = (length) => {
 };
 
 const size = () => {
-  const sizes = [1920, 1600, 1440, 1366, 1280, 1080, 1024, 900, 768, 720];
+  const maxmin = (max, min) => {
+    return Math.floor(Math.random() * (max - min) + 1) + min;
+  };
+  const sizes = [maxmin(1920, 1080), maxmin(1280, 720)];
   const random = Math.floor(Math.random() * sizes.length);
   return sizes[random];
 };
@@ -19,7 +24,7 @@ const cards = (length) => {
   return Array.from({ length }, () => {
     return {
       name: `${string(15)}`,
-      link: `https://placebeard.it/${size()}x${size()}`,
+      link: `http://placekitten.com/g/${size()}/${size()}`,
     };
   });
 };
@@ -37,7 +42,7 @@ const count = () => {
     console.log(`Функция вызвана ${counter} раза`);
   }
 
-  if (counter === 30) {
+  if (counter === initialCards.length) {
     console.log("Все готово! Обновите страницу.");
   }
 };
@@ -48,7 +53,7 @@ const tests = {
   test3: document.querySelector(".test3"),
 };
 
-// Тест - прогоняет массив из 30 картинок
+// Тест - прогоняет массив картинок в загрузку
 tests.test1.title = "Залить массив тестовых карточек";
 tests.test1.addEventListener("click", () => {
   initialCards.forEach((item, index) => {
@@ -65,9 +70,7 @@ tests.test2.addEventListener("click", () => {
   api.getDataAndCards().then(([data, cards]) => {
     cards.forEach((item, index) => {
       setTimeout(() => {
-        if (item.owner._id === data._id) {
-          api.deleteCard(item._id);
-        }
+        item.owner._id === data._id ? api.deleteCard(item._id) : null;
         count();
       }, (index + 1) * 100);
     });
@@ -81,16 +84,15 @@ tests.test3.addEventListener("click", () => {
     cards.forEach((item, index) => {
       setTimeout(() => {
         let method = null;
-        if (
-          item.likes.some((like) => {
-            return like._id === data._id;
-          })
-        ) {
-          method = "DELETE";
-        } else {
-          method = "PUT";
-        }
+
+        item.likes.some((like) => {
+          return like._id === data._id;
+        })
+          ? (method = "DELETE")
+          : (method = "PUT");
+
         api.likeState({ id: item._id, method: method });
+
         count();
       }, (index + 1) * 100);
     });

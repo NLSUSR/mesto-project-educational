@@ -1,12 +1,12 @@
 "use strict";
 
-import FormValidator from "./form-validator.js";
+import FormValidator from "./class-form-validator.js";
 import constants from "../../utils/constants.js";
 
 // создание экземпляра класса для валидации формы добавления карточки
-const cardFormValidation = new FormValidator(
+const newFormValidatorCard = new FormValidator(
   constants.objectValidation,
   constants.selectors.cardAddContainerForm
 );
 
-export default cardFormValidation;
+export default newFormValidatorCard;

@@ -1,12 +1,12 @@
 "use strict";
 
 import constants from "../../utils/constants.js";
-import popupFormPlace from "../popups/popup-form-place.js";
-import cardFormValidation from "../validation/card-form-validation.js";
+import newPopupWithFormsPlace from "../popups/instance-new-popup-with-forms-place.js";
+import newPopupWithFormsCard from "../validation/instance-new-form-validator-card.js";
 
 // слушатель кнопки открытия модалки добавления карточки
 constants.selectors.cardAddButton.addEventListener("click", () => {
-  popupFormPlace.returnSendStatus();
-  popupFormPlace.open();
-  cardFormValidation.changeButtonState();
+  newPopupWithFormsPlace.returnSendStatus();
+  newPopupWithFormsPlace.open();
+  newPopupWithFormsCard.changeButtonState();
 });

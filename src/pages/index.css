@@ -1,4 +1,4 @@
-@import url(https://raw.githubusercontent.com/NLSUSR/mopo/main/mopo.css);
+@import url(https://necolas.github.io/normalize.css/latest/normalize.css);
 @import url(https://fonts.googleapis.com/css2?family=Inter&display=swap);
 
 @import url("../blocks/page/page.css");

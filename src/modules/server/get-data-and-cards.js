@@ -1,21 +1,21 @@
 "use strict";
 
-import api from "../server/api/api.js";
-import userData from "../info/user-data.js";
-import cardRender from "../card/card-render.js";
+import newAPI from "../api/instance-new-api.js";
+import newUserInfo from "../info/instance-new-user-info.js";
+import newSection from "../section/instance-new-section.js";
 import constants from "../../utils/constants.js";
 
 // получение информации профиля с сервера
-api
+newAPI
   .getDataAndCards()
   .then(([data, cards]) => {
     //передаем данные методу класса информации профиля
-    userData.setUserInfo(data);
+    newUserInfo.setUserInfo(data);
     // функция перебора массива загружаемых с сервера карточек
-    cardRender.renderItems(cards);
+    newSection.renderItems(cards);
   })
   .catch((error) => {
-    api.responseError(error);
+    newAPI.responseError(error);
   })
   .finally(
     (window.onload = () => {

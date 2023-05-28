@@ -1,9 +1,11 @@
 "use strict";
 
-import avatarFormValidation from "../validation/avatar-form-validation.js";
-import profileFormValidation from "../validation/profile-form-validation.js";
-import cardFormValidation from "../validation/card-form-validation.js";
+import newFormValidatorAvatar from "../validation/instance-new-form-validator-avatar.js";
+import newFormValidatorProfile from "../validation/instance-new-form-validator-profile.js";
+import newFormValidatorCard from "../validation/instance-new-form-validator-card.js";
 
-[avatarFormValidation, profileFormValidation, cardFormValidation].forEach(
-  (item) => item.enableValidation()
-);
+[
+  newFormValidatorAvatar,
+  newFormValidatorProfile,
+  newFormValidatorCard,
+].forEach((item) => item.enableValidation());

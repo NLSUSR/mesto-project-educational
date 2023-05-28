@@ -1,9 +1,11 @@
 "use strict";
 
-import popupFormAvatar from "../popups/popup-form-avatar.js";
-import popupFormProfile from "../popups/popup-form-profile.js";
-import popupFormPlace from "../popups/popup-form-place.js";
+import newPopupWithFormsAvatar from "../popups/instance-new-popup-with-forms-avatar";
+import newPopupWithFormsProfile from "../popups/instance-new-popup-with-forms-profile.js";
+import newPopupWithFormsPlace from "../popups/instance-new-popup-with-forms-place.js";
 
-[popupFormAvatar, popupFormProfile, popupFormPlace].forEach((item) =>
-  item.setEventListeners()
-);
+[
+  newPopupWithFormsAvatar,
+  newPopupWithFormsProfile,
+  newPopupWithFormsPlace,
+].forEach((item) => item.setEventListeners());

@@ -1,27 +1,27 @@
 "use strict";
 
-import popupFormPlace from "../popups/popup-form-place.js";
-import api from "./api/api.js";
-import cardRender from "../card/card-render.js";
-import createCardElement from "../card/create-card-element.js";
+import newPopupWithFormsPlace from "../popups/instance-new-popup-with-forms-place.js";
+import newAPI from "../api/instance-new-api.js";
+import newSection from "../section/instance-new-section.js";
+import newCard from "../card/instance-new-card.js";
 
 // обработка добавления карточки
 const submitPostCard = (data) => {
-  popupFormPlace.returnSendStatus();
-  api
+  newPopupWithFormsPlace.returnSendStatus();
+  newAPI
     .postCard({ name: data.cardTitle, link: data.cardImage })
     .then((card) => {
-      cardRender.prependItem(createCardElement(card));
+      newSection.prependItem(newCard(card));
     })
     .then(() => {
-      popupFormPlace.reset();
-      popupFormPlace.close();
+      newPopupWithFormsPlace.reset();
+      newPopupWithFormsPlace.close();
     })
     .catch((error) => {
-      api.responseError(error);
+      newAPI.responseError(error);
     })
     .finally(() => {
-      popupFormPlace.showSendStatus();
+      newPopupWithFormsPlace.showSendStatus();
     });
 };
 

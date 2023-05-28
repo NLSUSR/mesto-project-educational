@@ -1,6 +1,6 @@
 "use strict";
 
-const Api = class {
+const API = class {
   #resource;
   #main;
   #cards;
@@ -26,22 +26,24 @@ const Api = class {
     this.#send = object.methods.send;
     this.#remove = object.methods.remove;
     this.#headers = object.headers;
-
     this.#head = { method: this.#request, headers: this.#headers };
     this.#getMain = fetch(`${this.#resource + this.#main}`, this.#head);
     this.#getCards = fetch(`${this.#resource + this.#cards}`, this.#head);
   }
 
-  #resolve = async (response) => await Promise.resolve(response.json());
+  #resolve = async (response) => {
+    return await Promise.resolve(response.json());
+  };
 
-  #reject = async (response) =>
-    await Promise.reject("Ошибка: "`${response.status}`);
+  #reject = async (response) => {
+    return await Promise.reject("Ошибка: "`${response.status}`);
+  };
 
-  #check = (response) => {
+  #check = async (response) => {
     if (response.ok) {
-      return this.#resolve(response);
+      return await this.#resolve(response);
     } else {
-      return this.#reject(response);
+      return await this.#reject(response);
     }
   };
 
@@ -88,35 +90,37 @@ const Api = class {
   };
 
   // замена аватара
-  patchAvatar = (resource) => {
-    return this.#sendRequest(this.#avatar, this.#change, { avatar: resource });
+  patchAvatar = async (resource) => {
+    return await this.#sendRequest(this.#avatar, this.#change, {
+      avatar: resource,
+    });
   };
 
   // заменяем данные имя/деятельность
-  patchData = (main) => {
-    return this.#sendRequest(this.#main, this.#change, {
+  patchData = async (main) => {
+    return await this.#sendRequest(this.#main, this.#change, {
       name: main.name,
       about: main.about,
     });
   };
 
   // выкладываем на сервер новую карточку
-  postCard = (card) => {
-    return this.#sendRequest(this.#cards, this.#send, {
+  postCard = async (card) => {
+    return await this.#sendRequest(this.#cards, this.#send, {
       name: card.name,
       link: card.link,
     });
   };
 
   // удаляем карточку
-  deleteCard = (cardId) => {
-    return this.#sendRequest(`${this.#cards + cardId} `, this.#remove);
+  deleteCard = async (cardId) => {
+    return await this.#sendRequest(`${this.#cards + cardId} `, this.#remove);
   };
 
   // меняем состояние лайка
-  likeState = (data) => {
-    return this.#sendRequest(`${this.#likes + data.id} `, data.method);
+  likeState = async (data) => {
+    return await this.#sendRequest(`${this.#likes + data.id} `, data.method);
   };
 };
 
-export default Api;
+export default API;

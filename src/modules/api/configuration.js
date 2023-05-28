@@ -1,9 +1,4 @@
-"use strict";
-
-import Api from "./application-programming-interface.js";
-
-// создание экземпляра класса для Application Programming Interface
-const api = new Api({
+const configuration = {
   resource: "https://nomoreparties.co/v1/plus-cohort-20",
   endpoints: {
     main: "/users/me/",
@@ -22,6 +17,6 @@ const api = new Api({
     authorization: "b920c8ce-3925-48c5-9ff8-5e542e04acb8",
     "content-type": "application/json",
   },
-});
+};
 
-export default api;
+export default configuration;

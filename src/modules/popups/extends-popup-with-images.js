@@ -1,6 +1,6 @@
 "use strict";
 
-import Popup from "./popup.js";
+import Popup from "./class-popup.js";
 
 const PopupWithImages = class extends Popup {
   #$placeName;

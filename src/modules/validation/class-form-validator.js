@@ -43,17 +43,13 @@ const FormValidator = class {
   }
 
   #checkInputValidity(input) {
-    if (input.validity.patternMismatch) {
-      input.setCustomValidity(input.dataset.errorMessage);
-    } else {
-      input.setCustomValidity("");
-    }
+    input.validity.patternMismatch
+      ? input.setCustomValidity(input.dataset.errorMessage)
+      : input.setCustomValidity("");
 
-    if (!input.validity.valid) {
-      this.#showInputError(input, input.validationMessage);
-    } else {
-      this.#hideInputError(input);
-    }
+    !input.validity.valid
+      ? this.#showInputError(input, input.validationMessage)
+      : this.#hideInputError(input);
   }
 
   #hasInvalidInput() {
@@ -63,17 +59,13 @@ const FormValidator = class {
   }
 
   #toggleButtonState() {
-    if (this.#hasInvalidInput()) {
-      this.#$button.setAttribute("disabled", "");
-    } else {
-      this.#$button.removeAttribute("disabled", "");
-    }
+    this.#hasInvalidInput()
+      ? (this.#$button.disabled = true)
+      : (this.#$button.disabled = false);
 
-    if (this.#$button.hasAttribute("disabled")) {
-      this.#$button.classList.add(this.#$inactiveButtonClass);
-    } else {
-      this.#$button.classList.remove(this.#$inactiveButtonClass);
-    }
+    this.#$button.hasAttribute("disabled")
+      ? this.#$button.classList.add(this.#$inactiveButtonClass)
+      : this.#$button.classList.remove(this.#$inactiveButtonClass);
   }
 
   #setEventListeners() {

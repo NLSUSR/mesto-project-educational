@@ -1,15 +1,15 @@
 "use strict";
 
-import popupDelete from "../popups/popup-delete.js";
-import popupImage from "../popups/popup-image.js";
+import newPopupWithDeletions from "../popups/instance-new-popup-with-deletions.js";
+import newPopupWithImages from "../popups/instance-new-popup-with-images.js";
 import likeCard from "../server/like-card.js";
 
 const callbacks = {
   deleteCallback: (card, id) => {
-    popupDelete.open(card, id);
+    newPopupWithDeletions.open(card, id);
   },
   cardCallback: (name, link, owner) => {
-    popupImage.open(name, link, owner);
+    newPopupWithImages.open(name, link, owner);
   },
   likeCallback: (card, id, method) => {
     likeCard(card, id, method);

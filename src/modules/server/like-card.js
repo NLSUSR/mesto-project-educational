@@ -1,16 +1,16 @@
 "use strict";
 
-import api from "./api/api.js";
+import newAPI from "../api/instance-new-api.js";
 
 // обработка лайка
 const likeCard = (card, id, method) => {
-  api
+  newAPI
     .likeState({ id, method })
     .then((data) => {
       card.changeLikeState(data.likes);
     })
     .catch((error) => {
-      api.responseError(error);
+      newAPI.responseError(error);
     });
 };
 
