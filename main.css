@@ -1,4 +1,4 @@
-@import url(https://raw.githubusercontent.com/NLSUSR/mopo/main/mopo.css);
+@import url(https://necolas.github.io/normalize.css/latest/normalize.css);
 @import url(https://fonts.googleapis.com/css2?family=Inter&display=swap);
 .page{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;background-color:#000;font-family:Inter,Arial,Helvetica,sans-serif;margin:0 auto;max-width:1280px;min-width:320px;padding:0;text-rendering:optimizeLegibility}@media screen and (max-width:1279px){.page{max-width:1024px}}@media screen and (max-width:1024px){.page{max-width:768px}}@media screen and (max-width:767px){.page{max-width:320px}}
 .content{margin:0 auto;padding:0}
@@ -29,7 +29,7 @@
 .element__like_active{background:url(35948469632d0421d697.svg) 50%/100% no-repeat transparent}
 .element__like-counter{color:#000;font-family:Inter,Arial,Helvetica,sans-serif;font-size:.8125rem;font-style:normal;font-weight:400;line-height:1rem;margin:0;position:absolute;top:20px}
 .footer{display:flex;flex-direction:row;margin:0 auto 60px;padding:0;width:880px}@media screen and (max-width:1024px){.footer{flex-direction:column;width:581px}}@media screen and (max-width:767px){.footer{margin-bottom:36px;width:282px}}
-.footer__copyright{color:#545454;font-family:Inter,Arial,Helvetica,sans-serif;font-size:1.125rem;font-style:normal;font-weight:400;line-height:1.375rem}.footer__copyright:before{content:attr(data-copyright)}@media screen and (max-width:767px){.footer__copyright{display:flex;font-size:.875rem;line-height:1.0625rem;width:282px}}
+.footer__copyright{color:#545454;font-family:Inter,Arial,Helvetica,sans-serif;font-size:1.125rem;font-style:normal;font-weight:400;line-height:1.375rem;margin:0}.footer__copyright:before{content:attr(data-copyright)}@media screen and (max-width:767px){.footer__copyright{display:flex;font-size:.875rem;line-height:1.0625rem;width:282px}}
 .footer__copyleft{color:#545454;font-family:Inter,Arial,Helvetica,sans-serif;font-size:1.125rem;font-style:normal;font-weight:400;line-height:1.375rem;margin-left:16px;padding:0}.footer__copyleft:before{content:attr(data-copyleft);display:inline-block;transform:rotate(180deg)}@media screen and (max-width:1024px){.footer__copyleft{margin:0}}@media screen and (max-width:767px){.footer__copyleft{display:flex;font-size:.875rem;line-height:1.0625rem;margin:0;width:282px}}
 .footer__copyleft-link{color:#545454;text-decoration:none}
 .popup{align-items:center;background-color:rgba(0,0,0,.5);color:#000;display:flex;height:100%;justify-content:center;left:0;opacity:0;position:fixed;top:0;transition:all .3s linear;visibility:hidden;width:100%;z-index:333}
