@@ -40,11 +40,9 @@ const API = class {
   };
 
   #check = async (response) => {
-    if (response.ok) {
-      return await this.#resolve(response);
-    } else {
-      return await this.#reject(response);
-    }
+    return (await response.ok)
+      ? this.#resolve(response)
+      : this.#reject(response);
   };
 
   #getHeadlines = (method, data) => {
@@ -57,17 +55,24 @@ const API = class {
 
   #getEndpoints = (endpoints) => `${this.#resource + endpoints}`;
 
-  #getRequest = async (endpoints, method, data) =>
-    await fetch(
+  #getRequest = async (endpoints, method, data) => {
+    return await fetch(
       this.#getEndpoints(endpoints),
       this.#getHeadlines(method, data)
     );
+  };
 
-  #checkReceiving = async (endpoints, method, data) =>
-    await this.#checkResponse(await this.#getRequest(endpoints, method, data));
+  #checkReceiving = async (endpoints, method, data) => {
+    return await this.#checkResponse(
+      await this.#getRequest(endpoints, method, data)
+    );
+  };
 
-  #promiseMap = async (array) =>
-    await Promise.all(array.map((response) => this.#checkResponse(response)));
+  #promiseMap = async (array) => {
+    return await Promise.all(
+      array.map((response) => this.#checkResponse(response))
+    );
+  };
 
   // проверяем ответ сервера
   #checkResponse = async (response) => {

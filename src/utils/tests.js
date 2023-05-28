@@ -36,15 +36,13 @@ const count = () => {
   console.clear();
   counter++;
   const includes = [2, 3, 4, 22, 23, 24].includes(counter);
-  if (!includes) {
-    console.log(`Функция вызвана ${counter} раз`);
-  } else {
-    console.log(`Функция вызвана ${counter} раза`);
-  }
+  !includes
+    ? console.log(`Функция вызвана ${counter} раз`)
+    : console.log(`Функция вызвана ${counter} раза`);
 
-  if (counter === initialCards.length) {
-    console.log("Все готово! Обновите страницу.");
-  }
+  counter === initialCards.length
+    ? console.log("Все готово! Обновите страницу.")
+    : null;
 };
 
 const tests = {

@@ -12,21 +12,15 @@ const Popup = class {
   }
 
   #buttonClose = (event) => {
-    if (event.target.closest(this.#constants.$close)) {
-      this.close();
-    }
+    event.target.closest(this.#constants.$close) ? this.close() : null;
   };
 
   #overlayClose = (event) => {
-    if (event.target === event.currentTarget) {
-      this.close();
-    }
+    event.target === event.currentTarget ? this.close() : null;
   };
 
   #keyClose = (event) => {
-    if (event.key === "Escape") {
-      this.close();
-    }
+    event.key === "Escape" ? this.close() : null;
   };
 
   // слушатели

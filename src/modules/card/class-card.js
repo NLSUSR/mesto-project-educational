@@ -48,15 +48,11 @@ const Card = class {
   }
 
   #removeTrash = () => {
-    if (!this.#myCard) {
-      this.#$elementTrash.remove();
-    }
+    return !this.#myCard ? this.#$elementTrash.remove() : null;
   };
 
   #setLikeBase = () => {
-    if (this.#noLikes) {
-      return (this.#cardLikes = []);
-    }
+    return this.#noLikes ? (this.#cardLikes = []) : null;
   };
 
   #nonsense = () => {
