@@ -1,6 +1,4 @@
 .element__delete {
-  margin: 0;
-  padding: 0;
   width: 18px;
   height: 19px;
   background: url("../../../images/main-pics/delete.svg") center/100% no-repeat transparent;

@@ -1,6 +1,4 @@
 .profile__info {
-  margin: 0;
-  padding: 0;
   max-width: fit-content;
   grid-area: p-i;
 }
